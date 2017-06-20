@@ -1,5 +1,6 @@
-package iamdilipkumar.com.spacedig;
+package iamdilipkumar.com.spacedig.ui;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import iamdilipkumar.com.spacedig.R;
 import iamdilipkumar.com.spacedig.adapters.MainListAdapter;
 import iamdilipkumar.com.spacedig.models.SimpleItemModel;
 
@@ -58,7 +60,9 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
 
     @Override
     public void onMainItemClick(int position) {
-
+        if (position == 1) {
+            startActivity(new Intent(this, FullDetailActivity.class));
+        }
     }
 
     @Override
