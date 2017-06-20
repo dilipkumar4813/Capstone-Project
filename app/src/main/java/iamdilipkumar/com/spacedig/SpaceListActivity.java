@@ -45,9 +45,10 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
 
         TypedArray images = getResources().obtainTypedArray(R.array.main_list_images);
         String[] listNames = getResources().getStringArray(R.array.main_list_names);
+        String[] listInformations = getResources().getStringArray(R.array.main_list_information);
 
         for (int i = 0; i < listNames.length; i++) {
-            listItems.add(new SimpleItemModel(listNames[i], "", images.getResourceId(i, -1)));
+            listItems.add(new SimpleItemModel(listNames[i], listInformations[i], images.getResourceId(i, -1)));
         }
 
         images.recycle();

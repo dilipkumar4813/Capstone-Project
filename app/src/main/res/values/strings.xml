@@ -21,4 +21,14 @@
         <item>CAD</item>
         <item>NEO</item>
     </string-array>
+
+    <string-array name="main_list_information">
+        <item>Mars Rover</item>
+        <item>APOD</item>
+        <item>Earth Imagery</item>
+        <item>EPIC</item>
+        <item>Search</item>
+        <item>CAD</item>
+        <item>NEO</item>
+    </string-array>
 </resources>
