@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Space Dig</string>
 
+    <string name="apod">APOD</string>
+    <string name="share">Share</string>
+    <string name="copyright">Copyright</string>
+    <string name="poweredby">Powered by NASA</string>
+    <string name="error_message">Whoops, something went wrong please try again later</string>
+
     <array name="main_list_images">
         <item>@drawable/block_1</item>
         <item>@drawable/block_2</item>
