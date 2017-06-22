@@ -5,10 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -46,11 +43,12 @@ public class RoverListAdapter extends RecyclerView.Adapter<RoverListAdapter.Grid
 
     @Override
     public void onBindViewHolder(RoverListAdapter.GridListViewHolder holder, int position) {
-        Picasso.with(mContext).load(mList.get(position)
-                .getImgSrc()).into(holder.mDescriptiveImage);
-
         if (mList.get(position).getCamera() != null) {
             holder.mName.setText(mList.get(position).getCamera().getName());
+        }
+
+        if(mList.get(position).getEarthDate()!=null){
+            holder.mInfo.setText(mList.get(position).getEarthDate());
         }
     }
 
@@ -65,8 +63,8 @@ public class RoverListAdapter extends RecyclerView.Adapter<RoverListAdapter.Grid
 
     class GridListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @BindView(R.id.iv_descriptive)
-        ImageView mDescriptiveImage;
+        @BindView(R.id.tv_list_info)
+        TextView mInfo;
 
         @BindView(R.id.tv_list_name)
         TextView mName;

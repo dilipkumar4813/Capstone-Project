@@ -6,6 +6,7 @@
     <string name="share">Share</string>
     <string name="copyright">Copyright</string>
     <string name="poweredby">Powered by NASA</string>
+    <string name="mars_rover">Mars Rover</string>
     <string name="error_message">Whoops, something went wrong please try again later</string>
 
     <string name="action_share">Share</string>
@@ -45,4 +46,6 @@
         <item>CAD which stands for Close Approach Data, provides access to current close-approach data for all asteroids and comets.</item>
         <item>Near Earth Objects which provides Asteroid information near earth.</item>
     </string-array>
+    <string name="title_generalitem_list">GeneralItems</string>
+    <string name="title_generalitem_detail">GeneralItem Detail</string>
 </resources>

@@ -2,35 +2,36 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cv_grid"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/keyline_2"
     card_view:cardCornerRadius="@dimen/keyline_3"
     card_view:cardUseCompatPadding="true">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/iv_descriptive"
-            android:layout_width="175dp"
-            android:layout_height="175dp"
-            android:contentDescription="@string/app_name"
-            android:scaleType="centerCrop"
-            android:src="@drawable/block_1" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_list_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_marginLeft="@dimen/keyline_2"
             android:layout_marginStart="@dimen/keyline_2"
             android:paddingBottom="@dimen/keyline_2"
             android:text="@string/app_name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@android:color/white" />
-    </RelativeLayout>
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <TextView
+            android:id="@+id/tv_list_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/keyline_2"
+            android:layout_marginStart="@dimen/keyline_2"
+            android:paddingBottom="@dimen/keyline_2"
+            android:text="@string/app_name"
+            android:textSize="@dimen/regular_body" />
+    </LinearLayout>
 
 </android.support.v7.widget.CardView>

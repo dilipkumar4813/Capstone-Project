@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.SpaceListActivity"
+            android:name=".ui.activities.SpaceListActivity"
             android:theme="@style/AppTheme.CollapsingToolbar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,16 +21,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".ui.FullDetailActivity"
+            android:name=".ui.activities.FullDetailActivity"
             android:label="@string/apod"
             android:theme="@style/AppTheme.CollapsingToolbar" />
-
         <activity
             android:name=".ui.GridListingActivity"
             android:label="@string/apod"
             android:theme="@style/AppTheme.CollapsingToolbar" />
+        <activity
+            android:name=".ui.activities.GeneralItemListActivity"
+            android:label="@string/title_generalitem_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activities.GeneralItemDetailActivity"
+            android:label="@string/title_generalitem_detail"
+            android:parentActivityName=".ui.activities.GeneralItemListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="iamdilipkumar.com.spacedig.ui.activities.GeneralItemListActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package iamdilipkumar.com.spacedig.ui;
+package iamdilipkumar.com.spacedig.ui.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

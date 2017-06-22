@@ -1,4 +1,4 @@
-package iamdilipkumar.com.spacedig.ui;
+package iamdilipkumar.com.spacedig.ui.activities;
 
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import iamdilipkumar.com.spacedig.R;
 import iamdilipkumar.com.spacedig.adapters.MainListAdapter;
 import iamdilipkumar.com.spacedig.models.SimpleItemModel;
+import iamdilipkumar.com.spacedig.ui.GridListingActivity;
 import iamdilipkumar.com.spacedig.ui.fragments.AboutFragment;
 import iamdilipkumar.com.spacedig.utils.CommonUtils;
 import iamdilipkumar.com.spacedig.utils.DialogUtils;
@@ -99,8 +100,10 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
         if (CommonUtils.checkNetworkConnectivity(this)) {
             if (position == 1) {
                 startActivity(new Intent(this, FullDetailActivity.class));
-            } else {
+            } else if(position==0) {
                 startActivity(new Intent(this, GridListingActivity.class));
+            }else{
+                startActivity(new Intent(this, GeneralItemListActivity.class));
             }
         } else {
             DialogUtils.noNetworkPreActionDialog(this);
