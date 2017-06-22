@@ -3,6 +3,7 @@ package iamdilipkumar.com.spacedig.utils;
 import java.util.List;
 
 import iamdilipkumar.com.spacedig.models.Apod;
+import iamdilipkumar.com.spacedig.models.MarsRover;
 import iamdilipkumar.com.spacedig.models.MarsRoverPhoto;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -19,6 +20,6 @@ public interface ApiInterface {
     @GET("planetary/apod")
     Observable<Apod> getApod();
 
-    @GET("/api/v1/rovers/curiosity/photos")
-    Observable<List<MarsRoverPhoto>> getRoverPhotos();
+    @GET("/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&")
+    Observable<MarsRover> getRoverPhotos();
 }

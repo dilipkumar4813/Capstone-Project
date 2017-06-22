@@ -2,10 +2,17 @@
     <string name="app_name">Space Dig</string>
 
     <string name="apod">APOD</string>
+    <string name="about">About</string>
     <string name="share">Share</string>
     <string name="copyright">Copyright</string>
     <string name="poweredby">Powered by NASA</string>
     <string name="error_message">Whoops, something went wrong please try again later</string>
+
+    <string name="action_share">Share</string>
+    <string name="share_type" translatable="false">text/plain</string>
+    <string name="share_title">Share Space Dig</string>
+
+    <string name="information">Information</string>
 
     <array name="main_list_images">
         <item>@drawable/block_1</item>
@@ -29,12 +36,12 @@
     </string-array>
 
     <string-array name="main_list_information">
-        <item>Mars Rover</item>
-        <item>APOD</item>
-        <item>Earth Imagery</item>
-        <item>EPIC</item>
-        <item>Search</item>
-        <item>CAD</item>
-        <item>NEO</item>
+        <item>Allows you to view images taken by Mars rover where the sols range from 1 to 1000</item>
+        <item>APOD which stands for astronomical picture of the day does exactly what it says.</item>
+        <item>Earth Imagery, select the location of your choice and see the image through the eyes of the satellite.</item>
+        <item>Provides information on the daily imagery collected by DSCOVR\'s Earth Polychromatic Imaging Camera (EPIC) instrument.</item>
+        <item>Search through the wide database of NASA.</item>
+        <item>CAD which stands for Close Approach Data, provides access to current close-approach data for all asteroids and comets.</item>
+        <item>Near Earth Objects which provides Asteroid information near earth.</item>
     </string-array>
 </resources>
