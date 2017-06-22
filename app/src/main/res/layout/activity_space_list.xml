@@ -27,4 +27,9 @@
         <include layout="@layout/content_space_list" />
     </android.support.v4.widget.NestedScrollView>
 
+    <FrameLayout
+        android:id="@+id/main_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </android.support.design.widget.CoordinatorLayout>

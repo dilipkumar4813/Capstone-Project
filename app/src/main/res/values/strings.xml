@@ -13,6 +13,7 @@
     <string name="share_title">Share Space Dig</string>
 
     <string name="information">Information</string>
+    <string name="share_content">Check out SPACE DIG, your space buddy available only on Google Play Store</string>
 
     <array name="main_list_images">
         <item>@drawable/block_1</item>

@@ -9,6 +9,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import butterknife.ButterKnife;
 import iamdilipkumar.com.spacedig.R;
 import iamdilipkumar.com.spacedig.adapters.MainListAdapter;
 import iamdilipkumar.com.spacedig.models.SimpleItemModel;
+import iamdilipkumar.com.spacedig.ui.fragments.AboutFragment;
 import iamdilipkumar.com.spacedig.utils.CommonUtils;
 import iamdilipkumar.com.spacedig.utils.DialogUtils;
 
@@ -58,6 +60,21 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_space_list, menu);
 
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_share:
+                CommonUtils.shareData(this,getString(R.string.share_content));
+                break;
+            case R.id.action_about:
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.main_container,new AboutFragment())
+                        .addToBackStack(null).commit();
+                break;
+        }
         return true;
     }
 
