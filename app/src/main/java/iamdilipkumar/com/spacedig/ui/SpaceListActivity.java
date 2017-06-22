@@ -4,13 +4,11 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,7 +92,7 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
 
     @Override
     public void onMainItemInformationClick(int position) {
-        DialogUtils.singleButtonDialog(this, mListItems.get(position).getmName(),
-                mListItems.get(position).getmInformation());
+        DialogUtils.singleButtonDialog(this, mListItems.get(position).getName(),
+                mListItems.get(position).getInformation());
     }
 }

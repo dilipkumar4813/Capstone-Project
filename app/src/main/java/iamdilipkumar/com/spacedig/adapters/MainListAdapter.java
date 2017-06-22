@@ -40,8 +40,8 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.MainLi
 
     @Override
     public void onBindViewHolder(MainListViewHolder holder, int position) {
-        holder.mDescriptiveImage.setImageResource(mList.get(position).getmImage());
-        holder.mName.setText(mList.get(position).getmName());
+        holder.mDescriptiveImage.setImageResource(mList.get(position).getImageRes());
+        holder.mName.setText(mList.get(position).getName());
     }
 
     @Override

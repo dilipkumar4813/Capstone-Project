@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -15,8 +14,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import iamdilipkumar.com.spacedig.R;
 import iamdilipkumar.com.spacedig.adapters.RoverListAdapter;
-import iamdilipkumar.com.spacedig.models.MarsRover;
-import iamdilipkumar.com.spacedig.models.MarsRoverPhoto;
+import iamdilipkumar.com.spacedig.models.rover.MarsRover;
+import iamdilipkumar.com.spacedig.models.rover.MarsRoverPhoto;
 import iamdilipkumar.com.spacedig.utils.ApiInterface;
 import iamdilipkumar.com.spacedig.utils.NetworkUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;

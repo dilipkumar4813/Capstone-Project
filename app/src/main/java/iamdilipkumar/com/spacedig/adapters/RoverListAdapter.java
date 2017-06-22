@@ -15,7 +15,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import iamdilipkumar.com.spacedig.R;
-import iamdilipkumar.com.spacedig.models.MarsRoverPhoto;
+import iamdilipkumar.com.spacedig.models.rover.MarsRoverPhoto;
 
 /**
  * Created on 21/06/17.

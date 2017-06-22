@@ -1,4 +1,4 @@
-package iamdilipkumar.com.spacedig.models;
+package iamdilipkumar.com.spacedig.models.rover;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

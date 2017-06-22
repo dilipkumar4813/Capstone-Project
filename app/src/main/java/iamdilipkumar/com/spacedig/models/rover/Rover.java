@@ -1,8 +1,10 @@
-package iamdilipkumar.com.spacedig.models;
+package iamdilipkumar.com.spacedig.models.rover;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import iamdilipkumar.com.spacedig.models.rover.CameraDetails;
 
 /**
  * Created on 21/06/17.

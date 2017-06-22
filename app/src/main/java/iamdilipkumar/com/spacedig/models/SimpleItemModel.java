@@ -9,36 +9,62 @@ package iamdilipkumar.com.spacedig.models;
 
 public class SimpleItemModel {
 
-    private String mName, mInformation;
-    private int mImage;
+    private String id;
+    private String imageUrl;
+    private String name, information;
+    private int imageRes;
 
     public SimpleItemModel(String name, String information, int image) {
-        this.mName = name;
-        this.mInformation = information;
-        this.mImage = image;
+        this.name = name;
+        this.information = information;
+        this.imageRes = image;
     }
 
-    public String getmName() {
-        return mName;
+    public SimpleItemModel(String pId, String imgUrl, String name, String information, int image) {
+        this.id = pId;
+        this.imageUrl = imgUrl;
+        this.name = name;
+        this.information = information;
+        this.imageRes = image;
     }
 
-    public void setmName(String mName) {
-        this.mName = mName;
+    public String getId() {
+        return id;
     }
 
-    public String getmInformation() {
-        return mInformation;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setmInformation(String mInformation) {
-        this.mInformation = mInformation;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public int getmImage() {
-        return mImage;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public void setmImage(int mImage) {
-        this.mImage = mImage;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getInformation() {
+        return information;
+    }
+
+    public void setInformation(String information) {
+        this.information = information;
+    }
+
+    public int getImageRes() {
+        return imageRes;
+    }
+
+    public void setImageRes(int imageRes) {
+        this.imageRes = imageRes;
     }
 }
