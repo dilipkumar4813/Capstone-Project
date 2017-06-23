@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 import iamdilipkumar.com.spacedig.R;
 
 import iamdilipkumar.com.spacedig.adapters.RoverListAdapter;
+import iamdilipkumar.com.spacedig.models.epic.Epic;
 import iamdilipkumar.com.spacedig.models.rover.MarsRover;
 import iamdilipkumar.com.spacedig.models.rover.MarsRoverPhoto;
 import iamdilipkumar.com.spacedig.utils.ApiInterface;
@@ -59,18 +60,32 @@ public class GeneralItemListActivity extends AppCompatActivity implements RoverL
 
         if (savedInstanceState == null) {
             int loadData = getIntent().getIntExtra(LOAD_API, 0);
+
+            ApiInterface apiInterface = NetworkUtils.buildRetrofit().create(ApiInterface.class);
+            switch (loadData) {
+                case 0:
+                    mCompositeDisposable.add(apiInterface.getRoverPhotos()
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribeOn(Schedulers.io())
+                            .subscribe(this::apiRoverResponse, this::apiError));
+                    break;
+                case 1:
+                    mCompositeDisposable.add(apiInterface.getEpicData("2017-01-01")
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribeOn(Schedulers.io())
+                            .subscribe(this::apiEpicResponse, this::apiError));
+                    break;
+                case 2:
+                    mCompositeDisposable.add(apiInterface.getEpicData("2017-01-01")
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribeOn(Schedulers.io())
+                            .subscribe(this::apiEpicResponse, this::apiError));
+                    break;
+            }
         }
-
-        ApiInterface apiInterface = NetworkUtils.buildRetrofit().create(ApiInterface.class);
-
-        mCompositeDisposable.add(apiInterface.getRoverPhotos()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(this::apiResponse, this::apiError));
     }
 
-    private void apiResponse(MarsRover marsRoverPhotos) {
-        Log.d(TAG, "" + marsRoverPhotos.getPhotos().size());
+    private void apiRoverResponse(MarsRover marsRoverPhotos) {
         int count = 0;
         for (MarsRoverPhoto item : marsRoverPhotos.getPhotos()) {
             if (count < 100) {
@@ -84,6 +99,10 @@ public class GeneralItemListActivity extends AppCompatActivity implements RoverL
         RoverListAdapter rcAdapter = new RoverListAdapter(this, this, marsRover);
         mGridList.setAdapter(rcAdapter);
         rcAdapter.notifyDataSetChanged();
+    }
+
+    private void apiEpicResponse(List<Epic> epic) {
+        Log.d(TAG, "" + epic.size());
     }
 
     private void apiError(Throwable throwable) {
