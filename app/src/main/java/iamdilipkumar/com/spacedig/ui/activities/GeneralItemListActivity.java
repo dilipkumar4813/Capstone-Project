@@ -32,6 +32,7 @@ import io.reactivex.schedulers.Schedulers;
 public class GeneralItemListActivity extends AppCompatActivity implements RoverListAdapter.GridListClick {
 
     private static final String TAG = "GeneralItemListActivity";
+    private static final String LOAD_API = "api_call";
 
     @BindView(R.id.generalitem_list)
     RecyclerView mGridList;
@@ -54,6 +55,10 @@ public class GeneralItemListActivity extends AppCompatActivity implements RoverL
 
         if (findViewById(R.id.generalitem_detail_container) != null) {
             mTwoPane = true;
+        }
+
+        if (savedInstanceState == null) {
+            int loadData = getIntent().getIntExtra(LOAD_API, 0);
         }
 
         ApiInterface apiInterface = NetworkUtils.buildRetrofit().create(ApiInterface.class);
