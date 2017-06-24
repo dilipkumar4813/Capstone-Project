@@ -1,5 +1,8 @@
 package iamdilipkumar.com.spacedig.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created on 20/06/17.
  *
@@ -7,7 +10,7 @@ package iamdilipkumar.com.spacedig.models;
  * @version 1.0
  */
 
-public class SimpleItemModel {
+public class SimpleItemModel implements Parcelable {
 
     private String id;
     private String imageUrl;
@@ -84,5 +87,41 @@ public class SimpleItemModel {
 
     public void setShortDescription(String shortDescription) {
         this.shortDescription = shortDescription;
+    }
+
+    protected SimpleItemModel(Parcel in) {
+        id = in.readString();
+        imageUrl = in.readString();
+        name = in.readString();
+        information = in.readString();
+        shortDescription = in.readString();
+        imageRes = in.readInt();
+    }
+
+    public static final Creator<SimpleItemModel> CREATOR = new Creator<SimpleItemModel>() {
+        @Override
+        public SimpleItemModel createFromParcel(Parcel in) {
+            return new SimpleItemModel(in);
+        }
+
+        @Override
+        public SimpleItemModel[] newArray(int size) {
+            return new SimpleItemModel[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(imageUrl);
+        dest.writeString(name);
+        dest.writeString(information);
+        dest.writeString(shortDescription);
+        dest.writeInt(imageRes);
     }
 }

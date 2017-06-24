@@ -17,7 +17,10 @@
     <string name="status">Status:</string>
     <string name="launch_date">Launch date:</string>
     <string name="earth_date">Earth Date:</string>
-    <string name="coordinates">Co-ordinates:</string>
+    <string name="quaternions">Attitude Quaternions:</string>
+    <string name="lunar_position">Lunar J2000 Position:</string>
+    <string name="dscovr_position">Dscovr J2000 Position:</string>
+    <string name="sun_position">Sun J2000 Position:</string>
     <string name="centroid_coordinates">Centroid Coords:</string>
 
     <string name="information">Information</string>

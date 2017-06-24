@@ -5,7 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +20,9 @@ import iamdilipkumar.com.spacedig.models.SimpleItemModel;
 import iamdilipkumar.com.spacedig.models.epic.Epic;
 import iamdilipkumar.com.spacedig.models.rover.MarsRover;
 import iamdilipkumar.com.spacedig.models.rover.MarsRoverPhoto;
-import iamdilipkumar.com.spacedig.models.rover.Rover;
+import iamdilipkumar.com.spacedig.ui.fragments.GeneralItemDetailFragment;
 import iamdilipkumar.com.spacedig.utils.ApiInterface;
+import iamdilipkumar.com.spacedig.utils.CommonUtils;
 import iamdilipkumar.com.spacedig.utils.NetworkUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -34,15 +36,18 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class GeneralItemListActivity extends AppCompatActivity implements GeneralListAdapter.GridListClick {
 
-    private static final String TAG = "GeneralItemListActivity";
+    private static final String LIST_ITEMS = "loaded_list";
     public static final String LOAD_API = "api_call";
+    List<SimpleItemModel> mGeneralItems;
 
     @BindView(R.id.generalitem_list)
     RecyclerView mGridList;
 
+    @BindView(R.id.pb_loading)
+    ProgressBar loading;
+
     private CompositeDisposable mCompositeDisposable;
     private boolean mTwoPane;
-    List<MarsRoverPhoto> marsRover = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +66,7 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
         }
 
         if (savedInstanceState == null) {
+            mGeneralItems = new ArrayList<>();
             int loadData = getIntent().getIntExtra(LOAD_API, 0);
 
             ApiInterface apiInterface = NetworkUtils.buildRetrofit().create(ApiInterface.class);
@@ -84,78 +90,58 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
                             .subscribe(this::apiEpicResponse, this::apiError));
                     break;
             }
+        } else {
+            if (savedInstanceState.getParcelableArrayList(LIST_ITEMS) != null) {
+                mGeneralItems = savedInstanceState.getParcelableArrayList(LIST_ITEMS);
+                GeneralListAdapter rcAdapter = new GeneralListAdapter(this, mGeneralItems);
+                mGridList.setAdapter(rcAdapter);
+                rcAdapter.notifyDataSetChanged();
+            }
         }
     }
 
     private void apiRoverResponse(MarsRover marsRoverPhotos) {
+        loading.setVisibility(View.GONE);
         int count = 0;
-        List<SimpleItemModel> epicItems = new ArrayList<>();
         for (MarsRoverPhoto item : marsRoverPhotos.getPhotos()) {
             if (count < 100) {
-                marsRover.add(item);
-
-                String landingDate = "", launchDate = "", status = "";
-                Rover rover = item.getRover();
-                if (rover != null) {
-                    landingDate = getString(R.string.landing_date) + " " + rover.getLandingDate();
-                    launchDate = getString(R.string.launch_date) + " " + rover.getLaunchDate();
-                    status = getString(R.string.status) + " " + rover.getStatus();
-                }
-                String fullDescription = landingDate + "\n" + launchDate + "\n" + status;
-                SimpleItemModel simpleItemModel = new SimpleItemModel(String.valueOf(item.getId()),
-                        item.getCamera().getName(),
-                        item.getCamera().getFullName(), item.getImgSrc(), fullDescription, 0);
-                epicItems.add(simpleItemModel);
+                mGeneralItems.add(CommonUtils.getRoverModel(item, this));
             } else {
                 break;
             }
             count++;
         }
 
-        GeneralListAdapter rcAdapter = new GeneralListAdapter(this, epicItems);
-        mGridList.setAdapter(rcAdapter);
-        rcAdapter.notifyDataSetChanged();
+        loadAdapter();
     }
 
     private void apiEpicResponse(List<Epic> epic) {
-
-        List<SimpleItemModel> epicItems = new ArrayList<>();
+        loading.setVisibility(View.GONE);
         for (Epic item : epic) {
-            String image = item.getImage();
-            String centroidCoordinates = "";
-            String earthDate = getString(R.string.earth_date)
-                    + " " + item.getDate();
-            String coordinates = getString(R.string.coordinates) + " "
-                    + item.getCoords();
-
-            if (item.getCentroidCoordinates() != null) {
-                centroidCoordinates = getString(R.string.centroid_coordinates) + " "
-                        + item.getCentroidCoordinates().getLat() + ", "
-                        + item.getCentroidCoordinates().getLon();
-            }
-
-            String description = item.getCaption() + "\n\n" + coordinates + "\n\n"
-                    + earthDate + "\n\n" + centroidCoordinates;
-            SimpleItemModel simpleItemModel = new SimpleItemModel("", earthDate,
-                    centroidCoordinates, image, description, 0);
-            epicItems.add(simpleItemModel);
+            mGeneralItems.add(CommonUtils.getEpicModel(item, this));
         }
-        GeneralListAdapter rcAdapter = new GeneralListAdapter(this, epicItems);
-        mGridList.setAdapter(rcAdapter);
-        rcAdapter.notifyDataSetChanged();
-        Log.d(TAG, "" + epic.size());
+
+        loadAdapter();
+    }
+
+    private void loadAdapter(){
+        if (mGeneralItems.size() > 0) {
+            GeneralListAdapter rcAdapter = new GeneralListAdapter(this, mGeneralItems);
+            mGridList.setAdapter(rcAdapter);
+            rcAdapter.notifyDataSetChanged();
+        }
     }
 
     private void apiError(Throwable throwable) {
-        Log.d(TAG, throwable.getLocalizedMessage());
+        loading.setVisibility(View.GONE);
     }
 
     @Override
     public void onMainItemClick(int position) {
-        String id = String.valueOf(marsRover.get(position).getId());
+        SimpleItemModel passItem = mGeneralItems.get(position);
         if (mTwoPane) {
             Bundle arguments = new Bundle();
-            arguments.putString(GeneralItemDetailFragment.ARG_ITEM_ID, id);
+            arguments.putParcelable(GeneralItemDetailActivity.ITEM_DETAILS, passItem);
             GeneralItemDetailFragment fragment = new GeneralItemDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
@@ -163,7 +149,7 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
                     .commit();
         } else {
             Intent intent = new Intent(this, GeneralItemDetailActivity.class);
-            intent.putExtra(GeneralItemDetailFragment.ARG_ITEM_ID, id);
+            intent.putExtra(GeneralItemDetailActivity.ITEM_DETAILS, passItem);
             startActivity(intent);
         }
     }
@@ -172,5 +158,11 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
     protected void onDestroy() {
         super.onDestroy();
         mCompositeDisposable.clear();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList(LIST_ITEMS, new ArrayList<>(mGeneralItems));
+        super.onSaveInstanceState(outState);
     }
 }
