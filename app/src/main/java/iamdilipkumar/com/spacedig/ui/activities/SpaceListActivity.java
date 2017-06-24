@@ -20,6 +20,7 @@ import iamdilipkumar.com.spacedig.R;
 import iamdilipkumar.com.spacedig.adapters.MainListAdapter;
 import iamdilipkumar.com.spacedig.models.SimpleItemModel;
 import iamdilipkumar.com.spacedig.ui.fragments.AboutFragment;
+import iamdilipkumar.com.spacedig.ui.fragments.SearchFragment;
 import iamdilipkumar.com.spacedig.utils.CommonUtils;
 import iamdilipkumar.com.spacedig.utils.DialogUtils;
 
@@ -103,6 +104,10 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
                 Intent intent = new Intent(this, GeneralItemListActivity.class);
                 intent.putExtra(GeneralItemListActivity.LOAD_API, 0);
                 startActivity(intent);
+            } else if (position == 4) {
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.main_container, new SearchFragment())
+                        .addToBackStack(null).commit();
             } else {
                 Intent intent = new Intent(this, GeneralItemListActivity.class);
                 intent.putExtra(GeneralItemListActivity.LOAD_API, 1);

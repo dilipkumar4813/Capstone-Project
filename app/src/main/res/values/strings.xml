@@ -6,6 +6,7 @@
     <string name="share">Share</string>
     <string name="copyright">Copyright</string>
     <string name="poweredby">Powered by NASA</string>
+    <string name="imagesby">Static images powered by Pixabay</string>
     <string name="mars_rover">Mars Rover</string>
     <string name="error_message">Whoops, something went wrong please try again later</string>
 
@@ -22,6 +23,10 @@
     <string name="dscovr_position">Dscovr J2000 Position:</string>
     <string name="sun_position">Sun J2000 Position:</string>
     <string name="centroid_coordinates">Centroid Coords:</string>
+
+    <string name="search_hint">Enter keywords to search</string>
+    <string name="search_images">images</string>
+    <string name="search_videos">videos</string>
 
     <string name="information">Information</string>
     <string name="share_content">Check out SPACE DIG, your space buddy available only on Google Play Store</string>
