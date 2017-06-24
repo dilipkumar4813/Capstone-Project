@@ -13,6 +13,13 @@
     <string name="share_type" translatable="false">text/plain</string>
     <string name="share_title">Share Space Dig</string>
 
+    <string name="landing_date">Landing date:</string>
+    <string name="status">Status:</string>
+    <string name="launch_date">Launch date:</string>
+    <string name="earth_date">Earth Date:</string>
+    <string name="coordinates">Co-ordinates:</string>
+    <string name="centroid_coordinates">Centroid Coords:</string>
+
     <string name="information">Information</string>
     <string name="share_content">Check out SPACE DIG, your space buddy available only on Google Play Store</string>
 

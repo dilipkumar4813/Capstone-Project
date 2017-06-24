@@ -1,6 +1,5 @@
 package iamdilipkumar.com.spacedig.adapters;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import iamdilipkumar.com.spacedig.R;
-import iamdilipkumar.com.spacedig.models.rover.MarsRoverPhoto;
+import iamdilipkumar.com.spacedig.models.SimpleItemModel;
 
 /**
  * Created on 21/06/17.
@@ -21,35 +20,28 @@ import iamdilipkumar.com.spacedig.models.rover.MarsRoverPhoto;
  * @version 1.0
  */
 
-public class RoverListAdapter extends RecyclerView.Adapter<RoverListAdapter.GridListViewHolder> {
+public class GeneralListAdapter extends RecyclerView.Adapter<GeneralListAdapter.GridListViewHolder> {
 
-    private List<MarsRoverPhoto> mList;
-    private RoverListAdapter.GridListClick mainListClick;
-    private Context mContext;
+    private List<SimpleItemModel> mList;
+    private GeneralListAdapter.GridListClick mainListClick;
 
-    public RoverListAdapter(Context context, RoverListAdapter.GridListClick listClick,
-                            List<MarsRoverPhoto> itemList) {
-        this.mContext = context;
+    public GeneralListAdapter(GeneralListAdapter.GridListClick listClick,
+                            List<SimpleItemModel> itemList) {
         this.mList = itemList;
         this.mainListClick = listClick;
     }
 
     @Override
-    public RoverListAdapter.GridListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public GeneralListAdapter.GridListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View layoutView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_grid, null);
-        return new RoverListAdapter.GridListViewHolder(layoutView);
+                .inflate(R.layout.item_grid, parent,false);
+        return new GeneralListAdapter.GridListViewHolder(layoutView);
     }
 
     @Override
-    public void onBindViewHolder(RoverListAdapter.GridListViewHolder holder, int position) {
-        if (mList.get(position).getCamera() != null) {
-            holder.mName.setText(mList.get(position).getCamera().getName());
-        }
-
-        if(mList.get(position).getEarthDate()!=null){
-            holder.mInfo.setText(mList.get(position).getEarthDate());
-        }
+    public void onBindViewHolder(GeneralListAdapter.GridListViewHolder holder, int position) {
+        holder.mName.setText(mList.get(position).getName());
+        holder.mInfo.setText(mList.get(position).getShortDescription());
     }
 
     @Override

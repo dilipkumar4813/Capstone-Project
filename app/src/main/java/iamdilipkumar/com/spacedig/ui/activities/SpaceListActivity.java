@@ -19,7 +19,6 @@ import butterknife.ButterKnife;
 import iamdilipkumar.com.spacedig.R;
 import iamdilipkumar.com.spacedig.adapters.MainListAdapter;
 import iamdilipkumar.com.spacedig.models.SimpleItemModel;
-import iamdilipkumar.com.spacedig.ui.GridListingActivity;
 import iamdilipkumar.com.spacedig.ui.fragments.AboutFragment;
 import iamdilipkumar.com.spacedig.utils.CommonUtils;
 import iamdilipkumar.com.spacedig.utils.DialogUtils;
@@ -66,13 +65,13 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_share:
-                CommonUtils.shareData(this,getString(R.string.share_content));
+                CommonUtils.shareData(this, getString(R.string.share_content));
                 break;
             case R.id.action_about:
                 getSupportFragmentManager().beginTransaction()
-                        .add(R.id.main_container,new AboutFragment())
+                        .add(R.id.main_container, new AboutFragment())
                         .addToBackStack(null).commit();
                 break;
         }
@@ -100,10 +99,14 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
         if (CommonUtils.checkNetworkConnectivity(this)) {
             if (position == 1) {
                 startActivity(new Intent(this, FullDetailActivity.class));
-            } else if(position==0) {
-                startActivity(new Intent(this, GridListingActivity.class));
-            }else{
-                startActivity(new Intent(this, GeneralItemListActivity.class));
+            } else if (position == 0) {
+                Intent intent = new Intent(this, GeneralItemListActivity.class);
+                intent.putExtra(GeneralItemListActivity.LOAD_API, 0);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(this, GeneralItemListActivity.class);
+                intent.putExtra(GeneralItemListActivity.LOAD_API, 1);
+                startActivity(intent);
             }
         } else {
             DialogUtils.noNetworkPreActionDialog(this);

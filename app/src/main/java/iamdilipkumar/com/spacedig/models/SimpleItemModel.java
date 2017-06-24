@@ -12,6 +12,7 @@ public class SimpleItemModel {
     private String id;
     private String imageUrl;
     private String name, information;
+    private String shortDescription;
     private int imageRes;
 
     public SimpleItemModel(String name, String information, int image) {
@@ -24,6 +25,15 @@ public class SimpleItemModel {
         this.id = pId;
         this.imageUrl = imgUrl;
         this.name = name;
+        this.information = information;
+        this.imageRes = image;
+    }
+
+    public SimpleItemModel(String pId, String name, String sDescription, String imgUrl, String information, int image) {
+        this.id = pId;
+        this.name = name;
+        this.shortDescription = sDescription;
+        this.imageUrl = imgUrl;
         this.information = information;
         this.imageRes = image;
     }
@@ -66,5 +76,13 @@ public class SimpleItemModel {
 
     public void setImageRes(int imageRes) {
         this.imageRes = imageRes;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
     }
 }

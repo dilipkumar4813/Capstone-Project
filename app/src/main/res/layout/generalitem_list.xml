@@ -9,5 +9,4 @@
     android:layout_marginLeft="@dimen/keyline_1"
     android:layout_marginRight="@dimen/keyline_1"
     app:layoutManager="LinearLayoutManager"
-    tools:context="iamdilipkumar.com.spacedig.ui.activities.GeneralItemListActivity"
-    tools:listitem="@layout/generalitem_list_content" />
+    tools:context="iamdilipkumar.com.spacedig.ui.activities.GeneralItemListActivity" />

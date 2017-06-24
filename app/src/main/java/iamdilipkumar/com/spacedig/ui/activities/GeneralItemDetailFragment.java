@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import iamdilipkumar.com.spacedig.R;
-import iamdilipkumar.com.spacedig.ui.activities.dummy.DummyContent;
 
 /**
  * A fragment representing a single GeneralItem detail screen.
@@ -26,11 +25,6 @@ public class GeneralItemDetailFragment extends Fragment {
     public static final String ARG_ITEM_ID = "item_id";
 
     /**
-     * The dummy content this fragment is presenting.
-     */
-    private DummyContent.DummyItem mItem;
-
-    /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
@@ -42,12 +36,11 @@ public class GeneralItemDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.content);
+                appBarLayout.setTitle("");
             }
         }
     }
@@ -58,9 +51,9 @@ public class GeneralItemDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.generalitem_detail, container, false);
 
         // Show the dummy content as text in a TextView.
-        if (mItem != null) {
+        /*if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.generalitem_detail)).setText(mItem.details);
-        }
+        }*/
 
         return rootView;
     }

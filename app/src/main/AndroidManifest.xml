@@ -25,14 +25,12 @@
             android:name=".ui.activities.FullDetailActivity"
             android:label="@string/apod"
             android:theme="@style/AppTheme.CollapsingToolbar" />
-        <activity
-            android:name=".ui.GridListingActivity"
-            android:label="@string/apod"
-            android:theme="@style/AppTheme.CollapsingToolbar" />
+
         <activity
             android:name=".ui.activities.GeneralItemListActivity"
             android:label="@string/title_generalitem_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".ui.activities.GeneralItemDetailActivity"
             android:label="@string/title_generalitem_detail"

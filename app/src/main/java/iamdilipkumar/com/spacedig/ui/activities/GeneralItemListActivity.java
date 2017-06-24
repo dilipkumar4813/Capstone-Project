@@ -14,10 +14,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import iamdilipkumar.com.spacedig.R;
 
-import iamdilipkumar.com.spacedig.adapters.RoverListAdapter;
+import iamdilipkumar.com.spacedig.adapters.GeneralListAdapter;
+import iamdilipkumar.com.spacedig.models.SimpleItemModel;
 import iamdilipkumar.com.spacedig.models.epic.Epic;
 import iamdilipkumar.com.spacedig.models.rover.MarsRover;
 import iamdilipkumar.com.spacedig.models.rover.MarsRoverPhoto;
+import iamdilipkumar.com.spacedig.models.rover.Rover;
 import iamdilipkumar.com.spacedig.utils.ApiInterface;
 import iamdilipkumar.com.spacedig.utils.NetworkUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -30,10 +32,10 @@ import io.reactivex.schedulers.Schedulers;
  * @author dilipkumar4813
  * @version 1.0
  */
-public class GeneralItemListActivity extends AppCompatActivity implements RoverListAdapter.GridListClick {
+public class GeneralItemListActivity extends AppCompatActivity implements GeneralListAdapter.GridListClick {
 
     private static final String TAG = "GeneralItemListActivity";
-    private static final String LOAD_API = "api_call";
+    public static final String LOAD_API = "api_call";
 
     @BindView(R.id.generalitem_list)
     RecyclerView mGridList;
@@ -87,21 +89,60 @@ public class GeneralItemListActivity extends AppCompatActivity implements RoverL
 
     private void apiRoverResponse(MarsRover marsRoverPhotos) {
         int count = 0;
+        List<SimpleItemModel> epicItems = new ArrayList<>();
         for (MarsRoverPhoto item : marsRoverPhotos.getPhotos()) {
             if (count < 100) {
                 marsRover.add(item);
+
+                String landingDate = "", launchDate = "", status = "";
+                Rover rover = item.getRover();
+                if (rover != null) {
+                    landingDate = getString(R.string.landing_date) + " " + rover.getLandingDate();
+                    launchDate = getString(R.string.launch_date) + " " + rover.getLaunchDate();
+                    status = getString(R.string.status) + " " + rover.getStatus();
+                }
+                String fullDescription = landingDate + "\n" + launchDate + "\n" + status;
+                SimpleItemModel simpleItemModel = new SimpleItemModel(String.valueOf(item.getId()),
+                        item.getCamera().getName(),
+                        item.getCamera().getFullName(), item.getImgSrc(), fullDescription, 0);
+                epicItems.add(simpleItemModel);
             } else {
                 break;
             }
             count++;
         }
 
-        RoverListAdapter rcAdapter = new RoverListAdapter(this, this, marsRover);
+        GeneralListAdapter rcAdapter = new GeneralListAdapter(this, epicItems);
         mGridList.setAdapter(rcAdapter);
         rcAdapter.notifyDataSetChanged();
     }
 
     private void apiEpicResponse(List<Epic> epic) {
+
+        List<SimpleItemModel> epicItems = new ArrayList<>();
+        for (Epic item : epic) {
+            String image = item.getImage();
+            String centroidCoordinates = "";
+            String earthDate = getString(R.string.earth_date)
+                    + " " + item.getDate();
+            String coordinates = getString(R.string.coordinates) + " "
+                    + item.getCoords();
+
+            if (item.getCentroidCoordinates() != null) {
+                centroidCoordinates = getString(R.string.centroid_coordinates) + " "
+                        + item.getCentroidCoordinates().getLat() + ", "
+                        + item.getCentroidCoordinates().getLon();
+            }
+
+            String description = item.getCaption() + "\n\n" + coordinates + "\n\n"
+                    + earthDate + "\n\n" + centroidCoordinates;
+            SimpleItemModel simpleItemModel = new SimpleItemModel("", earthDate,
+                    centroidCoordinates, image, description, 0);
+            epicItems.add(simpleItemModel);
+        }
+        GeneralListAdapter rcAdapter = new GeneralListAdapter(this, epicItems);
+        mGridList.setAdapter(rcAdapter);
+        rcAdapter.notifyDataSetChanged();
         Log.d(TAG, "" + epic.size());
     }
 

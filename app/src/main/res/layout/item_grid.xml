@@ -15,21 +15,21 @@
 
         <TextView
             android:id="@+id/tv_list_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/keyline_2"
             android:layout_marginStart="@dimen/keyline_2"
-            android:paddingBottom="@dimen/keyline_2"
+            android:layout_marginRight="@dimen/keyline_2"
+            android:layout_marginEnd="@dimen/keyline_2"
+            android:layout_marginTop="@dimen/keyline_2"
             android:text="@string/app_name"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <TextView
             android:id="@+id/tv_list_info"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/keyline_2"
-            android:layout_marginStart="@dimen/keyline_2"
-            android:paddingBottom="@dimen/keyline_2"
+            android:layout_margin="@dimen/keyline_2"
             android:text="@string/app_name"
             android:textSize="@dimen/regular_body" />
     </LinearLayout>
