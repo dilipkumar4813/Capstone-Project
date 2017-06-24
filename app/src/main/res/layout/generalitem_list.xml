@@ -6,7 +6,7 @@
     android:name="iamdilipkumar.com.spacedig.ui.activities.GeneralItemListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="@dimen/keyline_1"
-    android:layout_marginRight="@dimen/keyline_1"
+    android:padding="@dimen/keyline_1"
+    android:background="@android:color/black"
     app:layoutManager="LinearLayoutManager"
     tools:context="iamdilipkumar.com.spacedig.ui.activities.GeneralItemListActivity" />

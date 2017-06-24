@@ -48,6 +48,7 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
 
     private CompositeDisposable mCompositeDisposable;
     private boolean mTwoPane;
+    int mloadAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +68,10 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
 
         if (savedInstanceState == null) {
             mGeneralItems = new ArrayList<>();
-            int loadData = getIntent().getIntExtra(LOAD_API, 0);
+            mloadAPI = getIntent().getIntExtra(LOAD_API, 0);
 
             ApiInterface apiInterface = NetworkUtils.buildRetrofit().create(ApiInterface.class);
-            switch (loadData) {
+            switch (mloadAPI) {
                 case 0:
                     mCompositeDisposable.add(apiInterface.getRoverPhotos()
                             .observeOn(AndroidSchedulers.mainThread())
@@ -163,6 +164,7 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putParcelableArrayList(LIST_ITEMS, new ArrayList<>(mGeneralItems));
+        outState.putInt(LOAD_API,mloadAPI);
         super.onSaveInstanceState(outState);
     }
 }

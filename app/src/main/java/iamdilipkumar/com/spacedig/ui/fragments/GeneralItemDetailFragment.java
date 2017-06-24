@@ -54,7 +54,7 @@ public class GeneralItemDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.generalitem_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_general_item_detail, container, false);
 
         ButterKnife.bind(this, view);
 
