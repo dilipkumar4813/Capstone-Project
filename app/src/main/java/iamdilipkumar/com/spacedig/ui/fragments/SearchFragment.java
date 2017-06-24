@@ -5,7 +5,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import iamdilipkumar.com.spacedig.R;
 
 /**
@@ -16,9 +20,17 @@ import iamdilipkumar.com.spacedig.R;
  */
 
 public class SearchFragment extends Fragment {
+
+    @BindView(R.id.et_search)
+    EditText searchText;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
+
+        ButterKnife.bind(this,view);
+
+        return view;
     }
 }
