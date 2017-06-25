@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -60,7 +61,7 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(getString(R.string.mars_rover));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (findViewById(R.id.generalitem_detail_container) != null) {
             mTwoPane = true;
@@ -73,12 +74,14 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
             ApiInterface apiInterface = NetworkUtils.buildRetrofit().create(ApiInterface.class);
             switch (mloadAPI) {
                 case 0:
+                    getSupportActionBar().setTitle(getString(R.string.mars_rover));
                     mCompositeDisposable.add(apiInterface.getRoverPhotos()
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribeOn(Schedulers.io())
                             .subscribe(this::apiRoverResponse, this::apiError));
                     break;
                 case 1:
+                    getSupportActionBar().setTitle(getString(R.string.epic));
                     mCompositeDisposable.add(apiInterface.getEpicData("2017-01-01")
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribeOn(Schedulers.io())
@@ -99,6 +102,17 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
                 rcAdapter.notifyDataSetChanged();
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+
+        return true;
     }
 
     private void apiRoverResponse(MarsRover marsRoverPhotos) {
@@ -125,7 +139,7 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
         loadAdapter();
     }
 
-    private void loadAdapter(){
+    private void loadAdapter() {
         if (mGeneralItems.size() > 0) {
             GeneralListAdapter rcAdapter = new GeneralListAdapter(this, mGeneralItems);
             mGridList.setAdapter(rcAdapter);
@@ -164,7 +178,7 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putParcelableArrayList(LIST_ITEMS, new ArrayList<>(mGeneralItems));
-        outState.putInt(LOAD_API,mloadAPI);
+        outState.putInt(LOAD_API, mloadAPI);
         super.onSaveInstanceState(outState);
     }
 }
