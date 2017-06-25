@@ -4,6 +4,7 @@ import java.util.List;
 
 import iamdilipkumar.com.spacedig.models.Apod;
 import iamdilipkumar.com.spacedig.models.epic.Epic;
+import iamdilipkumar.com.spacedig.models.neo.Neo;
 import iamdilipkumar.com.spacedig.models.rover.MarsRover;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -26,4 +27,7 @@ public interface ApiInterface {
 
     @GET("/EPIC/api/natural/date/{date}")
     Observable<List <Epic>> getEpicData(@Path("date") String queryDate);
+
+    @GET("/neo/rest/v1/neo/browse")
+    Observable<Neo> getNeoData();
 }

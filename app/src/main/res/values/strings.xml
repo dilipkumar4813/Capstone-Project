@@ -28,6 +28,39 @@
     <string name="search_images">images</string>
     <string name="search_videos">videos</string>
 
+    <string name="neo">Near Earth Object</string>
+    <string name="hazardous_asteroid">Hazardous asteroid:</string>
+    <string name="absolute_magnitude">Absolute Magnitude:</string>
+    <string name="estimated_diameter">Estimated diameter</string>
+    <string name="feet">Feet:</string>
+    <string name="kilometers">Kilometers:</string>
+    <string name="miles">Miles:</string>
+    <string name="meters">Meters:</string>
+    <string name="orbital_data">Orbital data</string>
+    <string name="equinox">Equinox:</string>
+    <string name="mean_anomaly">Mean anomaly:</string>
+    <string name="mean_motion">Mean motion:</string>
+
+    <string name="orbit_determination_date">Orbit determination date:</string>
+    <string name="orbit_uncertainty">Orbit uncertainty:</string>
+    <string name="minimum_orbit_intersection">Minimum orbit intersection:</string>
+    <string name="jupiter_tisserand_invariant">Jupiter tisserand invariant:</string>
+    <string name="epoch_osculation">EPOCH osculation:</string>
+    <string name="eccentricity">Eccentricity:</string>
+    <string name="semi_major_axis">Semi major axis:</string>
+    <string name="inclination">Inclination:</string>
+    <string name="ascending_node_longitude">Ascending node longitude:</string>
+    <string name="orbital_period">Orbital period:</string>
+    <string name="perihelion_distance">Perhielion distance:</string>
+    <string name="aphelion_distance">Aphelion distance:</string>
+    <string name="perihelion_time">Perihelion time:</string>
+    <string name="close_approach">Close approach</string>
+    <string name="close_approach_date">Close approach date</string>
+    <string name="relative_velocity">Relative velocity</string>
+    <string name="kilometers_per_hour">Kilometers per hour:</string>
+    <string name="kilometers_per_second">Kilometers per second:</string>
+    <string name="miles_per_hour">Miles per hour:</string>
+
     <string name="epic">Earth Polychromatic Imaging Camera</string>
 
     <string name="information">Information</string>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -19,6 +20,8 @@ import iamdilipkumar.com.spacedig.R;
 import iamdilipkumar.com.spacedig.adapters.GeneralListAdapter;
 import iamdilipkumar.com.spacedig.models.SimpleItemModel;
 import iamdilipkumar.com.spacedig.models.epic.Epic;
+import iamdilipkumar.com.spacedig.models.neo.NearEarthObject;
+import iamdilipkumar.com.spacedig.models.neo.Neo;
 import iamdilipkumar.com.spacedig.models.rover.MarsRover;
 import iamdilipkumar.com.spacedig.models.rover.MarsRoverPhoto;
 import iamdilipkumar.com.spacedig.ui.fragments.GeneralItemDetailFragment;
@@ -88,10 +91,11 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
                             .subscribe(this::apiEpicResponse, this::apiError));
                     break;
                 case 2:
-                    mCompositeDisposable.add(apiInterface.getEpicData("2017-01-01")
+                    getSupportActionBar().setTitle(getString(R.string.neo));
+                    mCompositeDisposable.add(apiInterface.getNeoData()
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribeOn(Schedulers.io())
-                            .subscribe(this::apiEpicResponse, this::apiError));
+                            .subscribe(this::apiNeoResponse, this::apiError));
                     break;
             }
         } else {
@@ -113,6 +117,18 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
         }
 
         return true;
+    }
+
+    private void apiNeoResponse(Neo neo) {
+        loading.setVisibility(View.GONE);
+        Log.d("neo size", "" + neo.getNearEarthObjects().size());
+        if (neo.getNearEarthObjects() != null) {
+            for (NearEarthObject item : neo.getNearEarthObjects()) {
+                mGeneralItems.add(CommonUtils.getNeoModel(item, this));
+            }
+        }
+
+        loadAdapter();
     }
 
     private void apiRoverResponse(MarsRover marsRoverPhotos) {
@@ -148,6 +164,7 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
     }
 
     private void apiError(Throwable throwable) {
+        Log.d("api error","error: "+throwable.getLocalizedMessage());
         loading.setVisibility(View.GONE);
     }
 

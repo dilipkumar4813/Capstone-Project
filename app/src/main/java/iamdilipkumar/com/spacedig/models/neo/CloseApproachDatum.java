@@ -16,7 +16,7 @@ public class CloseApproachDatum {
     private String closeApproachDate;
     @SerializedName("epoch_date_close_approach")
     @Expose
-    private Integer epochDateCloseApproach;
+    private String epochDateCloseApproach;
     @SerializedName("relative_velocity")
     @Expose
     private RelativeVelocity relativeVelocity;
@@ -35,11 +35,11 @@ public class CloseApproachDatum {
         this.closeApproachDate = closeApproachDate;
     }
 
-    public Integer getEpochDateCloseApproach() {
+    public String getEpochDateCloseApproach() {
         return epochDateCloseApproach;
     }
 
-    public void setEpochDateCloseApproach(Integer epochDateCloseApproach) {
+    public void setEpochDateCloseApproach(String epochDateCloseApproach) {
         this.epochDateCloseApproach = epochDateCloseApproach;
     }
 

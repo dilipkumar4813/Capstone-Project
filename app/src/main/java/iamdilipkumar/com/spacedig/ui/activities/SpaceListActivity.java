@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -100,19 +101,30 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
         if (CommonUtils.checkNetworkConnectivity(this)) {
             if (position == 1) {
                 startActivity(new Intent(this, FullDetailActivity.class));
-            } else if (position == 0) {
-                Intent intent = new Intent(this, GeneralItemListActivity.class);
-                intent.putExtra(GeneralItemListActivity.LOAD_API, 0);
-                startActivity(intent);
+                return;
             } else if (position == 4) {
                 getSupportFragmentManager().beginTransaction()
                         .add(R.id.main_container, new SearchFragment())
                         .addToBackStack(null).commit();
-            } else {
-                Intent intent = new Intent(this, GeneralItemListActivity.class);
-                intent.putExtra(GeneralItemListActivity.LOAD_API, 1);
-                startActivity(intent);
+                return;
             }
+
+            Log.d("selection",""+position);
+            Intent intent = new Intent(this, GeneralItemListActivity.class);
+            switch(position){
+                case 0:
+                    intent.putExtra(GeneralItemListActivity.LOAD_API, 0);
+                    break;
+                case 3:
+                    intent.putExtra(GeneralItemListActivity.LOAD_API, 1);
+                    Log.d("selection","1");
+                    break;
+                case 6:
+                    intent.putExtra(GeneralItemListActivity.LOAD_API, 2);
+                    Log.d("selection","2");
+                    break;
+            }
+            startActivity(intent);
         } else {
             DialogUtils.noNetworkPreActionDialog(this);
         }
