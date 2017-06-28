@@ -45,6 +45,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="iamdilipkumar.com.spacedig.ui.activities.GeneralItemListActivity" />
         </activity>
+
+        <provider
+            android:name=".generated.data.NasaProvider"
+            android:authorities="iamdilipkumar.com.spacedig.provider"
+            android:exported="false" />
     </application>
 
 </manifest>
