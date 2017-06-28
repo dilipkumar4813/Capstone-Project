@@ -48,8 +48,10 @@
 
         <provider
             android:name=".generated.data.NasaProvider"
-            android:authorities="iamdilipkumar.com.spacedig.provider"
+            android:authorities="iamdilipkumar.com.spacedig.data.provider"
             android:exported="false" />
+
+        <service android:name=".service.DownloadService" />
     </application>
 
 </manifest>

@@ -121,7 +121,6 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
 
     private void apiNeoResponse(Neo neo) {
         loading.setVisibility(View.GONE);
-        Log.d("neo size", "" + neo.getNearEarthObjects().size());
         if (neo.getNearEarthObjects() != null) {
             for (NearEarthObject item : neo.getNearEarthObjects()) {
                 mGeneralItems.add(CommonUtils.getNeoModel(item, this));

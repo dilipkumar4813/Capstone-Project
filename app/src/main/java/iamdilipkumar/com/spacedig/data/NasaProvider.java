@@ -19,20 +19,37 @@ public class NasaProvider {
 
     public static final String AUTHORITY = "iamdilipkumar.com.spacedig.data.provider";
 
-    @TableEndpoint(table = NasaDatabase.NASADATABASE)
-    public static class MainContacts {
+    @TableEndpoint(table = NasaDatabase.NEOTTABLE)
+    public static class NeoData {
 
-        @ContentUri(path = "nasa", type = "vnd.android.cursor.dir/contacts", defaultSort = CommonDatabaseColumns._ID + " DESC")
-        public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/nasa");
+        @ContentUri(path = "neo", type = "vnd.android.cursor.dir/neo", defaultSort = NeoColumns._ID + " DESC")
+        public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/neo");
 
         @InexactContentUri(
-                path = "nasa/#",
-                name = "LIST_ID",
-                type = "vnd.android.cursor.item/nasa",
-                whereColumn = CommonDatabaseColumns._ID,
+                path = "neo/#",
+                name = "_ID",
+                type = "vnd.android.cursor.item/neo",
+                whereColumn = NeoColumns._ID,
                 pathSegment = 1)
         public static Uri withId(long id) {
-            return Uri.parse("content://" + AUTHORITY + "/nasa/" + id);
+            return Uri.parse("content://" + AUTHORITY + "/neo/" + id);
+        }
+
+        @TableEndpoint(table = NasaDatabase.NEOTTABLE)
+        public static class CadData {
+
+            @ContentUri(path = "cad", type = "vnd.android.cursor.dir/cad", defaultSort = NeoColumns._ID + " DESC")
+            public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/cad");
+
+            @InexactContentUri(
+                    path = "cad/#",
+                    name = "_ID",
+                    type = "vnd.android.cursor.item/cad",
+                    whereColumn = NeoColumns._ID,
+                    pathSegment = 1)
+            public static Uri withId(long id) {
+                return Uri.parse("content://" + AUTHORITY + "/cad/" + id);
+            }
         }
     }
 }

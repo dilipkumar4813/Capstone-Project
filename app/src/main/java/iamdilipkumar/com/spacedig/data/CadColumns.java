@@ -6,13 +6,13 @@ import net.simonvt.schematic.annotation.NotNull;
 import net.simonvt.schematic.annotation.PrimaryKey;
 
 /**
- * Created on 28/06/17.
+ * Created on 29/06/17.
  *
  * @author dilipkumar4813
  * @version 1.0
  */
 
-public interface CommonDatabaseColumns {
+public interface CadColumns {
 
     @DataType(DataType.Type.INTEGER)
     @PrimaryKey

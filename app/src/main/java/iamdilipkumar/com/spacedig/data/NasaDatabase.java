@@ -16,5 +16,8 @@ public class NasaDatabase {
     public static final int VERSION = 1;
 
     @Table(NasaDatabase.class)
-    public static final String NASADATABASE = "nasa";
+    public static final String NEOTTABLE = "neo";
+
+    @Table(NasaDatabase.class)
+    public static final String CADTABLE = "cad";
 }
