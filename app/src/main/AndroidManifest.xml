@@ -13,8 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.activities.SpaceListActivity"
-            android:theme="@style/AppTheme.CollapsingToolbar">
+            android:name=".ui.activities.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,8 +23,8 @@
         </activity>
 
         <activity
-            android:name=".ui.activities.SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".ui.activities.SpaceListActivity"
+            android:theme="@style/AppTheme.CollapsingToolbar" />
 
         <activity
             android:name=".ui.activities.FullDetailActivity"
