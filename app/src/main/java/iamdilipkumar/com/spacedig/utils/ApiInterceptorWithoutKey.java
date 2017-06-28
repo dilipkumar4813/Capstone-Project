@@ -9,17 +9,13 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * Created on 21/06/17.
+ * Created on 29/06/17.
  *
  * @author dilipkumar4813
  * @version 1.0
  */
 
-public class ApiInterceptor implements Interceptor {
-
-    private final static String PARAM_API = "api_key";
-
-    private final static String API_KEY = BuildConfig.API;
+public class ApiInterceptorWithoutKey implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
@@ -27,7 +23,6 @@ public class ApiInterceptor implements Interceptor {
         HttpUrl originalHttpUrl = original.url();
 
         HttpUrl url = originalHttpUrl.newBuilder()
-                .addQueryParameter(PARAM_API, API_KEY)
                 .build();
 
         Request.Builder requestBuilder = original.newBuilder()

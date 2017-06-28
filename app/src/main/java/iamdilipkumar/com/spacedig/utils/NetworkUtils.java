@@ -44,4 +44,23 @@ public class NetworkUtils {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
+
+    public static Retrofit buildRetrofitWithoutKey() {
+        OkHttpClient.Builder httpClient =
+                new OkHttpClient.Builder();
+        httpClient.addInterceptor(new ApiInterceptorWithoutKey());
+
+        if (BuildConfig.DEBUG) {
+            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            httpClient.addInterceptor(loggingInterceptor);
+        }
+
+        return new Retrofit.Builder()
+                .baseUrl(BEERS_BASE_URL)
+                .client(httpClient.build())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+    }
 }
