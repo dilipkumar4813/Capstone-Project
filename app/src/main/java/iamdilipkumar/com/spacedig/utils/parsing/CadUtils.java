@@ -10,7 +10,6 @@ import java.util.List;
 import iamdilipkumar.com.spacedig.R;
 import iamdilipkumar.com.spacedig.data.CadColumns;
 import iamdilipkumar.com.spacedig.data.NasaProvider;
-import iamdilipkumar.com.spacedig.data.NeoColumns;
 import iamdilipkumar.com.spacedig.models.SimpleItemModel;
 import iamdilipkumar.com.spacedig.models.cad.Cad;
 
@@ -21,8 +20,6 @@ import iamdilipkumar.com.spacedig.models.cad.Cad;
  * @version 1.0
  */
 public class CadUtils {
-
-    private static String collisionImage = "http://www.killerasteroids.org/images/impact_intro.jpg";
 
     public static List<SimpleItemModel> getCadDataIntoContentProvider(Cad cad, Context context) {
         List<SimpleItemModel> simpleItemModels = new ArrayList<>();
@@ -47,7 +44,7 @@ public class CadUtils {
             cadData.put(CadColumns.NAME, name);
             cadData.put(CadColumns.DESCRIPTION, information);
             cadData.put(CadColumns.SHORT_DESCRIPTION, shortDescription);
-            cadData.put(CadColumns.IMAGEURL, collisionImage);
+            cadData.put(CadColumns.IMAGEURL, "https://pbs.twimg.com/media/CQ5xYRXVEAAeiCy.jpg");
             context.getContentResolver().insert(NasaProvider.CadData.CONTENT_URI, cadData);
         }
 

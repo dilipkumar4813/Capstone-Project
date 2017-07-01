@@ -1,5 +1,6 @@
 package iamdilipkumar.com.spacedig.utils.parsing;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
@@ -25,7 +26,7 @@ import iamdilipkumar.com.spacedig.models.neo.RelativeVelocity;
 
 public class NeoUtils {
 
-    public static SimpleItemModel getNeoModel(NearEarthObject item, Context context) {
+    public static void getNeoModel(NearEarthObject item, Context context) {
         String description = "", estDiameter = "", orbData = "";
         String closeApproach = context.getString(R.string.close_approach);
         String hazardous = context.getString(R.string.hazardous_asteroid);
@@ -84,8 +85,13 @@ public class NeoUtils {
                 + item.getAbsoluteMagnitudeH() + "\n" + hazardous + "\n\n" + closeApproach + "\n\n"
                 + estDiameter + "\n\n" + orbData;
 
-        return new SimpleItemModel(item.getNeoReferenceId(), item.getName(),
-                hazardous, "http://star.arm.ac.uk/impact-hazard/DOOMS_DAY.JPG", description, 0);
+        ContentValues neoData = new ContentValues();
+        neoData.put(NeoColumns.NEO_ID, item.getNeoReferenceId());
+        neoData.put(NeoColumns.NAME, item.getName());
+        neoData.put(NeoColumns.DESCRIPTION, description);
+        neoData.put(NeoColumns.SHORT_DESCRIPTION, hazardous);
+        neoData.put(NeoColumns.IMAGEURL, "http://star.arm.ac.uk/impact-hazard/DOOMS_DAY.JPG");
+        context.getContentResolver().insert(NasaProvider.NeoData.CONTENT_URI, neoData);
     }
 
     public static List<SimpleItemModel> getNeoList(Context context) {

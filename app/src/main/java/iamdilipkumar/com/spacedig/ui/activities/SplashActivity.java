@@ -82,15 +82,7 @@ public class SplashActivity extends AppCompatActivity {
             getContentResolver().delete(NasaProvider.NeoData.CONTENT_URI, null, null);
 
             for (NearEarthObject item : neo.getNearEarthObjects()) {
-                SimpleItemModel insertModel = NeoUtils.getNeoModel(item, this);
-
-                ContentValues neoData = new ContentValues();
-                neoData.put(NeoColumns.NEO_ID, insertModel.getId());
-                neoData.put(NeoColumns.NAME, insertModel.getName());
-                neoData.put(NeoColumns.DESCRIPTION, insertModel.getInformation());
-                neoData.put(NeoColumns.SHORT_DESCRIPTION, insertModel.getShortDescription());
-                neoData.put(NeoColumns.IMAGEURL, insertModel.getImageUrl());
-                getContentResolver().insert(NasaProvider.NeoData.CONTENT_URI, neoData);
+                NeoUtils.getNeoModel(item, this);
             }
         }
 
