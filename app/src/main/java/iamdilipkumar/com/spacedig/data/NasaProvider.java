@@ -27,7 +27,7 @@ public class NasaProvider {
 
         @InexactContentUri(
                 path = "neo/#",
-                name = "_ID",
+                name = "LIST_ID",
                 type = "vnd.android.cursor.item/neo",
                 whereColumn = NeoColumns._ID,
                 pathSegment = 1)
@@ -43,7 +43,7 @@ public class NasaProvider {
 
             @InexactContentUri(
                     path = "cad/#",
-                    name = "_ID",
+                    name = "LIST_ID",
                     type = "vnd.android.cursor.item/cad",
                     whereColumn = NeoColumns._ID,
                     pathSegment = 1)

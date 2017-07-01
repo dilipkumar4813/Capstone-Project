@@ -50,17 +50,17 @@ public class DownloadService extends IntentService {
 
         ApiInterface apiInterface = NetworkUtils.buildRetrofit().create(ApiInterface.class);
 
-        mCompositeDisposable.add(apiInterface.getNeoData()
+        /*mCompositeDisposable.add(apiInterface.getNeoData()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(this::apiNeoResponse, this::apiError));
+                .subscribe(this::apiNeoResponse, this::apiError));*/
 
     }
 
     private void apiNeoResponse(Neo neo) {
         if (neo.getNearEarthObjects() != null) {
             getContentResolver().delete(NasaProvider.NeoData.CONTENT_URI, null, null);
-
+            Log.d("data", "" + neo.getNearEarthObjects().size());
             for (NearEarthObject item : neo.getNearEarthObjects()) {
                 SimpleItemModel insertModel = CommonUtils.getNeoModel(item, this); // Add to database
 
@@ -69,6 +69,7 @@ public class DownloadService extends IntentService {
                 neoData.put(NeoColumns.NAME, insertModel.getName());
                 neoData.put(NeoColumns.DESCRIPTION, insertModel.getInformation());
                 neoData.put(NeoColumns.SHORT_DESCRIPTION, insertModel.getShortDescription());
+                neoData.put(NeoColumns.IMAGEURL, insertModel.getImageUrl());
                 getContentResolver().insert(NasaProvider.NeoData.CONTENT_URI, neoData);
             }
         }

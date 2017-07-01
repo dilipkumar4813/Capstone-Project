@@ -1,6 +1,7 @@
 package iamdilipkumar.com.spacedig.ui.activities;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +19,8 @@ import butterknife.ButterKnife;
 import iamdilipkumar.com.spacedig.R;
 
 import iamdilipkumar.com.spacedig.adapters.GeneralListAdapter;
+import iamdilipkumar.com.spacedig.data.NasaProvider;
+import iamdilipkumar.com.spacedig.data.NeoColumns;
 import iamdilipkumar.com.spacedig.models.SimpleItemModel;
 import iamdilipkumar.com.spacedig.models.epic.Epic;
 import iamdilipkumar.com.spacedig.models.neo.NearEarthObject;
@@ -92,10 +95,11 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
                     break;
                 case 2:
                     getSupportActionBar().setTitle(getString(R.string.neo));
-                    mCompositeDisposable.add(apiInterface.getNeoData()
+                    loadNearEarthObjects();
+                    /*mCompositeDisposable.add(apiInterface.getNeoData()
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribeOn(Schedulers.io())
-                            .subscribe(this::apiNeoResponse, this::apiError));
+                            .subscribe(this::apiNeoResponse, this::apiError));*/
                     break;
             }
         } else {
@@ -106,6 +110,12 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
                 rcAdapter.notifyDataSetChanged();
             }
         }
+    }
+
+    private void loadNearEarthObjects() {
+        loading.setVisibility(View.GONE);
+        mGeneralItems = CommonUtils.getNeoList(this);
+        loadAdapter();
     }
 
     @Override
@@ -163,7 +173,7 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
     }
 
     private void apiError(Throwable throwable) {
-        Log.d("api error","error: "+throwable.getLocalizedMessage());
+        Log.d("api error", "error: " + throwable.getLocalizedMessage());
         loading.setVisibility(View.GONE);
     }
 

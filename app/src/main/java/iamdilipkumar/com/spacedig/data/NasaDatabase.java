@@ -11,13 +11,13 @@ import net.simonvt.schematic.annotation.Table;
  */
 
 @Database(version = NasaDatabase.VERSION)
-public class NasaDatabase {
+class NasaDatabase {
 
-    public static final int VERSION = 1;
+    static final int VERSION = 1;
 
-    @Table(NasaDatabase.class)
-    public static final String NEOTTABLE = "neo";
+    @Table(NeoColumns.class)
+    static final String NEOTTABLE = "neo";
 
-    @Table(NasaDatabase.class)
-    public static final String CADTABLE = "cad";
+    @Table(CadColumns.class)
+    static final String CADTABLE = "cad";
 }

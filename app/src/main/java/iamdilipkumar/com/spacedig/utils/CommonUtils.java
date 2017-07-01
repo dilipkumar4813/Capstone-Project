@@ -2,11 +2,17 @@ package iamdilipkumar.com.spacedig.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.support.v4.app.ShareCompat;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import iamdilipkumar.com.spacedig.BuildConfig;
 import iamdilipkumar.com.spacedig.R;
+import iamdilipkumar.com.spacedig.data.NasaProvider;
+import iamdilipkumar.com.spacedig.data.NeoColumns;
 import iamdilipkumar.com.spacedig.models.SimpleItemModel;
 import iamdilipkumar.com.spacedig.models.epic.AttitudeQuaternions;
 import iamdilipkumar.com.spacedig.models.epic.CentroidCoordinates;
@@ -184,10 +190,34 @@ public class CommonUtils {
         }
 
         description = context.getString(R.string.absolute_magnitude) + " "
-                + item.getAbsoluteMagnitudeH() + "\n" + hazardous + "\n\n" + closeApproach + "\n\n" 
+                + item.getAbsoluteMagnitudeH() + "\n" + hazardous + "\n\n" + closeApproach + "\n\n"
                 + estDiameter + "\n\n" + orbData;
 
         return new SimpleItemModel(item.getNeoReferenceId(), item.getName(),
                 hazardous, "http://star.arm.ac.uk/impact-hazard/DOOMS_DAY.JPG", description, 0);
+    }
+
+    public static List<SimpleItemModel> getNeoList(Context context) {
+        List<SimpleItemModel> itemModels = new ArrayList<>();
+        Cursor neoCursor = context.getContentResolver().query(NasaProvider.NeoData.CONTENT_URI,
+                null, null, null, null);
+        if (neoCursor != null) {
+            if (neoCursor.moveToFirst()) {
+                do {
+                    SimpleItemModel itemModel =
+                            new SimpleItemModel(neoCursor.getString(
+                                    neoCursor.getColumnIndex(NeoColumns.NEO_ID)),
+                                    neoCursor.getString(neoCursor.getColumnIndex(NeoColumns.NAME)),
+                                    neoCursor.getString(neoCursor.getColumnIndex(NeoColumns.SHORT_DESCRIPTION)),
+                                    neoCursor.getString(neoCursor.getColumnIndex(NeoColumns.IMAGEURL)),
+                                    neoCursor.getString(neoCursor.getColumnIndex(NeoColumns.DESCRIPTION)),
+                                    0);
+                    itemModels.add(itemModel);
+                } while (neoCursor.moveToNext());
+            }
+            neoCursor.close();
+        }
+
+        return itemModels;
     }
 }

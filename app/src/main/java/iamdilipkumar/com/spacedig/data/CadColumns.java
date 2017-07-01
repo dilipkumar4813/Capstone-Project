@@ -21,11 +21,19 @@ public interface CadColumns {
 
     @DataType(DataType.Type.TEXT)
     @NotNull
+    String NEO_ID = "nid";
+
+    @DataType(DataType.Type.TEXT)
+    @NotNull
     String NAME = "name";
 
     @DataType(DataType.Type.TEXT)
     @NotNull
     String DESCRIPTION = "description";
+
+    @DataType(DataType.Type.TEXT)
+    @NotNull
+    String SHORT_DESCRIPTION = "shortdescription";
 
     @DataType(DataType.Type.TEXT)
     String IMAGEURL = "image";
