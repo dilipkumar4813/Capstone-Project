@@ -25,7 +25,7 @@ public interface CadColumns {
 
     @DataType(DataType.Type.TEXT)
     @NotNull
-    String NUMBER = "description";
+    String DESCRIPTION = "description";
 
     @DataType(DataType.Type.TEXT)
     String IMAGEURL = "image";

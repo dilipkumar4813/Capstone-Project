@@ -47,7 +47,7 @@
         </activity>
 
         <provider
-            android:name=".generated.data.NasaProvider"
+            android:name=".data.generated.NasaProvider"
             android:authorities="iamdilipkumar.com.spacedig.data.provider"
             android:exported="false" />
 

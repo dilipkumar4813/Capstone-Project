@@ -1,10 +1,14 @@
 package iamdilipkumar.com.spacedig.service;
 
 import android.app.IntentService;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import iamdilipkumar.com.spacedig.data.NasaProvider;
+import iamdilipkumar.com.spacedig.data.NeoColumns;
+import iamdilipkumar.com.spacedig.models.SimpleItemModel;
 import iamdilipkumar.com.spacedig.models.neo.NearEarthObject;
 import iamdilipkumar.com.spacedig.models.neo.Neo;
 import iamdilipkumar.com.spacedig.utils.ApiInterface;
@@ -55,8 +59,17 @@ public class DownloadService extends IntentService {
 
     private void apiNeoResponse(Neo neo) {
         if (neo.getNearEarthObjects() != null) {
+            getContentResolver().delete(NasaProvider.NeoData.CONTENT_URI, null, null);
+
             for (NearEarthObject item : neo.getNearEarthObjects()) {
-                CommonUtils.getNeoModel(item, this); // Add to database
+                SimpleItemModel insertModel = CommonUtils.getNeoModel(item, this); // Add to database
+
+                ContentValues neoData = new ContentValues();
+                neoData.put(NeoColumns.NEO_ID, insertModel.getId());
+                neoData.put(NeoColumns.NAME, insertModel.getName());
+                neoData.put(NeoColumns.DESCRIPTION, insertModel.getInformation());
+                neoData.put(NeoColumns.SHORT_DESCRIPTION, insertModel.getShortDescription());
+                getContentResolver().insert(NasaProvider.NeoData.CONTENT_URI, neoData);
             }
         }
     }

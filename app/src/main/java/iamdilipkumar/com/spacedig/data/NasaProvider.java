@@ -14,10 +14,10 @@ import net.simonvt.schematic.annotation.TableEndpoint;
  * @version 1.0
  */
 
-@ContentProvider(authority = NasaProvider.AUTHORITY, database = NasaProvider.class)
+@ContentProvider(authority = NasaProvider.AUTHORITY, database = NasaDatabase.class)
 public class NasaProvider {
 
-    public static final String AUTHORITY = "iamdilipkumar.com.spacedig.data.provider";
+    static final String AUTHORITY = "iamdilipkumar.com.spacedig.data.provider";
 
     @TableEndpoint(table = NasaDatabase.NEOTTABLE)
     public static class NeoData {
