@@ -83,7 +83,7 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
                             .subscribeOn(Schedulers.io())
                             .subscribe(this::apiRoverResponse, this::apiError));
                     break;
-                case 2:
+                case 1:
                     getSupportActionBar().setTitle(getString(R.string.epic));
                     mCompositeDisposable.add(apiInterface.getEpicData("2017-01-01")
                             .observeOn(AndroidSchedulers.mainThread())

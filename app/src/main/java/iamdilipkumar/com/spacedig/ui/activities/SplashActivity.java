@@ -78,7 +78,9 @@ public class SplashActivity extends AppCompatActivity {
      */
     private void apiNeoResponse(Neo neo) {
         if (neo.getNearEarthObjects() != null) {
+
             getContentResolver().delete(NasaProvider.NeoData.CONTENT_URI, null, null);
+
             for (NearEarthObject item : neo.getNearEarthObjects()) {
                 SimpleItemModel insertModel = NeoUtils.getNeoModel(item, this);
 
@@ -97,6 +99,8 @@ public class SplashActivity extends AppCompatActivity {
 
     private void apiCadResponse(Cad cad) {
         if (cad != null) {
+            getContentResolver().delete(NasaProvider.CadData.CONTENT_URI, null, null);
+
             CadUtils.getCadDataIntoContentProvider(cad, this);
             Log.d(TAG, "api:" + cad.getData().size());
         }

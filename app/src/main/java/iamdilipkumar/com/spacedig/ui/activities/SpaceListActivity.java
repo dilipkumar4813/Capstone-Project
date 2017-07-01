@@ -115,7 +115,7 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
                 case 0:
                     intent.putExtra(GeneralItemListActivity.LOAD_API, 0);
                     break;
-                case 3:
+                case 2:
                     intent.putExtra(GeneralItemListActivity.LOAD_API, 1);
                     break;
                 case 5:

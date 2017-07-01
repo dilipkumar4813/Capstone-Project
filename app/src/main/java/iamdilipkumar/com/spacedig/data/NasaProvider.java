@@ -36,10 +36,10 @@ public class NasaProvider {
         }
     }
 
-    @TableEndpoint(table = NasaDatabase.NEOTTABLE)
+    @TableEndpoint(table = NasaDatabase.CADTABLE)
     public static class CadData {
 
-        @ContentUri(path = "cad", type = "vnd.android.cursor.dir/cad", defaultSort = NeoColumns._ID + " DESC")
+        @ContentUri(path = "cad", type = "vnd.android.cursor.dir/cad", defaultSort = CadColumns._ID + " DESC")
         public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/cad");
 
         @InexactContentUri(

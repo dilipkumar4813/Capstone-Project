@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import iamdilipkumar.com.spacedig.R;
+import iamdilipkumar.com.spacedig.data.CadColumns;
 import iamdilipkumar.com.spacedig.data.NasaProvider;
 import iamdilipkumar.com.spacedig.data.NeoColumns;
 import iamdilipkumar.com.spacedig.models.SimpleItemModel;
@@ -41,13 +42,13 @@ public class CadUtils {
                 information += cad.getFields().get(i) + ": " + item.get(i) + "\n";
             }
 
-            ContentValues neoData = new ContentValues();
-            neoData.put(NeoColumns.NEO_ID, "");
-            neoData.put(NeoColumns.NAME, name);
-            neoData.put(NeoColumns.DESCRIPTION, information);
-            neoData.put(NeoColumns.SHORT_DESCRIPTION, shortDescription);
-            neoData.put(NeoColumns.IMAGEURL, collisionImage);
-            context.getContentResolver().insert(NasaProvider.CadData.CONTENT_URI, neoData);
+            ContentValues cadData = new ContentValues();
+            cadData.put(CadColumns.NEO_ID, "");
+            cadData.put(CadColumns.NAME, name);
+            cadData.put(CadColumns.DESCRIPTION, information);
+            cadData.put(CadColumns.SHORT_DESCRIPTION, shortDescription);
+            cadData.put(CadColumns.IMAGEURL, collisionImage);
+            context.getContentResolver().insert(NasaProvider.CadData.CONTENT_URI, cadData);
         }
 
         return simpleItemModels;
@@ -56,23 +57,23 @@ public class CadUtils {
     public static List<SimpleItemModel> getCadContent(Context context) {
         List<SimpleItemModel> simpleItemModels = new ArrayList<>();
 
-        Cursor neoCursor = context.getContentResolver().query(NasaProvider.CadData.CONTENT_URI,
+        Cursor cadCursor = context.getContentResolver().query(NasaProvider.CadData.CONTENT_URI,
                 null, null, null, null);
-        if (neoCursor != null) {
-            if (neoCursor.moveToFirst()) {
+        if (cadCursor != null) {
+            if (cadCursor.moveToFirst()) {
                 do {
                     SimpleItemModel itemModel =
-                            new SimpleItemModel(neoCursor.getString(
-                                    neoCursor.getColumnIndex(NeoColumns.NEO_ID)),
-                                    neoCursor.getString(neoCursor.getColumnIndex(NeoColumns.NAME)),
-                                    neoCursor.getString(neoCursor.getColumnIndex(NeoColumns.SHORT_DESCRIPTION)),
-                                    neoCursor.getString(neoCursor.getColumnIndex(NeoColumns.IMAGEURL)),
-                                    neoCursor.getString(neoCursor.getColumnIndex(NeoColumns.DESCRIPTION)),
+                            new SimpleItemModel(cadCursor.getString(
+                                    cadCursor.getColumnIndex(CadColumns.NEO_ID)),
+                                    cadCursor.getString(cadCursor.getColumnIndex(CadColumns.NAME)),
+                                    cadCursor.getString(cadCursor.getColumnIndex(CadColumns.SHORT_DESCRIPTION)),
+                                    cadCursor.getString(cadCursor.getColumnIndex(CadColumns.IMAGEURL)),
+                                    cadCursor.getString(cadCursor.getColumnIndex(CadColumns.DESCRIPTION)),
                                     0);
                     simpleItemModels.add(itemModel);
-                } while (neoCursor.moveToNext());
+                } while (cadCursor.moveToNext());
             }
-            neoCursor.close();
+            cadCursor.close();
         }
 
         return simpleItemModels;
