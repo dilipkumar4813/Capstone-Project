@@ -2,7 +2,6 @@ package iamdilipkumar.com.spacedig.utils;
 
 import java.io.IOException;
 
-import iamdilipkumar.com.spacedig.BuildConfig;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -15,7 +14,7 @@ import okhttp3.Response;
  * @version 1.0
  */
 
-public class ApiInterceptorWithoutKey implements Interceptor {
+class ApiInterceptorWithoutKey implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {

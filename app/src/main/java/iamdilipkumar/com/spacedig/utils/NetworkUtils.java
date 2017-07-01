@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NetworkUtils {
 
     private final static String NASA_BASE_URL = "https://api.nasa.gov/";
-    private final static String CAD_BASE_URL = "https://ssd-api.jpl.nasa.gov/cad.api/";
+    private final static String CAD_BASE_URL = "https://ssd-api.jpl.nasa.gov/";
 
     /**
      * Method to create a new Retrofit instance

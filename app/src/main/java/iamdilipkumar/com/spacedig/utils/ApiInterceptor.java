@@ -14,8 +14,7 @@ import okhttp3.Response;
  * @author dilipkumar4813
  * @version 1.0
  */
-
-public class ApiInterceptor implements Interceptor {
+class ApiInterceptor implements Interceptor {
 
     private final static String PARAM_API = "api_key";
 

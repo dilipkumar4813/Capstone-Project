@@ -87,7 +87,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void apiCadResponse(Cad cad) {
         if (cad != null) {
-            Log.d(TAG, "api:" + cad.getCollection().getItems().size());
+            Log.d(TAG, "api:" + cad.getData().size());
         }
     }
 

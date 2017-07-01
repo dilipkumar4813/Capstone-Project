@@ -1,4 +1,4 @@
-package iamdilipkumar.com.spacedig.models.cad;
+package iamdilipkumar.com.spacedig.models.search;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
@@ -10,23 +10,24 @@ import com.google.gson.annotations.SerializedName;
  * @author dilipkumar4813
  * @version 1.0
  */
-public class Item {
+
+public class Collection {
 
     @SerializedName("links")
     @Expose
-    private List<Link_> links = null;
+    private List<Link> links = null;
     @SerializedName("href")
     @Expose
     private String href;
-    @SerializedName("data")
+    @SerializedName("items")
     @Expose
-    private List<Datum> data = null;
+    private List<Item> items = null;
 
-    public List<Link_> getLinks() {
+    public List<Link> getLinks() {
         return links;
     }
 
-    public void setLinks(List<Link_> links) {
+    public void setLinks(List<Link> links) {
         this.links = links;
     }
 
@@ -38,12 +39,12 @@ public class Item {
         this.href = href;
     }
 
-    public List<Datum> getData() {
-        return data;
+    public List<Item> getItems() {
+        return items;
     }
 
-    public void setData(List<Datum> data) {
-        this.data = data;
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
 }

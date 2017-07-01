@@ -4,6 +4,7 @@ import java.util.List;
 
 import iamdilipkumar.com.spacedig.models.Apod;
 import iamdilipkumar.com.spacedig.models.cad.Cad;
+import iamdilipkumar.com.spacedig.models.search.Search;
 import iamdilipkumar.com.spacedig.models.epic.Epic;
 import iamdilipkumar.com.spacedig.models.neo.Neo;
 import iamdilipkumar.com.spacedig.models.rover.MarsRover;
@@ -38,7 +39,7 @@ public interface ApiInterface {
     Observable<Neo> getSearchData(@Path("q") String searchTerm);
 
     // CAD API no key required
-    @GET("/")
+    @GET("/cad.api")
     Observable<Cad> getCadData(@Query("dist-max") String distance,
                                @Query("date-min") String dateMin,
                                @Query("sort") String sort);
