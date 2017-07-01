@@ -30,4 +30,7 @@ public interface ApiInterface {
 
     @GET("/neo/rest/v1/neo/browse")
     Observable<Neo> getNeoData();
+
+    @GET("/search?q={q}")
+    Observable<Neo> searchData(@Path("q") String searchTerm);
 }

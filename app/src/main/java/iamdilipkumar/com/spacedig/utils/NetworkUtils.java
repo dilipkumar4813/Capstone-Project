@@ -17,7 +17,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkUtils {
 
-    private final static String BEERS_BASE_URL = "https://api.nasa.gov/";
+    private final static String NASA_BASE_URL = "https://api.nasa.gov/";
+    private final static String CAD_BASE_URL = "https://ssd-api.jpl.nasa.gov/cad.api?dist-max=10LD&date-min=2017-01-01&sort=dist";
 
     /**
      * Method to create a new Retrofit instance
@@ -38,7 +39,7 @@ public class NetworkUtils {
         }
 
         return new Retrofit.Builder()
-                .baseUrl(BEERS_BASE_URL)
+                .baseUrl(NASA_BASE_URL)
                 .client(httpClient.build())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
@@ -57,7 +58,26 @@ public class NetworkUtils {
         }
 
         return new Retrofit.Builder()
-                .baseUrl(BEERS_BASE_URL)
+                .baseUrl(NASA_BASE_URL)
+                .client(httpClient.build())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+    }
+
+    public static Retrofit buildCadRetrofit() {
+        OkHttpClient.Builder httpClient =
+                new OkHttpClient.Builder();
+        httpClient.addInterceptor(new ApiInterceptorWithoutKey());
+
+        if (BuildConfig.DEBUG) {
+            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            httpClient.addInterceptor(loggingInterceptor);
+        }
+
+        return new Retrofit.Builder()
+                .baseUrl(CAD_BASE_URL)
                 .client(httpClient.build())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
