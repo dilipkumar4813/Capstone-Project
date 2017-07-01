@@ -1,8 +1,10 @@
-package iamdilipkumar.com.spacedig.utils;
+package iamdilipkumar.com.spacedig.utils.Network;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import iamdilipkumar.com.spacedig.BuildConfig;
+import iamdilipkumar.com.spacedig.utils.Network.ApiInterceptor;
+import iamdilipkumar.com.spacedig.utils.Network.ApiInterceptorWithoutKey;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;

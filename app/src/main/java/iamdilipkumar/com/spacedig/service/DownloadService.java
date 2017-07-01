@@ -11,12 +11,10 @@ import iamdilipkumar.com.spacedig.data.NeoColumns;
 import iamdilipkumar.com.spacedig.models.SimpleItemModel;
 import iamdilipkumar.com.spacedig.models.neo.NearEarthObject;
 import iamdilipkumar.com.spacedig.models.neo.Neo;
-import iamdilipkumar.com.spacedig.utils.ApiInterface;
+import iamdilipkumar.com.spacedig.utils.Network.ApiInterface;
 import iamdilipkumar.com.spacedig.utils.CommonUtils;
-import iamdilipkumar.com.spacedig.utils.NetworkUtils;
-import io.reactivex.android.schedulers.AndroidSchedulers;
+import iamdilipkumar.com.spacedig.utils.Network.NetworkUtils;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created on 29/06/17.

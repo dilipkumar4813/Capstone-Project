@@ -1,4 +1,4 @@
-package iamdilipkumar.com.spacedig.utils;
+package iamdilipkumar.com.spacedig.utils.Network;
 
 import java.util.List;
 

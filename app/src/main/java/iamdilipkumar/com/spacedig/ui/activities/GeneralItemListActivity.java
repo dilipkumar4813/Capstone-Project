@@ -1,7 +1,6 @@
 package iamdilipkumar.com.spacedig.ui.activities;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -19,8 +18,6 @@ import butterknife.ButterKnife;
 import iamdilipkumar.com.spacedig.R;
 
 import iamdilipkumar.com.spacedig.adapters.GeneralListAdapter;
-import iamdilipkumar.com.spacedig.data.NasaProvider;
-import iamdilipkumar.com.spacedig.data.NeoColumns;
 import iamdilipkumar.com.spacedig.models.SimpleItemModel;
 import iamdilipkumar.com.spacedig.models.epic.Epic;
 import iamdilipkumar.com.spacedig.models.neo.NearEarthObject;
@@ -28,9 +25,10 @@ import iamdilipkumar.com.spacedig.models.neo.Neo;
 import iamdilipkumar.com.spacedig.models.rover.MarsRover;
 import iamdilipkumar.com.spacedig.models.rover.MarsRoverPhoto;
 import iamdilipkumar.com.spacedig.ui.fragments.GeneralItemDetailFragment;
-import iamdilipkumar.com.spacedig.utils.ApiInterface;
+import iamdilipkumar.com.spacedig.utils.NeoUtils;
+import iamdilipkumar.com.spacedig.utils.Network.ApiInterface;
 import iamdilipkumar.com.spacedig.utils.CommonUtils;
-import iamdilipkumar.com.spacedig.utils.NetworkUtils;
+import iamdilipkumar.com.spacedig.utils.Network.NetworkUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -114,7 +112,7 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
 
     private void loadNearEarthObjects() {
         loading.setVisibility(View.GONE);
-        mGeneralItems = CommonUtils.getNeoList(this);
+        mGeneralItems = NeoUtils.getNeoList(this);
         loadAdapter();
     }
 
@@ -133,7 +131,7 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
         loading.setVisibility(View.GONE);
         if (neo.getNearEarthObjects() != null) {
             for (NearEarthObject item : neo.getNearEarthObjects()) {
-                mGeneralItems.add(CommonUtils.getNeoModel(item, this));
+                mGeneralItems.add(NeoUtils.getNeoModel(item, this));
             }
         }
 
