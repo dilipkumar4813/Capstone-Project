@@ -14,6 +14,7 @@ import iamdilipkumar.com.spacedig.models.neo.Neo;
 import iamdilipkumar.com.spacedig.utils.Network.ApiInterface;
 import iamdilipkumar.com.spacedig.utils.CommonUtils;
 import iamdilipkumar.com.spacedig.utils.Network.NetworkUtils;
+import iamdilipkumar.com.spacedig.utils.parsing.NeoUtils;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
@@ -60,7 +61,7 @@ public class DownloadService extends IntentService {
             getContentResolver().delete(NasaProvider.NeoData.CONTENT_URI, null, null);
             Log.d("data", "" + neo.getNearEarthObjects().size());
             for (NearEarthObject item : neo.getNearEarthObjects()) {
-                SimpleItemModel insertModel = CommonUtils.getNeoModel(item, this); // Add to database
+                SimpleItemModel insertModel = NeoUtils.getNeoModel(item, this);
 
                 ContentValues neoData = new ContentValues();
                 neoData.put(NeoColumns.NEO_ID, insertModel.getId());

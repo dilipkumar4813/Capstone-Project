@@ -1,4 +1,4 @@
-package iamdilipkumar.com.spacedig.utils;
+package iamdilipkumar.com.spacedig.utils.parsing;
 
 import android.content.Context;
 import android.database.Cursor;

@@ -20,12 +20,11 @@ import iamdilipkumar.com.spacedig.R;
 import iamdilipkumar.com.spacedig.adapters.GeneralListAdapter;
 import iamdilipkumar.com.spacedig.models.SimpleItemModel;
 import iamdilipkumar.com.spacedig.models.epic.Epic;
-import iamdilipkumar.com.spacedig.models.neo.NearEarthObject;
-import iamdilipkumar.com.spacedig.models.neo.Neo;
 import iamdilipkumar.com.spacedig.models.rover.MarsRover;
 import iamdilipkumar.com.spacedig.models.rover.MarsRoverPhoto;
 import iamdilipkumar.com.spacedig.ui.fragments.GeneralItemDetailFragment;
-import iamdilipkumar.com.spacedig.utils.NeoUtils;
+import iamdilipkumar.com.spacedig.utils.parsing.CadUtils;
+import iamdilipkumar.com.spacedig.utils.parsing.NeoUtils;
 import iamdilipkumar.com.spacedig.utils.Network.ApiInterface;
 import iamdilipkumar.com.spacedig.utils.CommonUtils;
 import iamdilipkumar.com.spacedig.utils.Network.NetworkUtils;
@@ -84,20 +83,20 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
                             .subscribeOn(Schedulers.io())
                             .subscribe(this::apiRoverResponse, this::apiError));
                     break;
-                case 1:
+                case 2:
                     getSupportActionBar().setTitle(getString(R.string.epic));
                     mCompositeDisposable.add(apiInterface.getEpicData("2017-01-01")
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribeOn(Schedulers.io())
                             .subscribe(this::apiEpicResponse, this::apiError));
                     break;
-                case 2:
+                case 5:
                     getSupportActionBar().setTitle(getString(R.string.neo));
                     loadNearEarthObjects();
-                    /*mCompositeDisposable.add(apiInterface.getNeoData()
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribeOn(Schedulers.io())
-                            .subscribe(this::apiNeoResponse, this::apiError));*/
+                    break;
+                case 6:
+                    getSupportActionBar().setTitle(getString(R.string.collision_approach));
+                    loadCadObjects();
                     break;
             }
         } else {
@@ -116,6 +115,12 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
         loadAdapter();
     }
 
+    private void loadCadObjects() {
+        loading.setVisibility(View.GONE);
+        mGeneralItems = CadUtils.getCadContent(this);
+        loadAdapter();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -125,17 +130,6 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
         }
 
         return true;
-    }
-
-    private void apiNeoResponse(Neo neo) {
-        loading.setVisibility(View.GONE);
-        if (neo.getNearEarthObjects() != null) {
-            for (NearEarthObject item : neo.getNearEarthObjects()) {
-                mGeneralItems.add(NeoUtils.getNeoModel(item, this));
-            }
-        }
-
-        loadAdapter();
     }
 
     private void apiRoverResponse(MarsRover marsRoverPhotos) {

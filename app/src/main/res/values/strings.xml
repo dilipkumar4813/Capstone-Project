@@ -60,6 +60,8 @@
     <string name="kilometers_per_hour">Kilometers per hour:</string>
     <string name="kilometers_per_second">Kilometers per second:</string>
     <string name="miles_per_hour">Miles per hour:</string>
+    <string name="collision_approach_short_description">Distance:</string>
+    <string name="collision_approach">Collision Approach Data</string>
 
     <string name="epic">Earth Polychromatic Imaging Camera</string>
 

@@ -117,11 +117,12 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
                     break;
                 case 3:
                     intent.putExtra(GeneralItemListActivity.LOAD_API, 1);
-                    Log.d("selection","1");
+                    break;
+                case 5:
+                    intent.putExtra(GeneralItemListActivity.LOAD_API, 6);
                     break;
                 case 6:
-                    intent.putExtra(GeneralItemListActivity.LOAD_API, 2);
-                    Log.d("selection","2");
+                    intent.putExtra(GeneralItemListActivity.LOAD_API, 5);
                     break;
             }
             startActivity(intent);

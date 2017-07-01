@@ -34,22 +34,22 @@ public class NasaProvider {
         public static Uri withId(long id) {
             return Uri.parse("content://" + AUTHORITY + "/neo/" + id);
         }
+    }
 
-        @TableEndpoint(table = NasaDatabase.NEOTTABLE)
-        public static class CadData {
+    @TableEndpoint(table = NasaDatabase.NEOTTABLE)
+    public static class CadData {
 
-            @ContentUri(path = "cad", type = "vnd.android.cursor.dir/cad", defaultSort = NeoColumns._ID + " DESC")
-            public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/cad");
+        @ContentUri(path = "cad", type = "vnd.android.cursor.dir/cad", defaultSort = NeoColumns._ID + " DESC")
+        public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/cad");
 
-            @InexactContentUri(
-                    path = "cad/#",
-                    name = "LIST_ID",
-                    type = "vnd.android.cursor.item/cad",
-                    whereColumn = NeoColumns._ID,
-                    pathSegment = 1)
-            public static Uri withId(long id) {
-                return Uri.parse("content://" + AUTHORITY + "/cad/" + id);
-            }
+        @InexactContentUri(
+                path = "cad/#",
+                name = "LIST_ID",
+                type = "vnd.android.cursor.item/cad",
+                whereColumn = NeoColumns._ID,
+                pathSegment = 1)
+        public static Uri withId(long id) {
+            return Uri.parse("content://" + AUTHORITY + "/cad/" + id);
         }
     }
 }
