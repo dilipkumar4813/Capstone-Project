@@ -33,11 +33,13 @@ public interface ApiInterface {
     @GET("/neo/rest/v1/neo/browse")
     Observable<Neo> getNeoData();
 
+    // Without the API key
+    @GET("/search?q={q}")
+    Observable<Neo> getSearchData(@Path("q") String searchTerm);
+
+    // CAD API no key required
     @GET("/")
     Observable<Cad> getCadData(@Query("dist-max") String distance,
                                @Query("date-min") String dateMin,
                                @Query("sort") String sort);
-
-    @GET("/search?q={q}")
-    Observable<Neo> getSearchData(@Path("q") String searchTerm);
 }
