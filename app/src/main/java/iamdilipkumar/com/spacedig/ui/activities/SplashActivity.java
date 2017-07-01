@@ -2,9 +2,7 @@ package iamdilipkumar.com.spacedig.ui.activities;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,9 +11,9 @@ import iamdilipkumar.com.spacedig.R;
 import iamdilipkumar.com.spacedig.data.NasaProvider;
 import iamdilipkumar.com.spacedig.data.NeoColumns;
 import iamdilipkumar.com.spacedig.models.SimpleItemModel;
+import iamdilipkumar.com.spacedig.models.cad.Cad;
 import iamdilipkumar.com.spacedig.models.neo.NearEarthObject;
 import iamdilipkumar.com.spacedig.models.neo.Neo;
-import iamdilipkumar.com.spacedig.service.DownloadService;
 import iamdilipkumar.com.spacedig.utils.ApiInterface;
 import iamdilipkumar.com.spacedig.utils.CommonUtils;
 import iamdilipkumar.com.spacedig.utils.NetworkUtils;
@@ -46,18 +44,25 @@ public class SplashActivity extends AppCompatActivity {
 
         if (CommonUtils.checkNetworkConnectivity(this)) {
             downloadData();
-        }else{
+        } else {
             loadScreen();
         }
     }
 
     private void downloadData() {
-        ApiInterface apiInterface = NetworkUtils.buildRetrofit().create(ApiInterface.class);
+        ApiInterface apiNeoInterface = NetworkUtils.buildRetrofit().create(ApiInterface.class);
 
-        mCompositeDisposable.add(apiInterface.getNeoData()
+        mCompositeDisposable.add(apiNeoInterface.getNeoData()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::apiNeoResponse, this::apiError));
+
+        ApiInterface apiCadInterface = NetworkUtils.buildCadRetrofit().create(ApiInterface.class);
+
+        mCompositeDisposable.add(apiCadInterface.getCadData("10LD", "2017-01-01", "dist")
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::apiCadResponse, this::apiError));
     }
 
     private void apiNeoResponse(Neo neo) {
@@ -79,12 +84,18 @@ public class SplashActivity extends AppCompatActivity {
         loadScreen();
     }
 
+    private void apiCadResponse(Cad cad) {
+        if (cad != null) {
+            Log.d(TAG, "api:" + cad.getCollection().getItems().size());
+        }
+    }
+
     private void apiError(Throwable throwable) {
         Log.e(TAG, "error: " + throwable.getLocalizedMessage());
         loadScreen();
     }
 
-    private void loadScreen(){
+    private void loadScreen() {
         SplashActivity.this.finish();
         startActivity(mainList);
     }
