@@ -3,6 +3,7 @@ package iamdilipkumar.com.spacedig.utils.Network;
 import java.util.List;
 
 import iamdilipkumar.com.spacedig.models.Apod;
+import iamdilipkumar.com.spacedig.models.EarthImagery;
 import iamdilipkumar.com.spacedig.models.cad.Cad;
 import iamdilipkumar.com.spacedig.models.search.Search;
 import iamdilipkumar.com.spacedig.models.epic.Epic;
@@ -29,10 +30,16 @@ public interface ApiInterface {
     Observable<MarsRover> getRoverPhotos();
 
     @GET("/EPIC/api/natural/date/{date}")
-    Observable<List <Epic>> getEpicData(@Path("date") String queryDate);
+    Observable<List<Epic>> getEpicData(@Path("date") String queryDate);
 
     @GET("/neo/rest/v1/neo/browse")
     Observable<Neo> getNeoData();
+
+    // Example lon=77.6309395&lat=12.9539974&date=2014-02-01
+    @GET("/planetary/earth/imagery")
+    Observable<EarthImagery> getEarthImage(@Query("lon") String longitude,
+                                           @Query("lat") String latitude,
+                                           @Query("date") String queryDate);
 
     // Without the API key
     @GET("/search")
