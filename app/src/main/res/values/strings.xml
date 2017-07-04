@@ -103,4 +103,5 @@
     </string-array>
     <string name="title_generalitem_list">GeneralItems</string>
     <string name="title_generalitem_detail">GeneralItem Detail</string>
+    <string name="title_activity_maps_location">Map</string>
 </resources>

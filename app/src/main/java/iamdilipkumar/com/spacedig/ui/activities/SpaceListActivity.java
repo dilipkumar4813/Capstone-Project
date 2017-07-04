@@ -115,8 +115,8 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
                 loadActivity = false;
                 break;
             case 2:
-                // Earth search
-
+                startActivity(new Intent(SpaceListActivity.this,MapsLocationActivity.class));
+                loadActivity = false;
                 break;
             case 3:
                 intent.putExtra(GeneralItemListActivity.LOAD_API, 1);
