@@ -98,36 +98,46 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
     @Override
     public void onMainItemClick(int position) {
 
-        if (CommonUtils.checkNetworkConnectivity(this)) {
-            if (position == 1) {
-                startActivity(new Intent(this, FullDetailActivity.class));
-                return;
-            } else if (position == 4) {
+        boolean loadActivity = true;
+        Log.d("selection", "" + position);
+        Intent intent = new Intent(this, GeneralItemListActivity.class);
+        switch (position) {
+            case 0:
+                intent.putExtra(GeneralItemListActivity.LOAD_API, 0);
+                break;
+            case 1:
+                if (CommonUtils.checkNetworkConnectivity(this)) {
+                    startActivity(new Intent(this, FullDetailActivity.class));
+                } else {
+                    DialogUtils.noNetworkPreActionDialog(this);
+                }
+
+                loadActivity = false;
+                break;
+            case 2:
+                // Earth search
+
+                break;
+            case 3:
+                intent.putExtra(GeneralItemListActivity.LOAD_API, 1);
+                break;
+            case 4:
                 getSupportFragmentManager().beginTransaction()
                         .add(R.id.main_container, new SearchFragment())
                         .addToBackStack(null).commit();
-                return;
-            }
 
-            Log.d("selection",""+position);
-            Intent intent = new Intent(this, GeneralItemListActivity.class);
-            switch(position){
-                case 0:
-                    intent.putExtra(GeneralItemListActivity.LOAD_API, 0);
-                    break;
-                case 2:
-                    intent.putExtra(GeneralItemListActivity.LOAD_API, 1);
-                    break;
-                case 5:
-                    intent.putExtra(GeneralItemListActivity.LOAD_API, 6);
-                    break;
-                case 6:
-                    intent.putExtra(GeneralItemListActivity.LOAD_API, 5);
-                    break;
-            }
+                loadActivity = false;
+                break;
+            case 5:
+                intent.putExtra(GeneralItemListActivity.LOAD_API, 6);
+                break;
+            case 6:
+                intent.putExtra(GeneralItemListActivity.LOAD_API, 5);
+                break;
+        }
+
+        if (loadActivity) {
             startActivity(intent);
-        } else {
-            DialogUtils.noNetworkPreActionDialog(this);
         }
     }
 

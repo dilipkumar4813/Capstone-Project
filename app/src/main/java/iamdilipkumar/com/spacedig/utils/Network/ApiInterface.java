@@ -35,8 +35,8 @@ public interface ApiInterface {
     Observable<Neo> getNeoData();
 
     // Without the API key
-    @GET("/search?q={q}")
-    Observable<Neo> getSearchData(@Path("q") String searchTerm);
+    @GET("/search")
+    Observable<Search> getSearchData(@Query("q") String searchTerm);
 
     // CAD API no key required
     @GET("/cad.api")

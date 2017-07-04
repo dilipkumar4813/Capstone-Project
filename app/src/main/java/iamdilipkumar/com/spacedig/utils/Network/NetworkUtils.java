@@ -3,8 +3,6 @@ package iamdilipkumar.com.spacedig.utils.Network;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import iamdilipkumar.com.spacedig.BuildConfig;
-import iamdilipkumar.com.spacedig.utils.Network.ApiInterceptor;
-import iamdilipkumar.com.spacedig.utils.Network.ApiInterceptorWithoutKey;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -20,6 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NetworkUtils {
 
     private final static String NASA_BASE_URL = "https://api.nasa.gov/";
+    private final static String NASA_SEARCH_URL = "https://images-api.nasa.gov/";
     private final static String CAD_BASE_URL = "https://ssd-api.jpl.nasa.gov/";
 
     /**
@@ -60,7 +59,7 @@ public class NetworkUtils {
         }
 
         return new Retrofit.Builder()
-                .baseUrl(NASA_BASE_URL)
+                .baseUrl(NASA_SEARCH_URL)
                 .client(httpClient.build())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
