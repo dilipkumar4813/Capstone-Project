@@ -22,15 +22,19 @@ import iamdilipkumar.com.spacedig.models.SimpleItemModel;
 import iamdilipkumar.com.spacedig.models.epic.Epic;
 import iamdilipkumar.com.spacedig.models.rover.MarsRover;
 import iamdilipkumar.com.spacedig.models.rover.MarsRoverPhoto;
+import iamdilipkumar.com.spacedig.models.search.Search;
 import iamdilipkumar.com.spacedig.ui.fragments.GeneralItemDetailFragment;
 import iamdilipkumar.com.spacedig.utils.parsing.CadUtils;
 import iamdilipkumar.com.spacedig.utils.parsing.NeoUtils;
 import iamdilipkumar.com.spacedig.utils.Network.ApiInterface;
 import iamdilipkumar.com.spacedig.utils.CommonUtils;
 import iamdilipkumar.com.spacedig.utils.Network.NetworkUtils;
+import iamdilipkumar.com.spacedig.utils.parsing.SearchUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+
+import static iamdilipkumar.com.spacedig.ui.fragments.SearchFragment.SEARCH_TEXT;
 
 /**
  * Created on 22/06/17.
@@ -90,6 +94,17 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
                             .subscribeOn(Schedulers.io())
                             .subscribe(this::apiEpicResponse, this::apiError));
                     break;
+                case 4:
+                    getSupportActionBar().setTitle(getString(R.string.search_results));
+                    String searchText = getIntent().getStringExtra(SEARCH_TEXT);
+
+                    ApiInterface apiInterfaceNoKey = NetworkUtils.buildRetrofitWithoutKey()
+                            .create(ApiInterface.class);
+                    mCompositeDisposable.add(apiInterfaceNoKey.getSearchData(searchText)
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribeOn(Schedulers.io())
+                            .subscribe(this::apiSearchResponse, this::apiError));
+                    break;
                 case 5:
                     getSupportActionBar().setTitle(getString(R.string.neo));
                     loadNearEarthObjects();
@@ -106,6 +121,14 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
                 mGridList.setAdapter(rcAdapter);
                 rcAdapter.notifyDataSetChanged();
             }
+        }
+    }
+
+    private void apiSearchResponse(Search search) {
+        loading.setVisibility(View.GONE);
+        if (search != null) {
+            mGeneralItems = SearchUtils.getSearchDetails(this, search);
+            loadAdapter();
         }
     }
 

@@ -27,6 +27,7 @@
     <string name="search_hint">Enter keywords to search</string>
     <string name="search_images">images</string>
     <string name="search_videos">videos</string>
+    <string name="search_results">Search Results</string>
 
     <string name="neo">Near Earth Object</string>
     <string name="hazardous_asteroid">Hazardous asteroid:</string>
@@ -63,6 +64,8 @@
     <string name="collision_approach_short_description">Distance:</string>
     <string name="collision_approach">Collision Approach Data</string>
 
+    <string name="media_type">Type:</string>
+    <string name="created">Created on:</string>
     <string name="epic">Earth Polychromatic Imaging Camera</string>
 
     <string name="information">Information</string>
