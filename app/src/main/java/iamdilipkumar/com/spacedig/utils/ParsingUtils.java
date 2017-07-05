@@ -117,7 +117,7 @@ public class ParsingUtils {
         List<SimpleItemModel> searchItems = new ArrayList<>();
 
         for (Item item : search.getCollection().getItems()) {
-            String id, title, description, shortDescription, imageUrl, downloadUrl;
+            String id, title, description, shortDescription, imageUrl, downloadUrl = null;
             id = item.getData().get(0).getNasaId();
             title = item.getData().get(0).getTitle();
             description = item.getData().get(0).getDescription() + "\n\n" +
@@ -127,11 +127,10 @@ public class ParsingUtils {
 
             if (item.getData().get(0).getMediaType().contains("video")) {
                 imageUrl = "https://cdn.pixabay.com/photo/2016/01/19/17/29/earth-1149733_960_720.jpg";
+                downloadUrl = item.getHref().replace(" ", "%20");
             } else {
                 imageUrl = item.getLinks().get(0).getHref();
             }
-
-            downloadUrl = item.getHref();
 
             searchItems.add(new SimpleItemModel(id, title,
                     shortDescription, imageUrl, description, 0, downloadUrl));

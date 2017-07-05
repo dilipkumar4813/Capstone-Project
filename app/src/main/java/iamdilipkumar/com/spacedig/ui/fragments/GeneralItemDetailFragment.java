@@ -47,10 +47,10 @@ public class GeneralItemDetailFragment extends Fragment {
     void fullScreenMode() {
         Bundle bundle = new Bundle();
 
-        if (mediaOptions != null) {
-            bundle.putString(FullAssetFragment.FULL_VIDEO, mediaOptions.getSmall());
+        if (mMediaOptions != null) {
+            bundle.putString(FullAssetFragment.FULL_VIDEO, mMediaOptions.getSmall());
         } else {
-            bundle.putString(FullAssetFragment.FULL_IMAGE, simpleItemModel.getImageUrl());
+            bundle.putString(FullAssetFragment.FULL_IMAGE, mSimpleItemModel.getImageUrl());
         }
 
         FullAssetFragment fullAssetFragment = new FullAssetFragment();
@@ -63,8 +63,8 @@ public class GeneralItemDetailFragment extends Fragment {
                 .commit();
     }
 
-    SimpleItemModel simpleItemModel;
-    MediaOptions mediaOptions;
+    private SimpleItemModel mSimpleItemModel;
+    private MediaOptions mMediaOptions;
 
     public GeneralItemDetailFragment() {
 
@@ -75,19 +75,21 @@ public class GeneralItemDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments().containsKey(GeneralItemDetailActivity.ITEM_DETAILS)) {
-            simpleItemModel = getArguments().getParcelable(GeneralItemDetailActivity.ITEM_DETAILS);
+            mSimpleItemModel = getArguments().getParcelable(GeneralItemDetailActivity.ITEM_DETAILS);
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout
                     = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(simpleItemModel.getName());
+                appBarLayout.setTitle(mSimpleItemModel.getName());
             }
 
-            if (simpleItemModel.getVideoDownloadUrl() != null) {
-                if (!simpleItemModel.getVideoDownloadUrl().isEmpty()) {
-                    HttpGetRequest getRequest = new HttpGetRequest();
-                    getRequest.execute("https://images-assets.nasa.gov/video/NHQ_2017_0523_FY18%20State%20Of%20NASA%20Budget/collection.json");
+            String videoDownloadUrl = mSimpleItemModel.getVideoDownloadUrl();
+
+            if (videoDownloadUrl != null) {
+                if (!videoDownloadUrl.isEmpty()) {
+                    HttpGetRequest httpGetRequest = new HttpGetRequest();
+                    httpGetRequest.execute(videoDownloadUrl);
                 }
             }
         }
@@ -100,8 +102,8 @@ public class GeneralItemDetailFragment extends Fragment {
 
         ButterKnife.bind(this, view);
 
-        title.setText(simpleItemModel.getName());
-        description.setText(simpleItemModel.getInformation());
+        title.setText(mSimpleItemModel.getName());
+        description.setText(mSimpleItemModel.getInformation());
 
         return view;
     }
@@ -172,7 +174,7 @@ public class GeneralItemDetailFragment extends Fragment {
                     }
                 }
 
-                mediaOptions = new MediaOptions(original, medium, small);
+                mMediaOptions = new MediaOptions(original, medium, small);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
