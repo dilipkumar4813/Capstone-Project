@@ -30,7 +30,13 @@ public class SearchUtils {
                     context.getString(R.string.created) + " " + item.getData().get(0).getDateCreated();
             shortDescription = context.getString(R.string.media_type)
                     + " " + item.getData().get(0).getMediaType();
-            imageUrl = item.getLinks().get(0).getHref();
+
+            if(item.getData().get(0).getMediaType().contains("video")){
+                imageUrl = "https://cdn.pixabay.com/photo/2016/01/19/17/29/earth-1149733_960_720.jpg";
+            }else{
+                imageUrl = item.getLinks().get(0).getHref();
+            }
+
             downloadUrl = item.getHref();
 
             searchItems.add(new SimpleItemModel(id, title,

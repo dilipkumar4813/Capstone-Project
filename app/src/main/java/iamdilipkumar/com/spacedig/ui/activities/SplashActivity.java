@@ -1,6 +1,5 @@
 package iamdilipkumar.com.spacedig.ui.activities;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,8 +7,6 @@ import android.util.Log;
 
 import iamdilipkumar.com.spacedig.R;
 import iamdilipkumar.com.spacedig.data.NasaProvider;
-import iamdilipkumar.com.spacedig.data.NeoColumns;
-import iamdilipkumar.com.spacedig.models.SimpleItemModel;
 import iamdilipkumar.com.spacedig.models.cad.Cad;
 import iamdilipkumar.com.spacedig.models.neo.NearEarthObject;
 import iamdilipkumar.com.spacedig.models.neo.Neo;
@@ -85,8 +82,6 @@ public class SplashActivity extends AppCompatActivity {
                 NeoUtils.getNeoModel(item, this);
             }
         }
-
-        loadScreen();
     }
 
     private void apiCadResponse(Cad cad) {
@@ -94,8 +89,9 @@ public class SplashActivity extends AppCompatActivity {
             getContentResolver().delete(NasaProvider.CadData.CONTENT_URI, null, null);
 
             CadUtils.getCadDataIntoContentProvider(cad, this);
-            Log.d(TAG, "api:" + cad.getData().size());
         }
+
+        loadScreen();
     }
 
     /**

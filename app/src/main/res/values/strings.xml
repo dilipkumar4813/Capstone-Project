@@ -5,7 +5,8 @@
     <string name="about">About</string>
     <string name="share">Share</string>
     <string name="copyright">Copyright</string>
-    <string name="poweredby">Powered by NASA</string>
+    <string name="poweredby">Powered by NASA and Google</string>
+    <string name="author">Developed by Dilip Kumar S</string>
     <string name="imagesby">Static images powered by Pixabay</string>
     <string name="mars_rover">Mars Rover</string>
     <string name="error_message">Whoops, something went wrong please try again later</string>
@@ -24,10 +25,11 @@
     <string name="sun_position">Sun J2000 Position:</string>
     <string name="centroid_coordinates">Centroid Coords:</string>
 
-    <string name="search_hint">Enter keywords to search</string>
+    <string name="search_hint">Enter Search words</string>
     <string name="search_images">images</string>
     <string name="search_videos">videos</string>
     <string name="search_results">Search Results</string>
+    <string name="search_title">Search through NASA Database for images and videos</string>
 
     <string name="neo">Near Earth Object</string>
     <string name="hazardous_asteroid">Hazardous asteroid:</string>

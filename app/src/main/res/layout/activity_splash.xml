@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@drawable/space_dig_initial"
     android:orientation="vertical">
 
     <ImageView
@@ -11,11 +11,13 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/main_logo" />
+        android:src="@drawable/space_dig_main" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/keyline_1"
         android:layout_centerHorizontal="true"
-        android:text="@string/poweredby" />
+        android:text="@string/poweredby"
+        android:textColor="@android:color/white" />
 </RelativeLayout>

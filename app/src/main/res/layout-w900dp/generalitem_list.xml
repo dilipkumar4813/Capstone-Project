@@ -1,36 +1,47 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginRight="16dp"
-    android:baselineAligned="false"
-    android:divider="?android:attr/dividerHorizontal"
-    android:orientation="horizontal"
-    android:showDividers="middle"
-    tools:context="iamdilipkumar.com.spacedig.ui.activities.GeneralItemListActivity">
+    android:layout_height="match_parent">
 
-    <!--
-    This layout is a two-pane layout for the GeneralItems
-    master/detail flow.
-    
-    -->
-
-    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/generalitem_list"
-        android:name="iamdilipkumar.com.spacedig.ui.activities.GeneralItemListFragment"
-        android:layout_width="@dimen/item_width"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        android:background="@android:color/black"
-        app:layoutManager="LinearLayoutManager"
-        tools:context="iamdilipkumar.com.spacedig.ui.activities.GeneralItemListActivity" />
+        android:layout_marginEnd="@dimen/keyline_1"
+        android:layout_marginRight="@dimen/keyline_1"
+        android:baselineAligned="false"
+        android:divider="?android:attr/dividerHorizontal"
+        android:orientation="horizontal"
+        android:showDividers="middle"
+        tools:context="iamdilipkumar.com.spacedig.ui.activities.GeneralItemListActivity">
+
+        <!--
+        This layout is a two-pane layout for the GeneralItems
+        master/detail flow.
+
+        -->
+
+        <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/generalitem_list"
+            android:name="iamdilipkumar.com.spacedig.ui.activities.GeneralItemListFragment"
+            android:layout_width="@dimen/item_width"
+            android:layout_height="match_parent"
+            android:background="@android:color/black"
+            android:padding="@dimen/keyline_1"
+            app:layoutManager="LinearLayoutManager"
+            tools:context="iamdilipkumar.com.spacedig.ui.activities.GeneralItemListActivity" />
+
+        <FrameLayout
+            android:id="@+id/generalitem_detail_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3" />
+
+    </LinearLayout>
 
     <FrameLayout
-        android:id="@+id/generalitem_detail_container"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="3" />
-
-</LinearLayout>
+        android:id="@+id/full_asset_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</RelativeLayout>

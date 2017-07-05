@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@android:color/black"
     android:clickable="true"
     tools:context="iamdilipkumar.com.spacedig.ui.fragments.AboutFragment">
 
@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/alignment_full_screen"
+        android:layout_marginTop="@dimen/keyline_1"
         android:orientation="vertical">
 
         <TextView
@@ -19,22 +19,32 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/keyline_2"
-            android:text="@string/poweredby" />
+            android:text="@string/poweredby"
+            android:textColor="@android:color/white" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/keyline_2"
-            android:text="@string/imagesby" />
+            android:layout_gravity="center_horizontal"
+            android:text="@string/imagesby"
+            android:textColor="@android:color/white" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/space_dig_main" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="@string/author"
+            android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/main_logo" />
+
 
 
 </RelativeLayout>
