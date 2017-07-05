@@ -27,8 +27,8 @@
                 android:id="@+id/iv_main_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:contentDescription="@string/app_name" />
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/detail_toolbar"
@@ -45,6 +45,7 @@
         android:id="@+id/generalitem_detail_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/black"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.FloatingActionButton
@@ -56,5 +57,10 @@
         app:layout_anchor="@+id/generalitem_detail_container"
         app:layout_anchorGravity="top|end"
         app:srcCompat="@drawable/ic_share_white_24dp" />
+
+    <FrameLayout
+        android:id="@+id/full_asset_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </android.support.design.widget.CoordinatorLayout>

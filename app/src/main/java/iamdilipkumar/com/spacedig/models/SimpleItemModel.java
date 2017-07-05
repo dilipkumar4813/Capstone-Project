@@ -16,6 +16,7 @@ public class SimpleItemModel implements Parcelable {
     private String imageUrl;
     private String name, information;
     private String shortDescription;
+    private String videoDownloadUrl;
     private int imageRes;
 
     public SimpleItemModel(String name, String information, int image) {
@@ -41,6 +42,16 @@ public class SimpleItemModel implements Parcelable {
         this.imageRes = image;
     }
 
+    public SimpleItemModel(String pId, String name, String sDescription, String imgUrl, String information, int image, String downloadUrl) {
+        this.id = pId;
+        this.name = name;
+        this.shortDescription = sDescription;
+        this.imageUrl = imgUrl;
+        this.information = information;
+        this.imageRes = image;
+        this.videoDownloadUrl = downloadUrl;
+    }
+
     public String getId() {
         return id;
     }
@@ -51,10 +62,6 @@ public class SimpleItemModel implements Parcelable {
 
     public String getImageUrl() {
         return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     public String getName() {
@@ -69,24 +76,16 @@ public class SimpleItemModel implements Parcelable {
         return information;
     }
 
-    public void setInformation(String information) {
-        this.information = information;
-    }
-
     public int getImageRes() {
         return imageRes;
-    }
-
-    public void setImageRes(int imageRes) {
-        this.imageRes = imageRes;
     }
 
     public String getShortDescription() {
         return shortDescription;
     }
 
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
+    public String getVideoDownloadUrl() {
+        return videoDownloadUrl;
     }
 
     protected SimpleItemModel(Parcel in) {
@@ -96,6 +95,7 @@ public class SimpleItemModel implements Parcelable {
         information = in.readString();
         shortDescription = in.readString();
         imageRes = in.readInt();
+        videoDownloadUrl = in.readString();
     }
 
     public static final Creator<SimpleItemModel> CREATOR = new Creator<SimpleItemModel>() {
@@ -123,5 +123,6 @@ public class SimpleItemModel implements Parcelable {
         dest.writeString(information);
         dest.writeString(shortDescription);
         dest.writeInt(imageRes);
+        dest.writeString(videoDownloadUrl);
     }
 }

@@ -22,8 +22,8 @@ public class SearchUtils {
     public static List<SimpleItemModel> getSearchDetails(Context context, Search search) {
         List<SimpleItemModel> searchItems = new ArrayList<>();
 
-        for(Item item:search.getCollection().getItems()){
-            String id, title, description, shortDescription, imageUrl;
+        for (Item item : search.getCollection().getItems()) {
+            String id, title, description, shortDescription, imageUrl, downloadUrl;
             id = item.getData().get(0).getNasaId();
             title = item.getData().get(0).getTitle();
             description = item.getData().get(0).getDescription() + "\n\n" +
@@ -31,9 +31,10 @@ public class SearchUtils {
             shortDescription = context.getString(R.string.media_type)
                     + " " + item.getData().get(0).getMediaType();
             imageUrl = item.getLinks().get(0).getHref();
+            downloadUrl = item.getHref();
 
             searchItems.add(new SimpleItemModel(id, title,
-                    shortDescription, imageUrl, description, 0));
+                    shortDescription, imageUrl, description, 0, downloadUrl));
         }
 
         return searchItems;
