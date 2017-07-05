@@ -40,11 +40,15 @@ public class GeneralItemDetailFragment extends Fragment {
     @BindView(R.id.tv_title)
     TextView title;
 
+    /*@BindView(R.id.fab)
+    FloatingActionButton shareFab;*/
+
     @BindView(R.id.tv_description)
     TextView description;
 
     @OnClick(R.id.tv_full_screen)
     void fullScreenMode() {
+        //shareFab.setVisibility(View.GONE);
         Bundle bundle = new Bundle();
 
         if (mMediaOptions != null) {

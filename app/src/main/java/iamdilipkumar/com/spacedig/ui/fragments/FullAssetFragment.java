@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -19,8 +21,6 @@ import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
-import com.squareup.picasso.Picasso;
-
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,7 +62,13 @@ public class FullAssetFragment extends Fragment {
 
         if (getArguments().containsKey(FULL_IMAGE)) {
             String imageUrl = getArguments().getString(FULL_IMAGE);
-            Picasso.with(getContext()).load(imageUrl).into(ivFull);
+
+            Glide.with(this).load(imageUrl)
+                    .fitCenter()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .error(R.drawable.space_dig_main)
+                    .into(ivFull);
+
             exoPlayerView.setVisibility(View.INVISIBLE);
         }
 

@@ -14,7 +14,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -109,7 +110,11 @@ public class FullDetailActivity extends AppCompatActivity {
 
             if (imageUrl != null) {
                 if (!imageUrl.isEmpty()) {
-                    Picasso.with(this).load(imageUrl).into(mainImage);
+                    Glide.with(this).load(imageUrl)
+                            .fitCenter()
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .error(R.drawable.space_dig_main)
+                            .into(mainImage);
                 }
             }
 
