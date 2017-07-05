@@ -7,10 +7,11 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,7 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
     @BindView(R.id.rv_main_staggered)
     RecyclerView mMainList;
 
+    private FirebaseAnalytics mFirebaseAnalytics;
     List<SimpleItemModel> mListItems = new ArrayList<>();
 
     @Override
@@ -38,6 +40,7 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
         setContentView(R.layout.activity_space_list);
 
         ButterKnife.bind(this);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -69,9 +72,11 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_share:
+                logEvent(getString(R.string.analytics_share));
                 CommonUtils.shareData(this, getString(R.string.share_content));
                 break;
             case R.id.action_about:
+                logEvent(getString(R.string.analytics_about));
                 getSupportFragmentManager().beginTransaction()
                         .add(R.id.main_container, new AboutFragment())
                         .addToBackStack(null).commit();
@@ -99,13 +104,18 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
     public void onMainItemClick(int position) {
 
         boolean loadActivity = true;
-        Log.d("selection", "" + position);
         Intent intent = new Intent(this, GeneralItemListActivity.class);
         switch (position) {
             case 0:
-                intent.putExtra(GeneralItemListActivity.LOAD_API, 0);
+                logEvent(getString(R.string.analytics_mars));
+                if (CommonUtils.checkNetworkConnectivity(this)) {
+                    intent.putExtra(GeneralItemListActivity.LOAD_API, 0);
+                } else {
+                    DialogUtils.noNetworkPreActionDialog(this);
+                }
                 break;
             case 1:
+                logEvent(getString(R.string.analytics_apod));
                 if (CommonUtils.checkNetworkConnectivity(this)) {
                     startActivity(new Intent(this, FullDetailActivity.class));
                 } else {
@@ -115,13 +125,20 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
                 loadActivity = false;
                 break;
             case 2:
-                startActivity(new Intent(SpaceListActivity.this,MapsLocationActivity.class));
+                logEvent(getString(R.string.analytics_earth_imagery));
+                startActivity(new Intent(SpaceListActivity.this, MapsLocationActivity.class));
                 loadActivity = false;
                 break;
             case 3:
-                intent.putExtra(GeneralItemListActivity.LOAD_API, 1);
+                logEvent(getString(R.string.analytics_epic));
+                if (CommonUtils.checkNetworkConnectivity(this)) {
+                    intent.putExtra(GeneralItemListActivity.LOAD_API, 1);
+                } else {
+                    DialogUtils.noNetworkPreActionDialog(this);
+                }
                 break;
             case 4:
+                logEvent(getString(R.string.analytics_search));
                 getSupportFragmentManager().beginTransaction()
                         .add(R.id.main_container, new SearchFragment())
                         .addToBackStack(null).commit();
@@ -129,9 +146,11 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
                 loadActivity = false;
                 break;
             case 5:
+                logEvent(getString(R.string.analytics_cad));
                 intent.putExtra(GeneralItemListActivity.LOAD_API, 6);
                 break;
             case 6:
+                logEvent(getString(R.string.analytics_neo));
                 intent.putExtra(GeneralItemListActivity.LOAD_API, 5);
                 break;
         }
@@ -145,5 +164,13 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
     public void onMainItemInformationClick(int position) {
         DialogUtils.singleButtonDialog(this, mListItems.get(position).getName(),
                 mListItems.get(position).getInformation());
+    }
+
+    private void logEvent(String name) {
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "MAIN_LISTING");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "card");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
 }

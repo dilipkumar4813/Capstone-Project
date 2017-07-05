@@ -108,4 +108,15 @@
     <string name="title_generalitem_list">GeneralItems</string>
     <string name="title_generalitem_detail">GeneralItem Detail</string>
     <string name="title_activity_maps_location">Map</string>
+
+    <!--Analytics logging-->
+    <string name="analytics_share" translatable="false">Share</string>
+    <string name="analytics_about" translatable="false">About</string>
+    <string name="analytics_apod" translatable="false">APOD</string>
+    <string name="analytics_mars" translatable="false">Mars Rover</string>
+    <string name="analytics_epic" translatable="false">EPIC</string>
+    <string name="analytics_cad" translatable="false">CAD</string>
+    <string name="analytics_neo" translatable="false">NEO</string>
+    <string name="analytics_earth_imagery" translatable="false">Earth Imagery</string>
+    <string name="analytics_search" translatable="false">Search</string>
 </resources>
