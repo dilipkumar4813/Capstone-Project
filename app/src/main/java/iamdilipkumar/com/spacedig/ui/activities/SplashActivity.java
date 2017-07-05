@@ -10,8 +10,7 @@ import iamdilipkumar.com.spacedig.data.NasaProvider;
 import iamdilipkumar.com.spacedig.models.cad.Cad;
 import iamdilipkumar.com.spacedig.models.neo.NearEarthObject;
 import iamdilipkumar.com.spacedig.models.neo.Neo;
-import iamdilipkumar.com.spacedig.utils.parsing.CadUtils;
-import iamdilipkumar.com.spacedig.utils.parsing.NeoUtils;
+import iamdilipkumar.com.spacedig.utils.ParsingUtils;
 import iamdilipkumar.com.spacedig.utils.Network.ApiInterface;
 import iamdilipkumar.com.spacedig.utils.CommonUtils;
 import iamdilipkumar.com.spacedig.utils.Network.NetworkUtils;
@@ -79,7 +78,7 @@ public class SplashActivity extends AppCompatActivity {
             getContentResolver().delete(NasaProvider.NeoData.CONTENT_URI, null, null);
 
             for (NearEarthObject item : neo.getNearEarthObjects()) {
-                NeoUtils.getNeoModel(item, this);
+                ParsingUtils.getNeoModel(item, this);
             }
         }
     }
@@ -88,7 +87,7 @@ public class SplashActivity extends AppCompatActivity {
         if (cad != null) {
             getContentResolver().delete(NasaProvider.CadData.CONTENT_URI, null, null);
 
-            CadUtils.getCadDataIntoContentProvider(cad, this);
+            ParsingUtils.getCadDataIntoContentProvider(cad, this);
         }
 
         loadScreen();

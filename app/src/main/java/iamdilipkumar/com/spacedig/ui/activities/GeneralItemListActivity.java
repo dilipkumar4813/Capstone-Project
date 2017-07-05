@@ -24,12 +24,9 @@ import iamdilipkumar.com.spacedig.models.rover.MarsRover;
 import iamdilipkumar.com.spacedig.models.rover.MarsRoverPhoto;
 import iamdilipkumar.com.spacedig.models.search.Search;
 import iamdilipkumar.com.spacedig.ui.fragments.GeneralItemDetailFragment;
-import iamdilipkumar.com.spacedig.utils.parsing.CadUtils;
-import iamdilipkumar.com.spacedig.utils.parsing.NeoUtils;
+import iamdilipkumar.com.spacedig.utils.ParsingUtils;
 import iamdilipkumar.com.spacedig.utils.Network.ApiInterface;
-import iamdilipkumar.com.spacedig.utils.CommonUtils;
 import iamdilipkumar.com.spacedig.utils.Network.NetworkUtils;
-import iamdilipkumar.com.spacedig.utils.parsing.SearchUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -37,6 +34,8 @@ import io.reactivex.schedulers.Schedulers;
 import static iamdilipkumar.com.spacedig.ui.fragments.SearchFragment.SEARCH_TEXT;
 
 /**
+ * A general class to access the loading listing for EPIC, CAD, NEO, Mars Rover and Search
+ *
  * Created on 22/06/17.
  *
  * @author dilipkumar4813
@@ -46,6 +45,7 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
 
     private static final String LIST_ITEMS = "loaded_list";
     public static final String LOAD_API = "api_call";
+    public static final String LISTING_TITLE = "listing_title";
     List<SimpleItemModel> mGeneralItems;
 
     @BindView(R.id.generalitem_list)
@@ -56,6 +56,7 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
 
     private CompositeDisposable mCompositeDisposable;
     private boolean mTwoPane;
+    private String mListingTitle;
     int mloadAPI;
 
     @Override
@@ -81,21 +82,21 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
             ApiInterface apiInterface = NetworkUtils.buildRetrofit().create(ApiInterface.class);
             switch (mloadAPI) {
                 case 0:
-                    getSupportActionBar().setTitle(getString(R.string.mars_rover));
+                    mListingTitle = getString(R.string.mars_rover);
                     mCompositeDisposable.add(apiInterface.getRoverPhotos()
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribeOn(Schedulers.io())
                             .subscribe(this::apiRoverResponse, this::apiError));
                     break;
                 case 1:
-                    getSupportActionBar().setTitle(getString(R.string.epic));
+                    mListingTitle = getString(R.string.epic);
                     mCompositeDisposable.add(apiInterface.getEpicData("2017-01-01")
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribeOn(Schedulers.io())
                             .subscribe(this::apiEpicResponse, this::apiError));
                     break;
                 case 4:
-                    getSupportActionBar().setTitle(getString(R.string.search_results));
+                    mListingTitle = getString(R.string.search_results);
                     String searchText = getIntent().getStringExtra(SEARCH_TEXT);
 
                     ApiInterface apiInterfaceNoKey = NetworkUtils.buildRetrofitWithoutKey()
@@ -106,42 +107,26 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
                             .subscribe(this::apiSearchResponse, this::apiError));
                     break;
                 case 5:
-                    getSupportActionBar().setTitle(getString(R.string.neo));
+                    mListingTitle = getString(R.string.neo);
                     loadNearEarthObjects();
                     break;
                 case 6:
-                    getSupportActionBar().setTitle(getString(R.string.collision_approach));
+                    mListingTitle = getString(R.string.collision_approach);
                     loadCadObjects();
                     break;
             }
+            getSupportActionBar().setTitle(mListingTitle);
         } else {
+            getSupportActionBar().setTitle(savedInstanceState.getString(LISTING_TITLE));
+
             if (savedInstanceState.getParcelableArrayList(LIST_ITEMS) != null) {
+                loading.setVisibility(View.GONE);
                 mGeneralItems = savedInstanceState.getParcelableArrayList(LIST_ITEMS);
                 GeneralListAdapter rcAdapter = new GeneralListAdapter(this, mGeneralItems);
                 mGridList.setAdapter(rcAdapter);
                 rcAdapter.notifyDataSetChanged();
             }
         }
-    }
-
-    private void apiSearchResponse(Search search) {
-        loading.setVisibility(View.GONE);
-        if (search != null) {
-            mGeneralItems = SearchUtils.getSearchDetails(this, search);
-            loadAdapter();
-        }
-    }
-
-    private void loadNearEarthObjects() {
-        loading.setVisibility(View.GONE);
-        mGeneralItems = NeoUtils.getNeoList(this);
-        loadAdapter();
-    }
-
-    private void loadCadObjects() {
-        loading.setVisibility(View.GONE);
-        mGeneralItems = CadUtils.getCadContent(this);
-        loadAdapter();
     }
 
     @Override
@@ -155,12 +140,17 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
         return true;
     }
 
+    /**
+     * Method that is called if the rover API has successfully executed
+     *
+     * @param marsRoverPhotos - Contains the list of photos and its relevant information
+     */
     private void apiRoverResponse(MarsRover marsRoverPhotos) {
         loading.setVisibility(View.GONE);
         int count = 0;
         for (MarsRoverPhoto item : marsRoverPhotos.getPhotos()) {
             if (count < 100) {
-                mGeneralItems.add(CommonUtils.getRoverModel(item, this));
+                mGeneralItems.add(ParsingUtils.getRoverModel(item, this));
             } else {
                 break;
             }
@@ -170,15 +160,56 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
         loadAdapter();
     }
 
+    /**
+     * Method to load the Search results either it being an image or a video
+     * Parsing of individual items using ParsingUtils static class
+     *
+     * @param search - Results of search
+     */
+    private void apiSearchResponse(Search search) {
+        loading.setVisibility(View.GONE);
+        if (search != null) {
+            mGeneralItems = ParsingUtils.getSearchDetails(this, search);
+            loadAdapter();
+        }
+    }
+
+    /**
+     * Method to get parse EPIC data after successful API call
+     * Parsing using ParsingUtils
+     *
+     * @param epic - Earth imagery results
+     */
     private void apiEpicResponse(List<Epic> epic) {
         loading.setVisibility(View.GONE);
         for (Epic item : epic) {
-            mGeneralItems.add(CommonUtils.getEpicModel(item, this));
+            mGeneralItems.add(ParsingUtils.getEpicModel(item, this));
         }
 
         loadAdapter();
     }
 
+    /**
+     * Load NEO results using the content provider
+     */
+    private void loadNearEarthObjects() {
+        loading.setVisibility(View.GONE);
+        mGeneralItems = ParsingUtils.getNeoList(this);
+        loadAdapter();
+    }
+
+    /**
+     * Load CAD results using the content provider
+     */
+    private void loadCadObjects() {
+        loading.setVisibility(View.GONE);
+        mGeneralItems = ParsingUtils.getCadContent(this);
+        loadAdapter();
+    }
+
+    /**
+     * Method to load the adapter once the listing has been populated
+     */
     private void loadAdapter() {
         if (mGeneralItems.size() > 0) {
             GeneralListAdapter rcAdapter = new GeneralListAdapter(this, mGeneralItems);
@@ -187,11 +218,22 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
         }
     }
 
+    /**
+     * Generalized method to extract the error and display the error log
+     *
+     * @param throwable - used to access the error message
+     */
     private void apiError(Throwable throwable) {
-        Log.d("api error", "error: " + throwable.getLocalizedMessage());
+        Log.w("api error", "error: " + throwable.getLocalizedMessage());
         loading.setVisibility(View.GONE);
     }
 
+    /**
+     * Method to handle the click of individual items if its a single screen
+     * or a multi screen
+     *
+     * @param position - item position in the recyclerview
+     */
     @Override
     public void onMainItemClick(int position) {
         SimpleItemModel passItem = mGeneralItems.get(position);
@@ -220,6 +262,7 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
     protected void onSaveInstanceState(Bundle outState) {
         outState.putParcelableArrayList(LIST_ITEMS, new ArrayList<>(mGeneralItems));
         outState.putInt(LOAD_API, mloadAPI);
+        outState.putString(LISTING_TITLE, mListingTitle);
         super.onSaveInstanceState(outState);
     }
 }

@@ -27,7 +27,7 @@
             android:name="iamdilipkumar.com.spacedig.ui.activities.GeneralItemListFragment"
             android:layout_width="@dimen/item_width"
             android:layout_height="match_parent"
-            android:background="@android:color/black"
+            android:background="@drawable/space_dig_initial"
             android:padding="@dimen/keyline_1"
             app:layoutManager="LinearLayoutManager"
             tools:context="iamdilipkumar.com.spacedig.ui.activities.GeneralItemListActivity" />

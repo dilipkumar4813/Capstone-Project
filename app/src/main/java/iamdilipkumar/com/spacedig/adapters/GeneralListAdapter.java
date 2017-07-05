@@ -34,7 +34,7 @@ public class GeneralListAdapter extends RecyclerView.Adapter<GeneralListAdapter.
     @Override
     public GeneralListAdapter.GridListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View layoutView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_grid, parent,false);
+                .inflate(R.layout.item_general, parent,false);
         return new GeneralListAdapter.GridListViewHolder(layoutView);
     }
 
