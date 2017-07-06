@@ -1,5 +1,5 @@
 # Capstone-Project
-Coolest space explorer project for hobbyists, researchers and visionaries
+Coolest space explorer project for hobbyists, researchers and visionaries. The android application helps users to search for Collision Approach data, Near Earth Object, Earth Plychromatic Imaging Camera, NASA database, Astronomical Picture of the day, Earth Imagery and pictures taken by Mars Rover on Mars.
 
 ## Features
 
@@ -38,7 +38,9 @@ Coolest space explorer project for hobbyists, researchers and visionaries
 
 ![Share](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/Screenshot_2017-07-06-23-45-33.png)
 
-![Full Screen]()
+![Full Screen](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/Screenshot_2017-07-06-23-53-18.png)
 
 ![Maps](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/Screenshot_2017-07-06-23-45-14.png)
+
+![Widget](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/Screenshot_2017-07-07-00-00-10.png)
 
