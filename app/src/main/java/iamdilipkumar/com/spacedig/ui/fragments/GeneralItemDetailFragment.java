@@ -1,18 +1,32 @@
 package iamdilipkumar.com.spacedig.ui.fragments;
 
-import android.app.Activity;
+import android.content.Context;
+import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.exoplayer2.DefaultLoadControl;
+import com.google.android.exoplayer2.DefaultRenderersFactory;
+import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
+import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,6 +42,7 @@ import iamdilipkumar.com.spacedig.models.MediaOptions;
 import iamdilipkumar.com.spacedig.models.SimpleItemModel;
 import iamdilipkumar.com.spacedig.ui.activities.GeneralItemDetailActivity;
 import iamdilipkumar.com.spacedig.ui.activities.GeneralItemListActivity;
+import iamdilipkumar.com.spacedig.utils.ParsingUtils;
 
 /**
  * A fragment representing a single GeneralItem detail screen.
@@ -40,15 +55,17 @@ public class GeneralItemDetailFragment extends Fragment {
     @BindView(R.id.tv_title)
     TextView title;
 
-    /*@BindView(R.id.fab)
-    FloatingActionButton shareFab;*/
+    @BindView(R.id.iv_main_content_image)
+    ImageView mainImage;
+
+    @BindView(R.id.video_view)
+    SimpleExoPlayerView exoPlayerView;
 
     @BindView(R.id.tv_description)
     TextView description;
 
     @OnClick(R.id.tv_full_screen)
     void fullScreenMode() {
-        //shareFab.setVisibility(View.GONE);
         Bundle bundle = new Bundle();
 
         if (mMediaOptions != null) {
@@ -70,6 +87,13 @@ public class GeneralItemDetailFragment extends Fragment {
     private SimpleItemModel mSimpleItemModel;
     private MediaOptions mMediaOptions;
 
+    SimpleExoPlayer player;
+    long playbackPosition = 0L;
+    int currentWindow = 1;
+    boolean playWhenReady = true;
+
+    public static final String PLAYBACK = "playback";
+
     public GeneralItemDetailFragment() {
 
     }
@@ -80,22 +104,11 @@ public class GeneralItemDetailFragment extends Fragment {
 
         if (getArguments().containsKey(GeneralItemDetailActivity.ITEM_DETAILS)) {
             mSimpleItemModel = getArguments().getParcelable(GeneralItemDetailActivity.ITEM_DETAILS);
+        }
 
-            Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout
-                    = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
-            if (appBarLayout != null) {
-                appBarLayout.setTitle(mSimpleItemModel.getName());
-            }
-
-            String videoDownloadUrl = mSimpleItemModel.getVideoDownloadUrl();
-
-            if (videoDownloadUrl != null) {
-                if (!videoDownloadUrl.isEmpty()) {
-                    HttpGetRequest httpGetRequest = new HttpGetRequest();
-                    httpGetRequest.execute(videoDownloadUrl);
-                }
-            }
+        if (savedInstanceState != null) {
+            playbackPosition = savedInstanceState.getLong(PLAYBACK);
+            mSimpleItemModel = savedInstanceState.getParcelable(GeneralItemDetailActivity.ITEM_DETAILS);
         }
     }
 
@@ -109,6 +122,38 @@ public class GeneralItemDetailFragment extends Fragment {
         title.setText(mSimpleItemModel.getName());
         description.setText(mSimpleItemModel.getInformation());
 
+        String videoDownloadUrl = mSimpleItemModel.getVideoDownloadUrl();
+
+        player = ExoPlayerFactory.newSimpleInstance(
+                new DefaultRenderersFactory(getContext()),
+                new DefaultTrackSelector(), new DefaultLoadControl());
+
+        exoPlayerView.setPlayer(player);
+
+        if (videoDownloadUrl != null) {
+            if (!videoDownloadUrl.isEmpty()) {
+                mainImage.setVisibility(View.GONE);
+                exoPlayerView.setVisibility(View.VISIBLE);
+
+                orientationalChanges(view);
+
+                player.setPlayWhenReady(playWhenReady);
+
+                if (mMediaOptions == null) {
+                    HttpGetRequest httpGetRequest = new HttpGetRequest();
+                    httpGetRequest.execute(videoDownloadUrl);
+                } else {
+                    initializePlayer(mMediaOptions.getSmall());
+                }
+            }
+        } else {
+            Glide.with(this).load(mSimpleItemModel.getImageUrl())
+                    .fitCenter()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .error(R.drawable.space_dig_main)
+                    .into(mainImage);
+        }
+
         return view;
     }
 
@@ -117,7 +162,6 @@ public class GeneralItemDetailFragment extends Fragment {
         static final String REQUEST_METHOD = "GET";
         static final int READ_TIMEOUT = 15000;
         static final int CONNECTION_TIMEOUT = 15000;
-        String medium, original, small;
 
         @Override
         protected String doInBackground(String... params) {
@@ -161,27 +205,71 @@ public class GeneralItemDetailFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
-            try {
-                JSONArray mediaArray = new JSONArray(result);
-                for (int i = 0; i < mediaArray.length(); i++) {
-                    String item = mediaArray.getString(i).replace("http://", "https://");
-                    if (item.contains("orig.")) {
-                        original = item.replace(" ", "%20");
-                        Log.d("results", original);
-                    } else if (item.contains("medium.")) {
-                        medium = item.replace(" ", "%20");
-                        Log.d("results", medium);
-                    } else if (item.contains("small.")) {
-                        small = item.replace(" ", "%20");
-                        Log.d("results", small);
-                    }
-                }
-
-                mMediaOptions = new MediaOptions(original, medium, small);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            mMediaOptions = ParsingUtils.parseMediaAsset(result);
+            initializePlayer(mMediaOptions.getSmall());
         }
+    }
+
+    private void initializePlayer(String videoUrl) {
+        Uri uri = Uri.parse(videoUrl);
+        MediaSource mediaSource = buildMediaSource(uri);
+        player.prepare(mediaSource, true, false);
+    }
+
+    private MediaSource buildMediaSource(Uri uri) {
+        return new ExtractorMediaSource(uri,
+                new DefaultHttpDataSourceFactory("ua"),
+                new DefaultExtractorsFactory(), null, null);
+    }
+
+    private void releasePlayer() {
+        if (player != null) {
+            playbackPosition = player.getCurrentPosition();
+            currentWindow = player.getCurrentWindowIndex();
+            playWhenReady = player.getPlayWhenReady();
+            player.release();
+            player = null;
+        }
+    }
+
+    private void orientationalChanges(View view) {
+        if (getActivity().getResources().getConfiguration().orientation ==
+                Configuration.ORIENTATION_LANDSCAPE) {
+            view.findViewById(R.id.scroll_content).setVisibility(View.GONE);
+
+            WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+            Display display = wm.getDefaultDisplay();
+            DisplayMetrics metrics = new DisplayMetrics();
+            display.getMetrics(metrics);
+            exoPlayerView.getLayoutParams().height = metrics.heightPixels;
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (player != null) {
+            player.seekTo(playbackPosition);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        releasePlayer();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        releasePlayer();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putLong(PLAYBACK, playbackPosition);
+        outState.putParcelable(GeneralItemDetailActivity.ITEM_DETAILS, mSimpleItemModel);
+        super.onSaveInstanceState(outState);
     }
 }

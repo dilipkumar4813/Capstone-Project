@@ -3,6 +3,10 @@ package iamdilipkumar.com.spacedig.utils;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +16,7 @@ import iamdilipkumar.com.spacedig.R;
 import iamdilipkumar.com.spacedig.data.CadColumns;
 import iamdilipkumar.com.spacedig.data.NasaProvider;
 import iamdilipkumar.com.spacedig.data.NeoColumns;
+import iamdilipkumar.com.spacedig.models.MediaOptions;
 import iamdilipkumar.com.spacedig.models.SimpleItemModel;
 import iamdilipkumar.com.spacedig.models.cad.Cad;
 import iamdilipkumar.com.spacedig.models.epic.AttitudeQuaternions;
@@ -284,5 +289,32 @@ public class ParsingUtils {
         }
 
         return simpleItemModels;
+    }
+
+    public static MediaOptions parseMediaAsset(String response) {
+        MediaOptions mediaOptions = null;
+        try {
+            JSONArray mediaArray = new JSONArray(response);
+            String original = null, medium = null, small = null;
+            for (int i = 0; i < mediaArray.length(); i++) {
+                String item = mediaArray.getString(i).replace("http://", "https://");
+                if (item.contains("orig.")) {
+                    original = item.replace(" ", "%20");
+                    Log.d("results", original);
+                } else if (item.contains("medium.")) {
+                    medium = item.replace(" ", "%20");
+                    Log.d("results", medium);
+                } else if (item.contains("small.")) {
+                    small = item.replace(" ", "%20");
+                    Log.d("results", small);
+                }
+            }
+
+            mediaOptions = new MediaOptions(original, medium, small);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return mediaOptions;
     }
 }

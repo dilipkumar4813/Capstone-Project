@@ -6,13 +6,8 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import iamdilipkumar.com.spacedig.R;
@@ -29,8 +24,6 @@ public class GeneralItemDetailActivity extends AppCompatActivity {
 
     public static final String ITEM_DETAILS = "item_detail";
     private SimpleItemModel mSimpleItemModel;
-    @BindView(R.id.iv_main_image)
-    ImageView mainImage;
 
     @OnClick(R.id.fab)
     void shareAction() {
@@ -70,13 +63,6 @@ public class GeneralItemDetailActivity extends AppCompatActivity {
 
         if (mSimpleItemModel != null) {
             actionBar.setTitle(mSimpleItemModel.getName());
-            String image = mSimpleItemModel.getImageUrl();
-
-            Glide.with(this).load(image)
-                    .fitCenter()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .error(R.drawable.space_dig_main)
-                    .into(mainImage);
         }
     }
 

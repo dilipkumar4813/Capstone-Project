@@ -1,33 +1,27 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black"
     tools:context="iamdilipkumar.com.spacedig.ui.fragments.GeneralItemDetailFragment">
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/scroll_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/iv_main_content_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/app_name" />
-
-        <com.google.android.exoplayer2.ui.SimpleExoPlayerView
-            android:id="@+id/video_view"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:visibility="gone"/>
+        android:layout_height="match_parent"
+        android:background="@android:color/black">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/keyline_1">
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_main_content_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/app_name" />
 
             <TextView
                 android:id="@+id/tv_title"
@@ -35,6 +29,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/keyline_1"
+                android:paddingEnd="@dimen/keyline_1"
+                android:paddingLeft="@dimen/keyline_1"
+                android:paddingRight="@dimen/keyline_1"
+                android:paddingStart="@dimen/keyline_1"
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -43,6 +41,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/keyline_2"
                 android:layout_marginTop="@dimen/keyline_2"
+                android:paddingEnd="@dimen/keyline_1"
+                android:paddingLeft="@dimen/keyline_1"
+                android:paddingRight="@dimen/keyline_1"
+                android:paddingStart="@dimen/keyline_1"
                 android:text="@string/view_full_screen"
                 android:textColor="@color/colorAccent" />
 
@@ -51,8 +53,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/keyline_2"
+                android:paddingEnd="@dimen/keyline_1"
+                android:paddingLeft="@dimen/keyline_1"
+                android:paddingRight="@dimen/keyline_1"
+                android:paddingStart="@dimen/keyline_1"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/regular_body" />
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+
+    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+        android:id="@+id/video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:visibility="gone" />
+</RelativeLayout>
