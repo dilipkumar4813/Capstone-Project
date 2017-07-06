@@ -55,8 +55,8 @@ dependencies {
     compile "com.google.android.gms:play-services-maps:$google_services_version"
     compile "com.google.android.gms:play-services-location:$google_services_version"
 
-    compile "com.google.firebase:firebase-core:$firebase_version"
-    compile "com.google.firebase:firebase-messaging:$firebase_version"
+    compile "com.google.firebase:firebase-core:$google_services_version"
+    compile "com.google.firebase:firebase-messaging:$google_services_version"
 
     compile 'com.google.android.exoplayer:exoplayer:r2.4.0'
     compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'

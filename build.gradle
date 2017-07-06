@@ -13,7 +13,6 @@ buildscript {
         butterknife_version = '8.5.1'
         schematic_version = '0.6.3'
         google_services_version = '11.0.2'
-        firebase_version = '11.0.2'
     }
 
     dependencies {
