@@ -15,10 +15,11 @@
 
         <ImageView
             android:id="@+id/iv_descriptive"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/app_name"
             android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
             android:src="@drawable/block_1" />
 
         <View
@@ -31,9 +32,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:paddingBottom="@dimen/keyline_2"
             android:layout_marginLeft="@dimen/keyline_2"
             android:layout_marginStart="@dimen/keyline_2"
+            android:paddingBottom="@dimen/keyline_2"
             android:text="@string/app_name"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@android:color/white" />
@@ -45,11 +46,11 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:paddingBottom="@dimen/keyline_2"
             android:layout_marginEnd="@dimen/keyline_2"
             android:layout_marginRight="@dimen/keyline_2"
-            android:src="@drawable/ic_info_black_24dp"
-            android:tint="@android:color/white" />
+            android:paddingBottom="@dimen/keyline_2"
+            android:tint="@android:color/white"
+            card_view:srcCompat="@drawable/ic_info_black_24dp" />
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>
