@@ -40,17 +40,17 @@ import butterknife.OnClick;
 import iamdilipkumar.com.spacedig.R;
 import iamdilipkumar.com.spacedig.models.MediaOptions;
 import iamdilipkumar.com.spacedig.models.SimpleItemModel;
-import iamdilipkumar.com.spacedig.ui.activities.GeneralItemDetailActivity;
-import iamdilipkumar.com.spacedig.ui.activities.GeneralItemListActivity;
+import iamdilipkumar.com.spacedig.ui.activities.GeneralDetailActivity;
+import iamdilipkumar.com.spacedig.ui.activities.GeneralListActivity;
 import iamdilipkumar.com.spacedig.utils.ParsingUtils;
 
 /**
  * A fragment representing a single GeneralItem detail screen.
- * This fragment is either contained in a {@link GeneralItemListActivity}
- * in two-pane mode (on tablets) or a {@link GeneralItemDetailActivity}
+ * This fragment is either contained in a {@link GeneralListActivity}
+ * in two-pane mode (on tablets) or a {@link GeneralDetailActivity}
  * on handsets.
  */
-public class GeneralItemDetailFragment extends Fragment {
+public class GeneralDetailFragment extends Fragment {
 
     @BindView(R.id.tv_title)
     TextView title;
@@ -94,7 +94,7 @@ public class GeneralItemDetailFragment extends Fragment {
 
     public static final String PLAYBACK = "playback";
 
-    public GeneralItemDetailFragment() {
+    public GeneralDetailFragment() {
 
     }
 
@@ -102,13 +102,13 @@ public class GeneralItemDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments().containsKey(GeneralItemDetailActivity.ITEM_DETAILS)) {
-            mSimpleItemModel = getArguments().getParcelable(GeneralItemDetailActivity.ITEM_DETAILS);
+        if (getArguments().containsKey(GeneralDetailActivity.ITEM_DETAILS)) {
+            mSimpleItemModel = getArguments().getParcelable(GeneralDetailActivity.ITEM_DETAILS);
         }
 
         if (savedInstanceState != null) {
             playbackPosition = savedInstanceState.getLong(PLAYBACK);
-            mSimpleItemModel = savedInstanceState.getParcelable(GeneralItemDetailActivity.ITEM_DETAILS);
+            mSimpleItemModel = savedInstanceState.getParcelable(GeneralDetailActivity.ITEM_DETAILS);
         }
     }
 
@@ -270,7 +270,7 @@ public class GeneralItemDetailFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putLong(PLAYBACK, playbackPosition);
-        outState.putParcelable(GeneralItemDetailActivity.ITEM_DETAILS, mSimpleItemModel);
+        outState.putParcelable(GeneralDetailActivity.ITEM_DETAILS, mSimpleItemModel);
         super.onSaveInstanceState(outState);
     }
 }

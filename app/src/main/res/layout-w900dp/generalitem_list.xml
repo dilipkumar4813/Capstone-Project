@@ -14,7 +14,7 @@
         android:divider="?android:attr/dividerHorizontal"
         android:orientation="horizontal"
         android:showDividers="middle"
-        tools:context="iamdilipkumar.com.spacedig.ui.activities.GeneralItemListActivity">
+        tools:context="iamdilipkumar.com.spacedig.ui.activities.GeneralListActivity">
 
         <!--
         This layout is a two-pane layout for the GeneralItems
@@ -31,7 +31,7 @@
             android:background="@drawable/space_dig_initial"
             android:padding="@dimen/keyline_1"
             app:layoutManager="LinearLayoutManager"
-            tools:context="iamdilipkumar.com.spacedig.ui.activities.GeneralItemListActivity" />
+            tools:context="iamdilipkumar.com.spacedig.ui.activities.GeneralListActivity" />
 
         <FrameLayout
             android:id="@+id/generalitem_detail_container"

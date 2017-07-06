@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black"
-    tools:context="iamdilipkumar.com.spacedig.ui.fragments.GeneralItemDetailFragment">
+    tools:context="iamdilipkumar.com.spacedig.ui.fragments.GeneralDetailFragment">
 
     <ScrollView
         android:id="@+id/scroll_content"

@@ -6,22 +6,21 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import iamdilipkumar.com.spacedig.R;
 import iamdilipkumar.com.spacedig.models.SimpleItemModel;
-import iamdilipkumar.com.spacedig.ui.fragments.GeneralItemDetailFragment;
+import iamdilipkumar.com.spacedig.ui.fragments.GeneralDetailFragment;
 import iamdilipkumar.com.spacedig.utils.CommonUtils;
 
 /**
  * An activity representing a single GeneralItem detail screen. This
  * activity is only used narrow width devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
- * in a {@link GeneralItemListActivity}.
+ * in a {@link GeneralListActivity}.
  */
-public class GeneralItemDetailActivity extends AppCompatActivity {
+public class GeneralDetailActivity extends AppCompatActivity {
 
     public static final String ITEM_DETAILS = "item_detail";
     private SimpleItemModel mSimpleItemModel;
@@ -56,9 +55,9 @@ public class GeneralItemDetailActivity extends AppCompatActivity {
             mSimpleItemModel = getIntent().getParcelableExtra(ITEM_DETAILS);
 
             Bundle arguments = new Bundle();
-            arguments.putParcelable(GeneralItemDetailActivity.ITEM_DETAILS,
+            arguments.putParcelable(GeneralDetailActivity.ITEM_DETAILS,
                     mSimpleItemModel);
-            GeneralItemDetailFragment fragment = new GeneralItemDetailFragment();
+            GeneralDetailFragment fragment = new GeneralDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.generalitem_detail_container, fragment)
@@ -76,7 +75,7 @@ public class GeneralItemDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            navigateUpTo(new Intent(this, GeneralItemListActivity.class));
+            navigateUpTo(new Intent(this, GeneralListActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

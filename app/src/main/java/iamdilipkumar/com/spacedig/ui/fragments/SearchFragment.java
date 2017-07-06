@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnEditorAction;
 import iamdilipkumar.com.spacedig.R;
-import iamdilipkumar.com.spacedig.ui.activities.GeneralItemListActivity;
+import iamdilipkumar.com.spacedig.ui.activities.GeneralListActivity;
 import iamdilipkumar.com.spacedig.utils.CommonUtils;
 
 /**
@@ -37,8 +37,8 @@ public class SearchFragment extends Fragment {
             if (CommonUtils.checkNetworkConnectivity(getContext())) {
                 try {
                     String search = URLEncoder.encode(searchText.getText().toString(), "UTF-8");
-                    Intent intent = new Intent(getActivity(), GeneralItemListActivity.class);
-                    intent.putExtra(GeneralItemListActivity.LOAD_API, 4);
+                    Intent intent = new Intent(getActivity(), GeneralListActivity.class);
+                    intent.putExtra(GeneralListActivity.LOAD_API, 4);
                     intent.putExtra(SEARCH_TEXT, search);
                     startActivity(intent);
                 } catch (UnsupportedEncodingException e) {

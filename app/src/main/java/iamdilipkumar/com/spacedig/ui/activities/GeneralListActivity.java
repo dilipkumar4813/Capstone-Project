@@ -27,7 +27,7 @@ import iamdilipkumar.com.spacedig.models.neo.Neo;
 import iamdilipkumar.com.spacedig.models.rover.MarsRover;
 import iamdilipkumar.com.spacedig.models.rover.MarsRoverPhoto;
 import iamdilipkumar.com.spacedig.models.search.Search;
-import iamdilipkumar.com.spacedig.ui.fragments.GeneralItemDetailFragment;
+import iamdilipkumar.com.spacedig.ui.fragments.GeneralDetailFragment;
 import iamdilipkumar.com.spacedig.utils.CommonUtils;
 import iamdilipkumar.com.spacedig.utils.DialogUtils;
 import iamdilipkumar.com.spacedig.utils.ParsingUtils;
@@ -47,7 +47,7 @@ import static iamdilipkumar.com.spacedig.ui.fragments.SearchFragment.SEARCH_TEXT
  * @author dilipkumar4813
  * @version 1.0
  */
-public class GeneralItemListActivity extends AppCompatActivity implements GeneralListAdapter.GridListClick {
+public class GeneralListActivity extends AppCompatActivity implements GeneralListAdapter.GridListClick {
 
     private static final String LIST_ITEMS = "loaded_list";
     public static final String LOAD_API = "api_call";
@@ -292,7 +292,7 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
         Log.w("api error", "error: " + throwable.getLocalizedMessage());
         loading.setVisibility(View.GONE);
 
-        DialogUtils.singleButtonDialog(GeneralItemListActivity.this,
+        DialogUtils.singleButtonDialog(GeneralListActivity.this,
                 getString(R.string.error),
                 getString(R.string.error_message));
         this.finish();
@@ -309,15 +309,15 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
         SimpleItemModel passItem = mGeneralItems.get(position);
         if (mTwoPane) {
             Bundle arguments = new Bundle();
-            arguments.putParcelable(GeneralItemDetailActivity.ITEM_DETAILS, passItem);
-            GeneralItemDetailFragment fragment = new GeneralItemDetailFragment();
+            arguments.putParcelable(GeneralDetailActivity.ITEM_DETAILS, passItem);
+            GeneralDetailFragment fragment = new GeneralDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.generalitem_detail_container, fragment)
                     .commit();
         } else {
-            Intent intent = new Intent(this, GeneralItemDetailActivity.class);
-            intent.putExtra(GeneralItemDetailActivity.ITEM_DETAILS, passItem);
+            Intent intent = new Intent(this, GeneralDetailActivity.class);
+            intent.putExtra(GeneralDetailActivity.ITEM_DETAILS, passItem);
             startActivity(intent);
         }
     }

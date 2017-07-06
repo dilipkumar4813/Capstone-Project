@@ -104,12 +104,12 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
     public void onMainItemClick(int position) {
 
         boolean loadActivity = true;
-        Intent intent = new Intent(this, GeneralItemListActivity.class);
+        Intent intent = new Intent(this, GeneralListActivity.class);
         switch (position) {
             case 0:
                 logEvent(getString(R.string.analytics_mars));
                 if (CommonUtils.checkNetworkConnectivity(this)) {
-                    intent.putExtra(GeneralItemListActivity.LOAD_API, 0);
+                    intent.putExtra(GeneralListActivity.LOAD_API, 0);
                 } else {
                     DialogUtils.noNetworkPreActionDialog(this);
                 }
@@ -132,7 +132,7 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
             case 3:
                 logEvent(getString(R.string.analytics_epic));
                 if (CommonUtils.checkNetworkConnectivity(this)) {
-                    intent.putExtra(GeneralItemListActivity.LOAD_API, 1);
+                    intent.putExtra(GeneralListActivity.LOAD_API, 1);
                 } else {
                     DialogUtils.noNetworkPreActionDialog(this);
                 }
@@ -147,11 +147,11 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
                 break;
             case 5:
                 logEvent(getString(R.string.analytics_cad));
-                intent.putExtra(GeneralItemListActivity.LOAD_API, 6);
+                intent.putExtra(GeneralListActivity.LOAD_API, 6);
                 break;
             case 6:
                 logEvent(getString(R.string.analytics_neo));
-                intent.putExtra(GeneralItemListActivity.LOAD_API, 5);
+                intent.putExtra(GeneralListActivity.LOAD_API, 5);
                 break;
         }
 
