@@ -82,6 +82,11 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method to get the CAD data
+     *
+     * @param cad - list of CAD data
+     */
     private void apiCadResponse(Cad cad) {
         if (cad != null) {
             getContentResolver().delete(NasaProvider.CadData.CONTENT_URI, null, null);

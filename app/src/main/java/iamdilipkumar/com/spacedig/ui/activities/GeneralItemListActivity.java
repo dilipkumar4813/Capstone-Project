@@ -18,12 +18,18 @@ import butterknife.ButterKnife;
 import iamdilipkumar.com.spacedig.R;
 
 import iamdilipkumar.com.spacedig.adapters.GeneralListAdapter;
+import iamdilipkumar.com.spacedig.data.NasaProvider;
 import iamdilipkumar.com.spacedig.models.SimpleItemModel;
+import iamdilipkumar.com.spacedig.models.cad.Cad;
 import iamdilipkumar.com.spacedig.models.epic.Epic;
+import iamdilipkumar.com.spacedig.models.neo.NearEarthObject;
+import iamdilipkumar.com.spacedig.models.neo.Neo;
 import iamdilipkumar.com.spacedig.models.rover.MarsRover;
 import iamdilipkumar.com.spacedig.models.rover.MarsRoverPhoto;
 import iamdilipkumar.com.spacedig.models.search.Search;
 import iamdilipkumar.com.spacedig.ui.fragments.GeneralItemDetailFragment;
+import iamdilipkumar.com.spacedig.utils.CommonUtils;
+import iamdilipkumar.com.spacedig.utils.DialogUtils;
 import iamdilipkumar.com.spacedig.utils.ParsingUtils;
 import iamdilipkumar.com.spacedig.utils.Network.ApiInterface;
 import iamdilipkumar.com.spacedig.utils.Network.NetworkUtils;
@@ -35,7 +41,7 @@ import static iamdilipkumar.com.spacedig.ui.fragments.SearchFragment.SEARCH_TEXT
 
 /**
  * A general class to access the loading listing for EPIC, CAD, NEO, Mars Rover and Search
- *
+ * <p>
  * Created on 22/06/17.
  *
  * @author dilipkumar4813
@@ -195,7 +201,20 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
     private void loadNearEarthObjects() {
         loading.setVisibility(View.GONE);
         mGeneralItems = ParsingUtils.getNeoList(this);
-        loadAdapter();
+
+        if (mGeneralItems.size() > 0) {
+            loadAdapter();
+        } else {
+            if (CommonUtils.checkNetworkConnectivity(this)) {
+                ApiInterface apiNeoInterface = NetworkUtils.buildRetrofit().create(ApiInterface.class);
+                mCompositeDisposable.add(apiNeoInterface.getNeoData()
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(this::apiNeoResponse, this::apiError));
+            } else {
+                DialogUtils.noNetworkPreActionDialog(this);
+            }
+        }
     }
 
     /**
@@ -204,7 +223,20 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
     private void loadCadObjects() {
         loading.setVisibility(View.GONE);
         mGeneralItems = ParsingUtils.getCadContent(this);
-        loadAdapter();
+
+        if (mGeneralItems.size() > 0) {
+            loadAdapter();
+        } else {
+            if (CommonUtils.checkNetworkConnectivity(this)) {
+                ApiInterface apiCadInterface = NetworkUtils.buildCadRetrofit().create(ApiInterface.class);
+                mCompositeDisposable.add(apiCadInterface.getCadData("10LD", "2017-01-01", "dist")
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(this::apiCadResponse, this::apiError));
+            } else {
+                DialogUtils.noNetworkPreActionDialog(this);
+            }
+        }
     }
 
     /**
@@ -219,6 +251,39 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
     }
 
     /**
+     * Method to parse Neo Object into Content provider
+     *
+     * @param neo - Object received from retrofit response
+     */
+    private void apiNeoResponse(Neo neo) {
+        if (neo.getNearEarthObjects() != null) {
+
+            getContentResolver().delete(NasaProvider.NeoData.CONTENT_URI, null, null);
+
+            for (NearEarthObject item : neo.getNearEarthObjects()) {
+                ParsingUtils.getNeoModel(item, this);
+            }
+        }
+
+        loadNearEarthObjects();
+    }
+
+    /**
+     * Method to get the CAD data
+     *
+     * @param cad - list of CAD data
+     */
+    private void apiCadResponse(Cad cad) {
+        if (cad != null) {
+            getContentResolver().delete(NasaProvider.CadData.CONTENT_URI, null, null);
+
+            ParsingUtils.getCadDataIntoContentProvider(cad, this);
+        }
+
+        loadCadObjects();
+    }
+
+    /**
      * Generalized method to extract the error and display the error log
      *
      * @param throwable - used to access the error message
@@ -226,6 +291,11 @@ public class GeneralItemListActivity extends AppCompatActivity implements Genera
     private void apiError(Throwable throwable) {
         Log.w("api error", "error: " + throwable.getLocalizedMessage());
         loading.setVisibility(View.GONE);
+
+        DialogUtils.singleButtonDialog(GeneralItemListActivity.this,
+                getString(R.string.error),
+                getString(R.string.error_message));
+        this.finish();
     }
 
     /**

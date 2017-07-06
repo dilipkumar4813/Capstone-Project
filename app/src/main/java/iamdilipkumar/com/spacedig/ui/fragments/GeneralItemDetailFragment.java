@@ -233,16 +233,16 @@ public class GeneralItemDetailFragment extends Fragment {
     }
 
     private void orientationalChanges(View view) {
-        WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        DisplayMetrics metrics = new DisplayMetrics();
-        display.getMetrics(metrics);
-        int height = metrics.heightPixels;
-
         if ((getActivity().getResources().getConfiguration().orientation ==
-                Configuration.ORIENTATION_LANDSCAPE) && (height < 900)) {
+                Configuration.ORIENTATION_LANDSCAPE)) {
             view.findViewById(R.id.scroll_content).setVisibility(View.GONE);
-            exoPlayerView.getLayoutParams().height = height;
+
+            WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+            Display display = wm.getDefaultDisplay();
+            DisplayMetrics metrics = new DisplayMetrics();
+            display.getMetrics(metrics);
+
+            exoPlayerView.getLayoutParams().height = metrics.heightPixels;
         }
     }
 
