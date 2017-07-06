@@ -34,7 +34,7 @@ import io.reactivex.schedulers.Schedulers;
  * @version 1.0
  */
 
-public class FullDetailActivity extends AppCompatActivity {
+public class ApodDetailActivity extends AppCompatActivity {
 
     @BindView(R.id.iv_main_image)
     ImageView mainImage;
@@ -57,7 +57,7 @@ public class FullDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_full_detail);
+        setContentView(R.layout.activity_apod_detail);
 
         mCompositeDisposable = new CompositeDisposable();
         ButterKnife.bind(this);

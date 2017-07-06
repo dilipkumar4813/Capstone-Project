@@ -117,7 +117,7 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
             case 1:
                 logEvent(getString(R.string.analytics_apod));
                 if (CommonUtils.checkNetworkConnectivity(this)) {
-                    startActivity(new Intent(this, FullDetailActivity.class));
+                    startActivity(new Intent(this, ApodDetailActivity.class));
                 } else {
                     DialogUtils.noNetworkPreActionDialog(this);
                 }

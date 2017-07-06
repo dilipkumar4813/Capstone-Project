@@ -27,7 +27,7 @@
             android:name=".ui.activities.SpaceListActivity"
             android:theme="@style/AppTheme.CollapsingToolbar" />
         <activity
-            android:name=".ui.activities.FullDetailActivity"
+            android:name=".ui.activities.ApodDetailActivity"
             android:label="@string/apod"
             android:theme="@style/AppTheme.CollapsingToolbar" />
         <activity

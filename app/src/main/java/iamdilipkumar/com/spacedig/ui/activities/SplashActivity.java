@@ -60,7 +60,6 @@ public class SplashActivity extends AppCompatActivity {
 
         ApiInterface apiCadInterface = NetworkUtils.buildCadRetrofit().create(ApiInterface.class);
 
-        // Load correct model
         mCompositeDisposable.add(apiCadInterface.getCadData("10LD", "2017-01-01", "dist")
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

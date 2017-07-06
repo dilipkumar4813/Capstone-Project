@@ -10,6 +10,7 @@ import iamdilipkumar.com.spacedig.models.epic.Epic;
 import iamdilipkumar.com.spacedig.models.neo.Neo;
 import iamdilipkumar.com.spacedig.models.rover.MarsRover;
 import io.reactivex.Observable;
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -25,6 +26,9 @@ public interface ApiInterface {
 
     @GET("planetary/apod")
     Observable<Apod> getApod();
+
+    @GET("planetary/apod")
+    Call<Apod> getApodWidget();
 
     @GET("/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&")
     Observable<MarsRover> getRoverPhotos();

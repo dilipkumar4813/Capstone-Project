@@ -4,18 +4,28 @@
     android:background="#09C"
     android:padding="@dimen/widget_margin">
 
+    <ImageView
+        android:id="@+id/iv_widget_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/space_dig_main" />
+
     <TextView
         android:id="@+id/appwidget_text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_margin="8dp"
-        android:background="#09C"
+        android:padding="@dimen/keyline_2"
         android:contentDescription="@string/analytics_apod"
         android:text="@string/analytics_apod"
+        android:background="@color/transparencyBlack"
         android:textColor="@android:color/white"
-        android:textSize="24sp"
-        android:textStyle="bold|italic" />
+        android:textSize="@dimen/widget_heading"
+        android:textStyle="bold" />
 
 </RelativeLayout>
