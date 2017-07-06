@@ -54,7 +54,7 @@ public class ApodDetailActivity extends AppCompatActivity {
 
     private static final String TAG = "FullDetailActivity";
     private CompositeDisposable mCompositeDisposable;
-    String mExplanation,mTitle;
+    String mExplanation, mTitle;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,6 +69,8 @@ public class ApodDetailActivity extends AppCompatActivity {
         CollapsingToolbarLayout collapsingToolbarLayout =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setTitle(getString(R.string.apod));
+
+        assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ApiInterface apiInterface = NetworkUtils.buildRetrofit().create(ApiInterface.class);
@@ -94,9 +96,9 @@ public class ApodDetailActivity extends AppCompatActivity {
                 onBackPressed();
                 break;
             case R.id.action_share:
-                if(mExplanation!=null){
+                if (mExplanation != null) {
                     String shareContent = mTitle +
-                            "\n\n" +mExplanation +
+                            "\n\n" + mExplanation +
                             "\n\n" + getString(R.string.share_content);
                     CommonUtils.shareData(this, shareContent);
                 }

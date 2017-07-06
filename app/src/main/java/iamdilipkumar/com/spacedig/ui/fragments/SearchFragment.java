@@ -16,6 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnEditorAction;
 import iamdilipkumar.com.spacedig.R;
+import iamdilipkumar.com.spacedig.data.ApplicationPersistence;
 import iamdilipkumar.com.spacedig.ui.activities.GeneralListActivity;
 import iamdilipkumar.com.spacedig.utils.CommonUtils;
 
@@ -31,6 +32,8 @@ public class SearchFragment extends Fragment {
     @BindView(R.id.et_search)
     EditText searchText;
 
+    public static final String SEARCH_TEXT = "searchtext";
+
     @OnEditorAction(R.id.et_search)
     boolean searchAction(int actionId) {
         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -39,6 +42,7 @@ public class SearchFragment extends Fragment {
                     String search = URLEncoder.encode(searchText.getText().toString(), "UTF-8");
                     Intent intent = new Intent(getActivity(), GeneralListActivity.class);
                     intent.putExtra(GeneralListActivity.LOAD_API, 4);
+                    ApplicationPersistence.storeSelectedItem(getContext(), 4);
                     intent.putExtra(SEARCH_TEXT, search);
                     startActivity(intent);
                 } catch (UnsupportedEncodingException e) {
@@ -49,8 +53,6 @@ public class SearchFragment extends Fragment {
 
         return true;
     }
-
-    public static final String SEARCH_TEXT = "searchtext";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

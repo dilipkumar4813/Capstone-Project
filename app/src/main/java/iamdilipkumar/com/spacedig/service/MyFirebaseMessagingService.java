@@ -14,8 +14,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import iamdilipkumar.com.spacedig.R;
+import iamdilipkumar.com.spacedig.data.ApplicationPersistence;
 import iamdilipkumar.com.spacedig.ui.activities.ApodDetailActivity;
+import iamdilipkumar.com.spacedig.ui.activities.GeneralListActivity;
 import iamdilipkumar.com.spacedig.ui.activities.SpaceListActivity;
+import iamdilipkumar.com.spacedig.utils.CommonUtils;
 
 /**
  * Created on 06/07/17.
@@ -47,11 +50,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
 
         if (message != null) {
-            buildNotification(module, message);
+            buildNotification(module, message, this);
         }
     }
 
-    private void buildNotification(String module, String message) {
+    private void buildNotification(String module, String message, Context context) {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
         mBuilder.setSmallIcon(R.drawable.space_dig_main);
         mBuilder.setContentTitle(getString(R.string.app_name));
@@ -59,9 +62,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         Intent resultIntent = new Intent(this, SpaceListActivity.class);
 
-        if (module != null) {
+        if (module != null && CommonUtils.checkNetworkConnectivity(context)) {
             if (module.equalsIgnoreCase(getString(R.string.analytics_apod))) {
                 resultIntent = new Intent(this, ApodDetailActivity.class);
+            } else if (module.equalsIgnoreCase(getString(R.string.analytics_mars))) {
+                resultIntent = new Intent(this, GeneralListActivity.class);
+                resultIntent.putExtra(GeneralListActivity.LOAD_API, 0);
+                ApplicationPersistence.storeSelectedItem(this, 0);
             }
         }
 

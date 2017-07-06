@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 import iamdilipkumar.com.spacedig.R;
 
 import iamdilipkumar.com.spacedig.adapters.GeneralListAdapter;
+import iamdilipkumar.com.spacedig.data.ApplicationPersistence;
 import iamdilipkumar.com.spacedig.data.NasaProvider;
 import iamdilipkumar.com.spacedig.models.SimpleItemModel;
 import iamdilipkumar.com.spacedig.models.cad.Cad;
@@ -75,6 +76,8 @@ public class GeneralListActivity extends AppCompatActivity implements GeneralLis
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (findViewById(R.id.generalitem_detail_container) != null) {
@@ -84,6 +87,10 @@ public class GeneralListActivity extends AppCompatActivity implements GeneralLis
         if (savedInstanceState == null) {
             mGeneralItems = new ArrayList<>();
             mloadAPI = getIntent().getIntExtra(LOAD_API, 0);
+
+            if (ApplicationPersistence.getSelectedItem(this) != 0) {
+                mloadAPI = ApplicationPersistence.getSelectedItem(this);
+            }
 
             ApiInterface apiInterface = NetworkUtils.buildRetrofit().create(ApiInterface.class);
             switch (mloadAPI) {

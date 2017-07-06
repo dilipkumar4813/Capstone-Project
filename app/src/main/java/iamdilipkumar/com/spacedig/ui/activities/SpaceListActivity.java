@@ -20,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import iamdilipkumar.com.spacedig.R;
 import iamdilipkumar.com.spacedig.adapters.MainListAdapter;
+import iamdilipkumar.com.spacedig.data.ApplicationPersistence;
 import iamdilipkumar.com.spacedig.models.SimpleItemModel;
 import iamdilipkumar.com.spacedig.ui.fragments.AboutFragment;
 import iamdilipkumar.com.spacedig.ui.fragments.SearchFragment;
@@ -44,6 +45,8 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        assert getSupportActionBar() != null;
         getSupportActionBar().setIcon(R.drawable.toolbar_image);
 
 
@@ -109,6 +112,7 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
             case 0:
                 logEvent(getString(R.string.analytics_mars));
                 if (CommonUtils.checkNetworkConnectivity(this)) {
+                    ApplicationPersistence.storeSelectedItem(this, 0);
                     intent.putExtra(GeneralListActivity.LOAD_API, 0);
                 } else {
                     DialogUtils.noNetworkPreActionDialog(this);
@@ -132,6 +136,7 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
             case 3:
                 logEvent(getString(R.string.analytics_epic));
                 if (CommonUtils.checkNetworkConnectivity(this)) {
+                    ApplicationPersistence.storeSelectedItem(this, 1);
                     intent.putExtra(GeneralListActivity.LOAD_API, 1);
                 } else {
                     DialogUtils.noNetworkPreActionDialog(this);
@@ -147,10 +152,12 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
                 break;
             case 5:
                 logEvent(getString(R.string.analytics_cad));
+                ApplicationPersistence.storeSelectedItem(this, 6);
                 intent.putExtra(GeneralListActivity.LOAD_API, 6);
                 break;
             case 6:
                 logEvent(getString(R.string.analytics_neo));
+                ApplicationPersistence.storeSelectedItem(this, 5);
                 intent.putExtra(GeneralListActivity.LOAD_API, 5);
                 break;
         }

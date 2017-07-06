@@ -67,6 +67,7 @@ public class GeneralDetailActivity extends AppCompatActivity {
         }
 
         if (mSimpleItemModel != null) {
+            assert actionBar != null;
             actionBar.setTitle(mSimpleItemModel.getName());
         }
     }
