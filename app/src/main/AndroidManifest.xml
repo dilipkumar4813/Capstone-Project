@@ -23,21 +23,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.activities.SpaceListActivity"
             android:theme="@style/AppTheme.CollapsingToolbar" />
-
         <activity
             android:name=".ui.activities.FullDetailActivity"
             android:label="@string/apod"
             android:theme="@style/AppTheme.CollapsingToolbar" />
-
         <activity
             android:name=".ui.activities.GeneralItemListActivity"
             android:label="@string/title_generalitem_list"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".ui.activities.GeneralItemDetailActivity"
             android:label="@string/title_generalitem_detail"
@@ -60,6 +56,16 @@
         <activity
             android:name=".ui.activities.MapsLocationActivity"
             android:label="@string/title_activity_maps_location" />
+
+        <receiver android:name=".widget.ApodWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/apod_widget_info" />
+        </receiver>
     </application>
 
 </manifest>
