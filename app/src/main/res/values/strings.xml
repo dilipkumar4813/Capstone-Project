@@ -74,7 +74,7 @@
     <string name="view_full_screen">View as full screen</string>
 
     <string name="information">Information</string>
-    <string name="share_content">Check out SPACE DIG, your space buddy available only on Google Play Store</string>
+    <string name="share_content">Check out SPACE DIG, your space explorer available only on Google Play Store</string>
 
     <array name="main_list_images">
         <item>@drawable/block_1</item>

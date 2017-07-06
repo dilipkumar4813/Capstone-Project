@@ -13,6 +13,7 @@ import butterknife.OnClick;
 import iamdilipkumar.com.spacedig.R;
 import iamdilipkumar.com.spacedig.models.SimpleItemModel;
 import iamdilipkumar.com.spacedig.ui.fragments.GeneralItemDetailFragment;
+import iamdilipkumar.com.spacedig.utils.CommonUtils;
 
 /**
  * An activity representing a single GeneralItem detail screen. This
@@ -27,7 +28,12 @@ public class GeneralItemDetailActivity extends AppCompatActivity {
 
     @OnClick(R.id.fab)
     void shareAction() {
-        Toast.makeText(this, "Replace with your own detail action", Toast.LENGTH_SHORT).show();
+        if (mSimpleItemModel != null) {
+            String shareContent = mSimpleItemModel.getName() + "\n\n" +
+                    mSimpleItemModel.getInformation() +
+                    "\n\n" + getString(R.string.share_content);
+            CommonUtils.shareData(this, shareContent);
+        }
     }
 
     @Override

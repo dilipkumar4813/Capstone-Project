@@ -21,6 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import iamdilipkumar.com.spacedig.R;
 import iamdilipkumar.com.spacedig.models.Apod;
+import iamdilipkumar.com.spacedig.utils.CommonUtils;
 import iamdilipkumar.com.spacedig.utils.Network.ApiInterface;
 import iamdilipkumar.com.spacedig.utils.Network.NetworkUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -53,6 +54,7 @@ public class ApodDetailActivity extends AppCompatActivity {
 
     private static final String TAG = "FullDetailActivity";
     private CompositeDisposable mCompositeDisposable;
+    String mExplanation,mTitle;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,7 +84,6 @@ public class ApodDetailActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_full_detail, menu);
-
         return true;
     }
 
@@ -91,6 +92,14 @@ public class ApodDetailActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
+                break;
+            case R.id.action_share:
+                if(mExplanation!=null){
+                    String shareContent = mTitle +
+                            "\n\n" +mExplanation +
+                            "\n\n" + getString(R.string.share_content);
+                    CommonUtils.shareData(this, shareContent);
+                }
                 break;
         }
 
@@ -103,8 +112,8 @@ public class ApodDetailActivity extends AppCompatActivity {
 
         if (apod != null) {
 
-            String mainTitle = apod.getTitle();
-            String explanation = apod.getExplanation();
+            mTitle = apod.getTitle();
+            mExplanation = apod.getExplanation();
             String imageUrl = apod.getUrl();
             String copyright = apod.getCopyright();
 
@@ -118,15 +127,15 @@ public class ApodDetailActivity extends AppCompatActivity {
                 }
             }
 
-            if (mainTitle != null) {
-                if (!mainTitle.isEmpty()) {
-                    title.setText(mainTitle);
+            if (mTitle != null) {
+                if (!mTitle.isEmpty()) {
+                    title.setText(mTitle);
                 }
             }
 
-            if (explanation != null) {
-                if (!explanation.isEmpty()) {
-                    description.setText(explanation);
+            if (mExplanation != null) {
+                if (!mExplanation.isEmpty()) {
+                    description.setText(mExplanation);
                 }
             }
 
