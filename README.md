@@ -26,9 +26,11 @@ Coolest space explorer project for hobbyists, researchers and visionaries. The a
 6. Enable Google Maps for android and generate API key
 7. Import project in Firebase based on the Google project created using Google Console
 8. Enable Firebase Cloud Messaging and Firebase Analytics for the application.
-9. Place the generated and downloaded .json file into the app directory
-10. Rebuild the application
-11. Run the application on Emulator or physical device using Android Studio
+9. Downloaded the .json file and place it into the app directory
+10. From the Google console place the generated API key within values `google_maps_api.xml` file
+11. The google maps api key has to be present in the debug and release version
+12. Rebuild the application
+13. Run the application on Emulator or physical device using Android Studio
 
 Note* Ensure your Google play services are at 11.0.2 version.
 
@@ -83,9 +85,7 @@ Note* Ensure your Google play services are at 11.0.2 version.
 
 ![Screen four](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/tablets/7inch/Screenshot_2017-07-07-11-48-55.png)
 
-![Screen five](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/tablets/7inch/Screenshot_2017-07-07-11-49-10.png)
-
-![Screen six](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/tablets/7inch/Screenshot_2017-07-07-11-49-34.png)
+![Screen five](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/tablets/7inch/Screenshot_2017-07-07-14-25-10.png)
 
 ### 10 Inch Tablets
 
@@ -93,7 +93,7 @@ Note* Ensure your Google play services are at 11.0.2 version.
 
 ![Screen two](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/tablets/10inch/Screenshot_2017-07-07-11-48-18.png)
 
-![Screen three](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/tablets/10inch/Screenshot_2017-07-07-11-49-21.png)
+![Screen three](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/tablets/10inch/Screenshot_2017-07-07-14-25-22.png)
 
 ![Screen four](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/tablets/10inch/Screenshot_2017-07-07-11-51-23.png)
 
