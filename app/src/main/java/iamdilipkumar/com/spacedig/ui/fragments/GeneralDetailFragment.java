@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -208,6 +209,8 @@ public class GeneralDetailFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+
+            Log.d("parsing",result);
             mMediaOptions = ParsingUtils.parseMediaAsset(result);
             initializePlayer(mMediaOptions.getSmall());
         }
