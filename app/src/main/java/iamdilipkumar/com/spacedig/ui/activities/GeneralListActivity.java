@@ -72,7 +72,7 @@ public class GeneralListActivity extends AppCompatActivity implements GeneralLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_generalitem_list);
+        setContentView(R.layout.activity_general_list);
 
         mCompositeDisposable = new CompositeDisposable();
         ButterKnife.bind(this);

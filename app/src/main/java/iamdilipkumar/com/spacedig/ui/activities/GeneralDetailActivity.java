@@ -46,7 +46,7 @@ public class GeneralDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_generalitem_detail);
+        setContentView(R.layout.activity_general_detail);
 
         ButterKnife.bind(this);
 
