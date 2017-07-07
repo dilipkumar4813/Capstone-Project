@@ -313,7 +313,6 @@ public class GeneralListActivity extends AppCompatActivity implements GeneralLis
         DialogUtils.singleButtonDialog(GeneralListActivity.this,
                 getString(R.string.error),
                 getString(R.string.error_message));
-        this.finish();
     }
 
     /**

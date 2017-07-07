@@ -1,6 +1,8 @@
 # Capstone-Project
 Coolest space explorer project for hobbyists, researchers and visionaries. The android application helps users to search for Collision Approach data, Near Earth Object, Earth Plychromatic Imaging Camera, NASA database, Astronomical Picture of the day, Earth Imagery and pictures taken by Mars Rover on Mars.
 
+[![Play store](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/google-play-badge.png)](https://play.google.com/store/apps/details?id=iamdilipkumar.com.spacedig)
+
 ## Features
 
 * Load CAD and NEO when app is loaded if network is available
