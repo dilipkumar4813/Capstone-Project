@@ -28,6 +28,7 @@ public class DialogUtils {
         customDialog.setContentView(R.layout.dialog_custom);
         customDialog.setCanceledOnTouchOutside(false);
 
+        assert customDialog.getWindow() != null;
         customDialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT);
 
@@ -60,10 +61,10 @@ public class DialogUtils {
     public static void singleButtonDialog(Activity activity, String title, String message) {
         final Dialog singleDialog = buildCustomDialog(activity);
 
-        TextView titleText = ButterKnife.findById(singleDialog,R.id.tv_dialog_title);
+        TextView titleText = ButterKnife.findById(singleDialog, R.id.tv_dialog_title);
         titleText.setText(title);
 
-        TextView messageText = ButterKnife.findById(singleDialog,R.id.tv_dialog_message);
+        TextView messageText = ButterKnife.findById(singleDialog, R.id.tv_dialog_message);
         messageText.setText(message);
 
         Button btnCancel = ButterKnife.findById(singleDialog, R.id.btn_no);

@@ -1,6 +1,10 @@
 package iamdilipkumar.com.spacedig.ui.activities;
 
+import android.app.LoaderManager;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -51,7 +55,9 @@ import static iamdilipkumar.com.spacedig.ui.fragments.SearchFragment.SEARCH_TEXT
  * @author dilipkumar4813
  * @version 1.0
  */
-public class GeneralListActivity extends AppCompatActivity implements GeneralListAdapter.GridListClick {
+public class GeneralListActivity extends AppCompatActivity implements
+        GeneralListAdapter.GridListClick,
+        LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String LIST_ITEMS = "loaded_list";
     public static final String LOAD_API = "api_call";
@@ -124,11 +130,11 @@ public class GeneralListActivity extends AppCompatActivity implements GeneralLis
                     break;
                 case 5:
                     mListingTitle = getString(R.string.neo);
-                    loadNearEarthObjects();
+                    getLoaderManager().initLoader(5, null, GeneralListActivity.this);
                     break;
                 case 6:
                     mListingTitle = getString(R.string.collision_approach);
-                    loadCadObjects();
+                    getLoaderManager().initLoader(6, null, GeneralListActivity.this);
                     break;
             }
             getSupportActionBar().setTitle(mListingTitle);
@@ -214,50 +220,6 @@ public class GeneralListActivity extends AppCompatActivity implements GeneralLis
     }
 
     /**
-     * Load NEO results using the content provider
-     */
-    private void loadNearEarthObjects() {
-        loading.setVisibility(View.GONE);
-        mGeneralItems = ParsingUtils.getNeoList(this);
-
-        if (mGeneralItems.size() > 0) {
-            loadAdapter();
-        } else {
-            if (CommonUtils.checkNetworkConnectivity(this)) {
-                ApiInterface apiNeoInterface = NetworkUtils.buildRetrofit().create(ApiInterface.class);
-                mCompositeDisposable.add(apiNeoInterface.getNeoData()
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(this::apiNeoResponse, this::apiError));
-            } else {
-                DialogUtils.noNetworkPreActionDialog(this);
-            }
-        }
-    }
-
-    /**
-     * Load CAD results using the content provider
-     */
-    private void loadCadObjects() {
-        loading.setVisibility(View.GONE);
-        mGeneralItems = ParsingUtils.getCadContent(this);
-
-        if (mGeneralItems.size() > 0) {
-            loadAdapter();
-        } else {
-            if (CommonUtils.checkNetworkConnectivity(this)) {
-                ApiInterface apiCadInterface = NetworkUtils.buildCadRetrofit().create(ApiInterface.class);
-                mCompositeDisposable.add(apiCadInterface.getCadData("10LD", "2017-01-01", "dist")
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(this::apiCadResponse, this::apiError));
-            } else {
-                DialogUtils.noNetworkPreActionDialog(this);
-            }
-        }
-    }
-
-    /**
      * Method to load the adapter once the listing has been populated
      */
     private void loadAdapter() {
@@ -283,7 +245,7 @@ public class GeneralListActivity extends AppCompatActivity implements GeneralLis
             }
         }
 
-        loadNearEarthObjects();
+        getLoaderManager().initLoader(5, null, GeneralListActivity.this);
     }
 
     /**
@@ -298,7 +260,7 @@ public class GeneralListActivity extends AppCompatActivity implements GeneralLis
             ParsingUtils.getCadDataIntoContentProvider(cad, this);
         }
 
-        loadCadObjects();
+        getLoaderManager().initLoader(6, null, GeneralListActivity.this);
     }
 
     /**
@@ -351,5 +313,69 @@ public class GeneralListActivity extends AppCompatActivity implements GeneralLis
         outState.putInt(LOAD_API, mloadAPI);
         outState.putString(LISTING_TITLE, mListingTitle);
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        CursorLoader cursorLoader = null;
+        switch (id) {
+            case 5:
+                cursorLoader = new CursorLoader(this, NasaProvider.NeoData.CONTENT_URI,
+                        null, null, null, null);
+                break;
+            case 6:
+                cursorLoader = new CursorLoader(this, NasaProvider.CadData.CONTENT_URI,
+                        null, null, null, null);
+                break;
+        }
+
+        return cursorLoader;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        loading.setVisibility(View.GONE);
+
+        switch (mloadAPI) {
+            case 5:
+                mGeneralItems = ParsingUtils.getNeoList(cursor);
+
+                if (mGeneralItems.size() > 0) {
+                    loadAdapter();
+                } else {
+                    if (CommonUtils.checkNetworkConnectivity(this)) {
+                        ApiInterface apiNeoInterface = NetworkUtils.buildRetrofit().create(ApiInterface.class);
+                        mCompositeDisposable.add(apiNeoInterface.getNeoData()
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribeOn(Schedulers.io())
+                                .subscribe(this::apiNeoResponse, this::apiError));
+                    } else {
+                        DialogUtils.noNetworkPreActionDialog(this);
+                    }
+                }
+                break;
+            case 6:
+                mGeneralItems = ParsingUtils.getCadContent(cursor);
+
+                if (mGeneralItems.size() > 0) {
+                    loadAdapter();
+                } else {
+                    if (CommonUtils.checkNetworkConnectivity(this)) {
+                        ApiInterface apiCadInterface = NetworkUtils.buildCadRetrofit().create(ApiInterface.class);
+                        mCompositeDisposable.add(apiCadInterface.getCadData("10LD", "2017-01-01", "dist")
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribeOn(Schedulers.io())
+                                .subscribe(this::apiCadResponse, this::apiError));
+                    } else {
+                        DialogUtils.noNetworkPreActionDialog(this);
+                    }
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        loadAdapter();
     }
 }

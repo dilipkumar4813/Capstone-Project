@@ -49,6 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/keyline_2"
+            android:contentDescription="@string/privacy_policy"
             android:text="@string/privacy_policy"
             android:textColor="@color/colorAccent" />
     </LinearLayout>

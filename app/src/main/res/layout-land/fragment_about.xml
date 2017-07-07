@@ -54,6 +54,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/keyline_1"
             android:text="@string/privacy_policy"
+            android:contentDescription="@string/privacy_policy"
             android:textColor="@color/colorAccent" />
 
     </LinearLayout>

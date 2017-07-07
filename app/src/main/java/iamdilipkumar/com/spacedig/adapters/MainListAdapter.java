@@ -34,7 +34,8 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.MainLi
 
     @Override
     public MainListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_staggered_main, null);
+        View layoutView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_staggered_main, parent, false);
         return new MainListViewHolder(layoutView);
     }
 

@@ -43,6 +43,7 @@
             android:layout_margin="@dimen/keyline_2"
             android:layout_weight="1"
             android:background="@color/colorAccent"
+            android:contentDescription="@android:string/cancel"
             android:text="@android:string/cancel"
             android:textColor="@android:color/white" />
 
@@ -54,6 +55,7 @@
             android:layout_margin="@dimen/keyline_2"
             android:layout_weight="1"
             android:background="@color/colorAccent"
+            android:contentDescription="@android:string/ok"
             android:text="@android:string/ok"
             android:textColor="@android:color/white" />
 

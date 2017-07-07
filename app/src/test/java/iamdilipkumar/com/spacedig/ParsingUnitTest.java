@@ -7,7 +7,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import iamdilipkumar.com.spacedig.models.MediaOptions;
-import iamdilipkumar.com.spacedig.ui.activities.GeneralListActivity;
 import iamdilipkumar.com.spacedig.utils.ParsingUtils;
 
 import static org.junit.Assert.*;

@@ -145,7 +145,7 @@ public class ParsingUtils {
     }
 
     public static void getNeoModel(NearEarthObject item, Context context) {
-        String description = "", estDiameter = "", orbData = "";
+        String description, estDiameter = "", orbData = "";
         String closeApproach = context.getString(R.string.close_approach);
         String hazardous = context.getString(R.string.hazardous_asteroid);
 
@@ -212,10 +212,9 @@ public class ParsingUtils {
         context.getContentResolver().insert(NasaProvider.NeoData.CONTENT_URI, neoData);
     }
 
-    public static List<SimpleItemModel> getNeoList(Context context) {
+    public static List<SimpleItemModel> getNeoList(Cursor neoCursor) {
         List<SimpleItemModel> itemModels = new ArrayList<>();
-        Cursor neoCursor = context.getContentResolver().query(NasaProvider.NeoData.CONTENT_URI,
-                null, null, null, null);
+
         if (neoCursor != null) {
             if (neoCursor.moveToFirst()) {
                 do {
@@ -266,11 +265,9 @@ public class ParsingUtils {
         return simpleItemModels;
     }
 
-    public static List<SimpleItemModel> getCadContent(Context context) {
+    public static List<SimpleItemModel> getCadContent(Cursor cadCursor) {
         List<SimpleItemModel> simpleItemModels = new ArrayList<>();
 
-        Cursor cadCursor = context.getContentResolver().query(NasaProvider.CadData.CONTENT_URI,
-                null, null, null, null);
         if (cadCursor != null) {
             if (cadCursor.moveToFirst()) {
                 do {
