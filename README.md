@@ -46,6 +46,7 @@ Note* Ensure your Google play services are at 11.0.2 version.
 
 ## Screenshots
 
+### Mobile devices
 ![Splash Screen](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/device-2017-07-05-123807.png)
 
 ![Initial Listing](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/Screenshot_2017-07-06-23-45-07.png)
@@ -60,7 +61,7 @@ Note* Ensure your Google play services are at 11.0.2 version.
 
 ![Search Video Streaming](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/Screenshot_2017-07-06-23-28-15.png)
 
-![APOD](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/device-2017-06-25-135240.png)
+![APOD](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/Screenshot_2017-07-07-11-57-38.png)
 
 ![About Us](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/Screenshot_2017-07-06-23-45-22.png)
 
@@ -71,6 +72,34 @@ Note* Ensure your Google play services are at 11.0.2 version.
 ![Maps](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/Screenshot_2017-07-06-23-45-14.png)
 
 ![Widget](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/Screenshot_2017-07-07-00-00-10.png)
+
+### 7 Inch Tablets
+
+![Screen one](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/tablets/7inch/Screenshot_2017-07-07-11-47-45.png)
+
+![Screen two](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/tablets/7inch/Screenshot_2017-07-07-11-48-26.png)
+
+![Screen three](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/tablets/7inch/Screenshot_2017-07-07-11-48-40.png)
+
+![Screen four](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/tablets/7inch/Screenshot_2017-07-07-11-48-55.png)
+
+![Screen five](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/tablets/7inch/Screenshot_2017-07-07-11-49-10.png)
+
+![Screen six](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/tablets/7inch/Screenshot_2017-07-07-11-49-34.png)
+
+### 10 Inch Tablets
+
+![Screen one](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/tablets/10inch/Screenshot_2017-07-07-11-47-59.png)
+
+![Screen two](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/tablets/10inch/Screenshot_2017-07-07-11-48-18.png)
+
+![Screen three](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/tablets/10inch/Screenshot_2017-07-07-11-49-21.png)
+
+![Screen four](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/tablets/10inch/Screenshot_2017-07-07-11-51-23.png)
+
+![Screen five](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/tablets/10inch/Screenshot_2017-07-07-11-51-54.png)
+
+![Screen six](https://github.com/dilipkumar4813/Capstone-Project/blob/master/screenshots/tablets/10inch/Screenshot_2017-07-07-11-52-28.png)
 
 ## License
 
