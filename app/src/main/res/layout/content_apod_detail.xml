@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/black"
     android:orientation="vertical">
 
     <ProgressBar
@@ -20,7 +21,9 @@
         android:layout_marginRight="@dimen/keyline_1"
         android:layout_marginStart="@dimen/keyline_1"
         android:layout_marginTop="@dimen/keyline_2"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_description"
@@ -31,6 +34,7 @@
         android:layout_marginLeft="@dimen/keyline_1"
         android:layout_marginRight="@dimen/keyline_1"
         android:layout_marginStart="@dimen/keyline_1"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/regular_body" />
 
     <TextView
@@ -39,5 +43,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/poweredby"
+        android:textColor="@android:color/white"
         android:visibility="gone" />
 </LinearLayout>
