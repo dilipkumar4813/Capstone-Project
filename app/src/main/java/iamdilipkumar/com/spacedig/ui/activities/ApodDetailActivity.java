@@ -125,6 +125,7 @@ public class ApodDetailActivity extends AppCompatActivity {
                             .fitCenter()
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .error(R.drawable.space_dig_main)
+                            .crossFade(600)
                             .into(mainImage);
                 }
             }

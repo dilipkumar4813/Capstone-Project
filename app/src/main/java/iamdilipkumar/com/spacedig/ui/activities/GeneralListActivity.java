@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.transition.Slide;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
@@ -139,6 +142,14 @@ public class GeneralListActivity extends AppCompatActivity implements GeneralLis
                 mGridList.setAdapter(rcAdapter);
                 rcAdapter.notifyDataSetChanged();
             }
+        }
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            Slide slide = new Slide(Gravity.END);
+            slide.setDuration(400);
+            slide.addTarget(R.id.frameLayout);
+            slide.setInterpolator(new DecelerateInterpolator());
+            getWindow().setEnterTransition(slide);
         }
     }
 

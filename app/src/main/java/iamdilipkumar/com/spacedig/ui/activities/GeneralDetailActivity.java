@@ -2,11 +2,14 @@ package iamdilipkumar.com.spacedig.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
+import android.view.animation.AnimationUtils;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import iamdilipkumar.com.spacedig.R;
@@ -25,8 +28,13 @@ public class GeneralDetailActivity extends AppCompatActivity {
     public static final String ITEM_DETAILS = "item_detail";
     private SimpleItemModel mSimpleItemModel;
 
+    @BindView(R.id.fab)
+    FloatingActionButton shareButton;
+
     @OnClick(R.id.fab)
     void shareAction() {
+        shareButton.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translate_360));
+
         if (mSimpleItemModel != null) {
             String shareContent = mSimpleItemModel.getName() + "\n\n" +
                     mSimpleItemModel.getInformation() +

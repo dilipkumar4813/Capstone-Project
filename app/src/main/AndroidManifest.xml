@@ -26,7 +26,7 @@
 
         <activity
             android:name=".ui.activities.SpaceListActivity"
-            android:theme="@style/AppTheme.CollapsingToolbar" />
+            android:theme="@style/AppTheme.CollapsingToolbar.MainList" />
 
         <activity
             android:name=".ui.activities.ApodDetailActivity"

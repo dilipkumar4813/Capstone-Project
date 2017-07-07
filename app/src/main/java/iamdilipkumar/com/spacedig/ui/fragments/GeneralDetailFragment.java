@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -79,6 +80,7 @@ public class GeneralDetailFragment extends Fragment {
 
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
+                .addSharedElement(mainImage, ViewCompat.getTransitionName(mainImage))
                 .replace(R.id.full_asset_container, fullAssetFragment)
                 .addToBackStack(null)
                 .commit();
@@ -151,6 +153,7 @@ public class GeneralDetailFragment extends Fragment {
                     .fitCenter()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .error(R.drawable.space_dig_main)
+                    .crossFade(600)
                     .into(mainImage);
         }
 

@@ -1,5 +1,6 @@
 package iamdilipkumar.com.spacedig.ui.activities;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.v7.app.AppCompatActivity;
@@ -108,6 +109,14 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
 
         boolean loadActivity = true;
         Intent intent = new Intent(this, GeneralListActivity.class);
+
+        Bundle bundle = new Bundle();
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            bundle = ActivityOptions
+                    .makeSceneTransitionAnimation(SpaceListActivity.this)
+                    .toBundle();
+        }
+
         switch (position) {
             case 0:
                 logEvent(getString(R.string.analytics_mars));
@@ -121,7 +130,7 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
             case 1:
                 logEvent(getString(R.string.analytics_apod));
                 if (CommonUtils.checkNetworkConnectivity(this)) {
-                    startActivity(new Intent(this, ApodDetailActivity.class));
+                    startActivity(new Intent(this, ApodDetailActivity.class), bundle);
                 } else {
                     DialogUtils.noNetworkPreActionDialog(this);
                 }
@@ -130,7 +139,7 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
                 break;
             case 2:
                 logEvent(getString(R.string.analytics_earth_imagery));
-                startActivity(new Intent(SpaceListActivity.this, MapsLocationActivity.class));
+                startActivity(new Intent(SpaceListActivity.this, MapsLocationActivity.class), bundle);
                 loadActivity = false;
                 break;
             case 3:
@@ -163,7 +172,7 @@ public class SpaceListActivity extends AppCompatActivity implements MainListAdap
         }
 
         if (loadActivity) {
-            startActivity(intent);
+            startActivity(intent, bundle);
         }
     }
 
