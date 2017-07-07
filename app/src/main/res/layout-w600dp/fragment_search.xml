@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        android:src="@drawable/space_dig_initial" />
+
+    <ImageView
+        android:id="@+id/iv_small_logo"
+        android:layout_width="@dimen/small_logo"
+        android:layout_height="@dimen/small_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/keyline_1"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/space_dig_main" />
+
+    <TextView
+        android:id="@+id/tv_search_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_small_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="@dimen/keyline_1"
+        android:layout_marginLeft="@dimen/keyline_1"
+        android:layout_marginRight="@dimen/keyline_1"
+        android:layout_marginStart="@dimen/keyline_1"
+        android:text="@string/search_title"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/regular_body"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/tablet_padding"
+        android:layout_marginLeft="@dimen/tablet_padding"
+        android:layout_marginRight="@dimen/tablet_padding"
+        android:layout_marginStart="@dimen/tablet_padding"
+        android:background="@drawable/radius_white_background"
+        android:hint="@string/search_hint"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:lines="1"
+        android:maxLines="1"
+        android:padding="@dimen/keyline_2" />
+
+
+</RelativeLayout>

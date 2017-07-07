@@ -16,4 +16,5 @@
     <dimen name="widget_min_height">180dp</dimen>
     <dimen name="widget_min_width">250dp</dimen>
     <dimen name="widget_heading">24sp</dimen>
+    <dimen name="tablet_padding">50dp</dimen>
 </resources>
