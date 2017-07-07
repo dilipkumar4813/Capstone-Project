@@ -66,6 +66,9 @@ public class GeneralDetailFragment extends Fragment {
     @BindView(R.id.tv_description)
     TextView description;
 
+    @BindView(R.id.tv_full_screen)
+    TextView fullScreen;
+
     @OnClick(R.id.tv_full_screen)
     void fullScreenMode() {
         Bundle bundle = new Bundle();
@@ -212,6 +215,7 @@ public class GeneralDetailFragment extends Fragment {
 
             Log.d("parsing",result);
             mMediaOptions = ParsingUtils.parseMediaAsset(result);
+            fullScreen.setVisibility(View.GONE);
             initializePlayer(mMediaOptions.getSmall());
         }
     }
