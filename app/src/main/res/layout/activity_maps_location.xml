@@ -19,6 +19,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/keyline_1"
+        android:contentDescription="@string/title_activity_maps_location"
         android:src="@android:drawable/ic_dialog_map"
         app:fabSize="normal" />
 

@@ -6,9 +6,9 @@ android {
     signingConfigs {
         release {
             keyAlias 'spacedig'
-            keyPassword 'ENTER_KEY'
-            storeFile file('PROVIDE_RELATIVE_PATH')
-            storePassword 'ENTER_KEY'
+            keyPassword 'Udacity13.'
+            storeFile file('../keys/udacity-release-key.jks')
+            storePassword 'Udacity13.'
         }
     }
 
