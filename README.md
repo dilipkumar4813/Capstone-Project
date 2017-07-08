@@ -32,8 +32,7 @@ Coolest space explorer project for hobbyists, researchers and visionaries. The a
 10. From the Google console place the generated API key within values `google_maps_api.xml` file
 11. The google maps api key has to be present in the debug and release version
 12. Rebuild the application
-13. Generate Build key for the application and provide relative path in build.gradle along with the password and alias for the application.
-14. Run the application on Emulator or physical device using Android Studio
+13. Run the application on Emulator or physical device using Android Studio
 
 Note* Ensure your Google play services are at 11.0.2 version.
 
